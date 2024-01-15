@@ -18,7 +18,7 @@ startBtn.addEventListener("click", () => {
     const lines = text.split("\n");
 
     for (const line of lines) {
-        const lineEl = document.createElement("div");
+        const lineEl = document.createElement("p");
 
         const words = line.split(" ");
         for (let i = 0; i < words.length; i++) {
@@ -51,6 +51,29 @@ startBtn.addEventListener("click", () => {
 
             lineEl.append(wordEl);
         }
+
+        const button = document.createElement("button");
+        button.textContent = "translate";
+
+        button.addEventListener("click", async () => {
+            const res = await fetch("http://127.0.0.1:3000/translate", {
+                method: "POST",
+                body: JSON.stringify({
+                    q: line,
+                    source: language,
+                    target: "en",
+                    format: "text",
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(res => res.json());
+
+            foreignWordSpan.textContent = "<sentence>";
+            translatedWordSpan.textContent = res.translatedText;
+        });
+
+        lineEl.append(button);
 
         richtextCont.append(lineEl);
     }
