@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Reader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <script>const url = "{{ url }}";</script>
+</head>
+
+<body>
+    <textarea placeholder="Paste in your text..." class="article-input"></textarea>
+    <div>
+        Language:
+        <select class="language-select">
+            <option value="es">Spanish</option>
+            <option value="zh">Chinese</option>
+        </select>
+    </div>
+    <button class="start-btn">Start</button>
+
+    <div class="cont">
+        <div class="richtext-cont"></div>
+        <div class="translate">
+            <strong>Translation</strong>
+            <div>Word: <span class="foreign-word"></span></div>
+            <div>Translated: <span class="translated-word"></span></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+</body>
+
+</html>

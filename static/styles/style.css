@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cont {
+    display: flex;
+}
+
+.cont .richtext-cont {
+    flex-grow: 3;
+}
+
+.cont .translate {
+    background-color: #eee;
+    flex-grow: 1;
+}

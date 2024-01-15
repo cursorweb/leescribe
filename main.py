@@ -4,6 +4,7 @@ from threading import Thread
 
 HOST = "127.0.0.1"
 TRANSLATE_PORT = "3000"
+SITE_PORT = "8080"
 
 
 def launch_libre():
@@ -11,24 +12,18 @@ def launch_libre():
 
 
 libre_thread = Thread(target=launch_libre)
+libre_thread.daemon = True
 libre_thread.start()
 
-import requests
-import json
+from flask import Flask, render_template
+
+app = Flask("app")
 
 
-out = requests.request(
-    "POST",
-    f"http://{HOST}:{TRANSLATE_PORT}/translate",
-    data=json.dumps(
-        {
-            "q": "hola, mundo!",
-            "source": "es",
-            "target": "en",
-            "format": "text",
-        }
-    ),
-    headers={"Content-Type": "application/json"},
-)
+@app.route("/")
+def main():
+    return render_template("index.html", url=f"http://{HOST}:{TRANSLATE_PORT}")
 
-print(out.json())
+
+print(f"Running on http://{HOST}:{SITE_PORT}")
+app.run(host=HOST, port=SITE_PORT)
