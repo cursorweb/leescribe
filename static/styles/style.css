@@ -20,7 +20,7 @@ body {
     overflow: auto;
 }
 
-.pinyin-hint {
+/* .pinyin-hint {
     font-family: Consolas;
     background: #d2e5ff;
     font-size: 16px;
@@ -29,10 +29,14 @@ body {
     left: 0;
     z-index: 2;
     display: none;
+} */
+
+.cont .richtext-cont ruby rt {
+    visibility: hidden;
 }
 
-.cont .richtext-cont span:hover>.pinyin-hint {
-    display: block;
+.cont .richtext-cont ruby:hover rt {
+    visibility: visible;
 }
 
 /* Maybe we need this */

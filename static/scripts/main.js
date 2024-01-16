@@ -31,9 +31,19 @@ startBtn.addEventListener("click", () => {
 
         for (let i = 0; i < words.length; i++) {
             const word = words[i];
-            const wordEl = document.createElement("span");
+            let wordEl;
 
-            wordEl.textContent = word;
+            if (language == "zh") {
+                wordEl = document.createElement("ruby");
+                wordEl.textContent = word;
+
+                const rt = document.createElement("rt");
+                rt.textContent = pinyin(word);
+                wordEl.append(rt);
+            } else {
+                wordEl = document.createElement("span");
+                wordEl.textContent = word;
+            }
 
             if (language != "zh" && i < words.length - 1) {
                 wordEl.textContent += " ";
@@ -49,14 +59,6 @@ startBtn.addEventListener("click", () => {
             wordEl.style.position = "relative";
 
             lineEl.append(wordEl);
-
-            const pinyinEl = document.createElement("span");
-            const pinyinText = pinyin(word);
-
-            pinyinEl.textContent = pinyinText;
-            pinyinEl.classList.add("pinyin-hint");
-
-            wordEl.append(pinyinEl);
         }
 
         if (line) {
