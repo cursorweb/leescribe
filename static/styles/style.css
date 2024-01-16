@@ -16,4 +16,5 @@ body {
 .cont .translate {
     background-color: #eee;
     flex: 0 0 25%;
+    overflow: auto;
 }

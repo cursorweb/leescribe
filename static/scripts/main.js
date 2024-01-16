@@ -43,17 +43,29 @@ startBtn.addEventListener("click", () => {
 
         if (line) {
             // if line not empty
-            const button = document.createElement("button");
-            button.textContent = "translate";
+            const translateBtn = document.createElement("button");
+            translateBtn.textContent = "translate";
 
-            button.addEventListener("click", async () => {
+            translateBtn.addEventListener("click", async () => {
                 const res = await translate(line);
 
                 foreignWordSpan.textContent = "<sentence>";
                 translatedWordSpan.textContent = res.translatedText;
             });
 
-            lineEl.append(button);
+            lineEl.append(translateBtn);
+
+            if (language == "zh") {
+                const pinyinBtn = document.createElement("button");
+                pinyinBtn.textContent = "pinyin";
+
+                pinyinBtn.addEventListener("click", async () => {
+                    foreignWordSpan.textContent = "<pinyin>";
+                    translatedWordSpan.textContent = pinyinPro.pinyin(line);
+                });
+
+                lineEl.append(pinyinBtn);
+            }
         }
 
         richtextCont.append(lineEl);

@@ -31,3 +31,5 @@ Flashcard system (not sure if I want it long term)
 Translate highlighted sentences
 
 Read out loud
+
+Pinyin
