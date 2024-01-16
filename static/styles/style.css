@@ -33,9 +33,10 @@ body {
 
 .cont .richtext-cont ruby rt {
     visibility: hidden;
+    user-select: none;
 }
 
-.cont .richtext-cont ruby:hover rt {
+.cont .richtext-cont ruby:focus rt {
     visibility: visible;
 }
 

@@ -41,3 +41,5 @@ Switch font
 Review
 
 Writing Canvas
+
+Font size

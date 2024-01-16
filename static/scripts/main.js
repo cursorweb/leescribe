@@ -35,11 +35,19 @@ startBtn.addEventListener("click", () => {
 
             if (language == "zh") {
                 wordEl = document.createElement("ruby");
-                wordEl.textContent = word;
 
-                const rt = document.createElement("rt");
-                rt.textContent = pinyin(word);
-                wordEl.append(rt);
+                wordEl.setAttribute("tabindex", "0");
+
+                const chars = word.split("");
+                const charPinyins = pinyin(word, true);
+
+                for (let i = 0; i < chars.length; i++) {
+                    const textNode = document.createTextNode(chars[i]);
+                    const rubyTextEl = document.createElement("rt");
+                    rubyTextEl.textContent = charPinyins[i];
+
+                    wordEl.append(textNode, rubyTextEl);
+                }
             } else {
                 wordEl = document.createElement("span");
                 wordEl.textContent = word;
@@ -108,6 +116,6 @@ async function translate(text) {
     return await res.json();
 }
 
-function pinyin(text) {
-    return pinyinPro.pinyin(text, { nonZh: 'consecutive' });
+function pinyin(text, arr = false) {
+    return pinyinPro.pinyin(text, { nonZh: arr ? 'spaced' : 'consecutive', type: arr ? 'array' : 'string' });
 }
