@@ -15,7 +15,7 @@ startBtn.addEventListener("click", () => {
 
     const text = articleInput.value;
 
-    const lines = text.split("\n");
+    const lines = text.split("\n").map(line => line.trim());
 
     for (const line of lines) {
         const lineEl = document.createElement("p");
@@ -32,18 +32,7 @@ startBtn.addEventListener("click", () => {
             }
 
             wordEl.addEventListener("click", async () => {
-                const res = await fetch("http://127.0.0.1:3000/translate", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        q: word,
-                        source: language,
-                        target: "en",
-                        format: "text",
-                    }),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }).then(res => res.json());
+                const res = await translate(word);
 
                 foreignWordSpan.textContent = word;
                 translatedWordSpan.textContent = res.translatedText;
@@ -52,29 +41,37 @@ startBtn.addEventListener("click", () => {
             lineEl.append(wordEl);
         }
 
-        const button = document.createElement("button");
-        button.textContent = "translate";
+        if (line) {
+            // if line not empty
+            const button = document.createElement("button");
+            button.textContent = "translate";
 
-        button.addEventListener("click", async () => {
-            const res = await fetch("http://127.0.0.1:3000/translate", {
-                method: "POST",
-                body: JSON.stringify({
-                    q: line,
-                    source: language,
-                    target: "en",
-                    format: "text",
-                }),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }).then(res => res.json());
+            button.addEventListener("click", async () => {
+                const res = await translate(line);
 
-            foreignWordSpan.textContent = "<sentence>";
-            translatedWordSpan.textContent = res.translatedText;
-        });
+                foreignWordSpan.textContent = "<sentence>";
+                translatedWordSpan.textContent = res.translatedText;
+            });
 
-        lineEl.append(button);
+            lineEl.append(button);
+        }
 
         richtextCont.append(lineEl);
     }
 });
+
+async function translate(text) {
+    const res = await fetch("http://127.0.0.1:3000/translate", {
+        method: "POST",
+        body: JSON.stringify({
+            q: text,
+            source: language,
+            target: "en",
+            format: "text",
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    return await res.json();
+}
