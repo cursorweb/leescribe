@@ -12,6 +12,7 @@ let language = "";
 
 startBtn.addEventListener("click", () => {
     language = languageSelect.value;
+    richtextCont.textContent = "";
 
     const text = articleInput.value;
 
@@ -20,14 +21,20 @@ startBtn.addEventListener("click", () => {
     for (const line of lines) {
         const lineEl = document.createElement("p");
 
-        const words = line.split(" ");
+        let words;
+        if (language == "zh") {
+            // split based on punctuation (i.e. by phrase)
+            words = line.split(/([，。！、？（）])/);
+        } else {
+            words = line.split(" ");
+        }
         for (let i = 0; i < words.length; i++) {
             const word = words[i];
             const wordEl = document.createElement("span");
 
             wordEl.textContent = word;
 
-            if (i < words.length - 1) {
+            if (language != "zh" && i < words.length - 1) {
                 wordEl.textContent += " ";
             }
 

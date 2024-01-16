@@ -5,7 +5,7 @@ body {
 
 .cont {
     display: flex;
-    height: 500px;
+    height: 80vh;
 }
 
 .cont .richtext-cont {
