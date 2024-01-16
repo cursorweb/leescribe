@@ -1,5 +1,5 @@
 body {
-    font-family: calibri;
+    font-family: calibri, kaiti;
     font-size: 22px;
 }
 
@@ -11,6 +11,7 @@ body {
 .cont .richtext-cont {
     flex: 0 0 75%;
     overflow: auto;
+    position: relative;
 }
 
 .cont .translate {
@@ -18,3 +19,25 @@ body {
     flex: 0 0 25%;
     overflow: auto;
 }
+
+.pinyin-hint {
+    font-family: Consolas;
+    background: #d2e5ff;
+    font-size: 16px;
+    position: absolute;
+    top: -22px;
+    left: 0;
+    z-index: 2;
+    display: none;
+}
+
+.cont .richtext-cont span:hover>.pinyin-hint {
+    display: block;
+}
+
+/* Maybe we need this */
+/*
+.handwritten {
+    font-family: calibri, kaiti;
+}
+*/

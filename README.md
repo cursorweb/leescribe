@@ -4,7 +4,9 @@ Save words in a growable list collection to review them.
 
 Venv:
 ```
+python -m venv .venv
 .\.venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
 Running:

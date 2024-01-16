@@ -24,10 +24,11 @@ startBtn.addEventListener("click", () => {
         let words;
         if (language == "zh") {
             // split based on punctuation (i.e. by phrase)
-            words = line.split(/([，。！、？（）])/);
+            words = line.split(/([，。！、？（）：—]+)/);
         } else {
             words = line.split(" ");
         }
+
         for (let i = 0; i < words.length; i++) {
             const word = words[i];
             const wordEl = document.createElement("span");
@@ -45,7 +46,17 @@ startBtn.addEventListener("click", () => {
                 translatedWordSpan.textContent = res.translatedText;
             });
 
+            wordEl.style.position = "relative";
+
             lineEl.append(wordEl);
+
+            const pinyinEl = document.createElement("span");
+            const pinyinText = pinyin(word);
+
+            pinyinEl.textContent = pinyinText;
+            pinyinEl.classList.add("pinyin-hint");
+
+            wordEl.append(pinyinEl);
         }
 
         if (line) {
@@ -68,7 +79,7 @@ startBtn.addEventListener("click", () => {
 
                 pinyinBtn.addEventListener("click", async () => {
                     foreignWordSpan.textContent = "<pinyin>";
-                    translatedWordSpan.textContent = pinyinPro.pinyin(line, { nonZh: 'consecutive' });
+                    translatedWordSpan.textContent = pinyin(line);
                 });
 
                 lineEl.append(pinyinBtn);
@@ -93,4 +104,8 @@ async function translate(text) {
         }
     });
     return await res.json();
+}
+
+function pinyin(text) {
+    return pinyinPro.pinyin(text, { nonZh: 'consecutive' });
 }

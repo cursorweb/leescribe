@@ -7,15 +7,20 @@
     <title>Language Reader</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
     <script>const url = "{{ url }}";</script>
+    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.19.2/dist/index.min.js"></script>
 </head>
 
 <body>
+    <div>
+        <a href="https://www.bbc.com/mundo" target="_blank">BBC Mundo</a>
+        <a href="http://www.people.com.cn/" target="_blank">人民网</a>
+    </div>
     <textarea placeholder="Paste in your text..." class="article-input"></textarea>
     <div>
         Language:
         <select class="language-select">
             <option value="es">Spanish</option>
-            <option value="zh">Chinese</option>
+            <option value="zh" selected>Chinese</option>
         </select>
     </div>
     <button class="start-btn">Start</button>
@@ -30,8 +35,6 @@
     </div>
 
     <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.19.2/dist/index.min.js"></script>
-    <script src="{{ url_for('static', filename='scripts/test.js') }}" defer></script>
 </body>
 
 </html>
