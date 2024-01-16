@@ -32,4 +32,10 @@ Translate highlighted sentences
 
 Read out loud
 
-Pinyin
+Pinyin (On click?)
+
+Switch font
+
+Review
+
+Writing Canvas

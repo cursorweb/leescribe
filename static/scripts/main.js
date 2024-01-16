@@ -68,7 +68,7 @@ startBtn.addEventListener("click", () => {
 
                 pinyinBtn.addEventListener("click", async () => {
                     foreignWordSpan.textContent = "<pinyin>";
-                    translatedWordSpan.textContent = pinyinPro.pinyin(line);
+                    translatedWordSpan.textContent = pinyinPro.pinyin(line, { nonZh: 'consecutive' });
                 });
 
                 lineEl.append(pinyinBtn);
