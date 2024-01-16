@@ -1,5 +1,5 @@
-# Language Reader
-Read languages and translate words you don't know!
+# Leescribe
+Read articles in other languages and translate words you don't know!
 Save words in a growable list collection to review them.
 
 Venv:
