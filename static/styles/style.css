@@ -31,12 +31,12 @@ body {
     display: none;
 } */
 
-.cont .richtext-cont ruby rt {
+.cont .richtext-cont span rt {
     visibility: hidden;
     user-select: none;
 }
 
-.cont .richtext-cont ruby:focus rt {
+.cont .richtext-cont span:focus rt {
     visibility: visible;
 }
 

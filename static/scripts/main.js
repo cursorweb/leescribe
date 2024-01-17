@@ -31,23 +31,11 @@ startBtn.addEventListener("click", () => {
 
         for (let i = 0; i < words.length; i++) {
             const word = words[i];
-            let wordEl;
+            let wordEl = document.createElement("span");
 
             if (language == "zh") {
-                wordEl = document.createElement("ruby");
-
+                wordEl.innerHTML = pinyinPro.html(word);
                 wordEl.setAttribute("tabindex", "0");
-
-                const chars = word.split("");
-                const charPinyins = pinyin(word, true);
-
-                for (let i = 0; i < chars.length; i++) {
-                    const textNode = document.createTextNode(chars[i]);
-                    const rubyTextEl = document.createElement("rt");
-                    rubyTextEl.textContent = charPinyins[i];
-
-                    wordEl.append(textNode, rubyTextEl);
-                }
             } else {
                 wordEl = document.createElement("span");
                 wordEl.textContent = word;
