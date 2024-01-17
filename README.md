@@ -43,3 +43,11 @@ Review
 Writing Canvas
 
 Font size
+
+Gray out existing text while loading translation
+
+Remove pinyin button
+
+Optimization?
+* Reduce spans
+* Make more modular (probably optional but want to mod this)

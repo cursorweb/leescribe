@@ -64,8 +64,6 @@ startBtn.addEventListener("click", () => {
                 translatedWordSpan.textContent = res.translatedText;
             });
 
-            wordEl.style.position = "relative";
-
             lineEl.append(wordEl);
         }
 
@@ -99,6 +97,24 @@ startBtn.addEventListener("click", () => {
         richtextCont.append(lineEl);
     }
 });
+
+const customTranslateInput = document.querySelector(".custom-translate-input");
+const customTranslateBtn = document.querySelector(".custom-translate-btn");
+const customTranslateOut = document.querySelector(".custom-translate-out");
+
+customTranslateBtn.addEventListener("click", async () => {
+    const text = customTranslateInput.value;
+    const translatedText = await translate(text);
+
+    customTranslateOut.textContent = translatedText.translatedText;
+});
+
+customTranslateInput.addEventListener("keydown", e => {
+    if (e.key == "Enter" && e.ctrlKey) {
+        e.preventDefault();
+        customTranslateBtn.click();
+    }
+})
 
 async function translate(text) {
     const res = await fetch("http://127.0.0.1:3000/translate", {

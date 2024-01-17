@@ -13,6 +13,7 @@
 <body>
     <div>
         <a href="https://www.bbc.com/mundo" target="_blank">BBC Mundo</a>
+        <a href="https://www.bbc.com/zhongwen/simp">BBC 中文</a>
         <a href="http://www.people.com.cn/" target="_blank">人民网</a>
     </div>
     <textarea placeholder="Paste in your text..." class="article-input"></textarea>
@@ -20,7 +21,7 @@
         Language:
         <select class="language-select">
             <option value="es">Spanish</option>
-            <option value="zh" selected>Chinese</option>
+            <option value="zh">Chinese</option>
         </select>
     </div>
     <button class="start-btn">Start</button>
@@ -31,6 +32,15 @@
             <strong>Translation</strong>
             <div>Word: <span class="foreign-word"></span></div>
             <div>Translated: <span class="translated-word"></span></div>
+
+            <div class="custom">
+                <strong>Custom Translate</strong>
+                <div>Text:</div>
+                <div><textarea class="custom-translate-input"></textarea></div>
+                <button class="custom-translate-btn">Translate</button>
+                <div>Translated:</div>
+                <div class="custom-translate-out"></div>
+            </div>
         </div>
     </div>
 
