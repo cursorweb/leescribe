@@ -24,8 +24,6 @@ Languages are stored in `C:\users\user\.local\share\argos-translate\packages`
 ## Todo
 Import spanish from bbc mundo link
 
-Modify translation word
-
 More better formatted document
 
 Flashcard system (not sure if I want it long term)
@@ -34,8 +32,6 @@ Translate highlighted sentences
 
 Read out loud
 
-Pinyin (On click?)
-
 Switch font
 
 Review
@@ -43,10 +39,6 @@ Review
 Writing Canvas
 
 Font size
-
-Gray out existing text while loading translation
-
-Remove pinyin button
 
 Optimization?
 * Reduce spans

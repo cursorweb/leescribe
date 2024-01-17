@@ -40,6 +40,10 @@ body {
     visibility: visible;
 }
 
+.grayed-out {
+    opacity: 0.5;
+}
+
 /* Maybe we need this */
 /*
 .handwritten {
