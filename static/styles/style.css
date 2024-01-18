@@ -16,7 +16,7 @@ body {
 
 .cont {
     display: flex;
-    /* ??? */
+    /* why ??? */
     height: 10px;
     flex: 1;
 }

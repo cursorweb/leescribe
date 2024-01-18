@@ -42,6 +42,8 @@ Font size
 
 Typing practice
 
+Save texts
+
 Optimization?
 * Reduce spans
 * Make more modular (probably optional but want to mod this)
