@@ -8,6 +8,8 @@ const richtextCont = document.querySelector(".richtext-cont");
 const foreignWordSpan = document.querySelector(".foreign-word");
 const translatedWordSpan = document.querySelector(".translated-word");
 
+const passageTranslate = document.querySelector(".passage-translate");
+
 let language = "";
 
 startBtn.addEventListener("click", () => {
@@ -46,7 +48,9 @@ startBtn.addEventListener("click", () => {
             }
 
             wordEl.addEventListener("click", async () => {
+                passageTranslate.classList.add("grayed-out");
                 const res = await translate(word);
+                passageTranslate.classList.remove("grayed-out");
 
                 foreignWordSpan.textContent = word;
                 translatedWordSpan.textContent = res.translatedText;
@@ -61,25 +65,15 @@ startBtn.addEventListener("click", () => {
             translateBtn.textContent = "translate";
 
             translateBtn.addEventListener("click", async () => {
+                passageTranslate.classList.add("grayed-out");
                 const res = await translate(line);
+                passageTranslate.classList.remove("grayed-out");
 
                 foreignWordSpan.textContent = "<sentence>";
                 translatedWordSpan.textContent = res.translatedText;
             });
 
             lineEl.append(translateBtn);
-
-            if (language == "zh") {
-                const pinyinBtn = document.createElement("button");
-                pinyinBtn.textContent = "pinyin";
-
-                pinyinBtn.addEventListener("click", async () => {
-                    foreignWordSpan.textContent = "<pinyin>";
-                    translatedWordSpan.textContent = pinyin(line);
-                });
-
-                lineEl.append(pinyinBtn);
-            }
         }
 
         richtextCont.append(lineEl);
