@@ -55,6 +55,7 @@ startBtn.addEventListener("click", () => {
                 const res = await translate(word);
                 passageTranslate.classList.remove("grayed-out");
 
+                if (passage) passage.style.removeProperty("background");
                 passage = wordEl;
 
                 foreignWordSpan.textContent = word;
@@ -74,6 +75,7 @@ startBtn.addEventListener("click", () => {
                 const res = await translate(line);
                 passageTranslate.classList.remove("grayed-out");
 
+                if (passage) passage.style.removeProperty("background");
                 passage = lineEl;
 
                 foreignWordSpan.textContent = "<sentence>";
@@ -88,6 +90,7 @@ startBtn.addEventListener("click", () => {
 });
 
 jumpToPassage.addEventListener("click", () => {
+    if (!passage) return;
     passage.style.background = "yellow";
     passage.scrollIntoView(true);
 });
