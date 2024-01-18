@@ -1,11 +1,23 @@
 body {
     font-family: calibri, kaiti;
     font-size: 22px;
+
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    flex-direction: column;
+}
+
+.header {
+    background: #eef;
+    box-sizing: border-box;
 }
 
 .cont {
     display: flex;
-    height: 80vh;
+    height: 10px;
+    flex: 1;
 }
 
 .cont .richtext-cont {
@@ -17,19 +29,13 @@ body {
 .cont .translate {
     background-color: #eee;
     flex: 0 0 25%;
+    box-sizing: border-box;
     overflow: auto;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
-
-/* .pinyin-hint {
-    font-family: Consolas;
-    background: #d2e5ff;
-    font-size: 16px;
-    position: absolute;
-    top: -22px;
-    left: 0;
-    z-index: 2;
-    display: none;
-} */
 
 .cont .richtext-cont span rt {
     visibility: hidden;
@@ -44,9 +50,10 @@ body {
     opacity: 0.5;
 }
 
-/* Maybe we need this */
-/*
-.handwritten {
-    font-family: calibri, kaiti;
+a {
+    color: blue;
 }
-*/
+
+a:hover {
+    text-decoration: none;
+}

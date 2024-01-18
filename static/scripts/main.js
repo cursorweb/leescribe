@@ -10,7 +10,10 @@ const translatedWordSpan = document.querySelector(".translated-word");
 
 const passageTranslate = document.querySelector(".passage-translate");
 
+const jumpToPassage = document.querySelector(".jump-to-passage");
+
 let language = "";
+let passage;
 
 startBtn.addEventListener("click", () => {
     language = languageSelect.value;
@@ -52,6 +55,8 @@ startBtn.addEventListener("click", () => {
                 const res = await translate(word);
                 passageTranslate.classList.remove("grayed-out");
 
+                passage = wordEl;
+
                 foreignWordSpan.textContent = word;
                 translatedWordSpan.textContent = res.translatedText;
             });
@@ -69,6 +74,8 @@ startBtn.addEventListener("click", () => {
                 const res = await translate(line);
                 passageTranslate.classList.remove("grayed-out");
 
+                passage = lineEl;
+
                 foreignWordSpan.textContent = "<sentence>";
                 translatedWordSpan.textContent = res.translatedText;
             });
@@ -78,6 +85,11 @@ startBtn.addEventListener("click", () => {
 
         richtextCont.append(lineEl);
     }
+});
+
+jumpToPassage.addEventListener("click", () => {
+    passage.style.background = "yellow";
+    passage.scrollIntoView(true);
 });
 
 const customTranslateInput = document.querySelector(".custom-translate-input");
