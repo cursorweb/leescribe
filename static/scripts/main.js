@@ -1,3 +1,9 @@
+let voices;
+speechSynthesis.addEventListener("voiceschanged", () => {
+    voices = window.speechSynthesis.getVoices();
+    console.log('reach', window.speechSynthesis.getVoices().filter(v => v.lang.includes("zh") || v.lang.includes("es")))
+});
+
 const articleInput = document.querySelector(".article-input");
 const languageSelect = document.querySelector(".language-select");
 
@@ -65,8 +71,8 @@ startBtn.addEventListener("click", () => {
             lineEl.append(wordEl);
         }
 
+        // if line not empty
         if (line) {
-            // if line not empty
             const translateBtn = document.createElement("button");
             translateBtn.textContent = "translate";
 
@@ -82,7 +88,27 @@ startBtn.addEventListener("click", () => {
                 translatedWordSpan.textContent = res.translatedText;
             });
 
-            lineEl.append(translateBtn);
+            const speakBtn = document.createElement("button");
+            speakBtn.textContent = "speak";
+
+            speakBtn.addEventListener("click", async () => {
+                // https://stackoverflow.com/questions/64662877/how-to-add-a-pause-and-stop-function-to-my-javascript-text-to-speech
+
+                const speaker = new SpeechSynthesisUtterance(line);
+                const voiceName = "Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)";
+                // speaker.voice = voices[voiceName];
+
+                for (let i = 0; i < voices.length; i++) {
+                    if (voices[i].name === voiceName) {
+                        speaker.voice = voices[i];
+                        break;
+                    }
+                }
+
+                window.speechSynthesis.speak(speaker);
+            });
+
+            lineEl.append(translateBtn, speakBtn);
         }
 
         richtextCont.append(lineEl);
