@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leescribe</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-    <script>const url = "{{ url }}";</script>
+
+    <script>const TRANSLATE_URL = "{{ url }}";</script>
+
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.19.2/dist/index.min.js"></script>
+
+    <script src="{{ url_for('static', filename='scripts/languageModels/languageModel.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/languageModels/spanish.js') }}"></script>
 </head>
 
 <body>
@@ -55,7 +60,8 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='scripts/main.js') }}"></script> -->
+    <script src="{{ url_for('static', filename='scripts/language.js') }}"></script>
 </body>
 
 </html>
