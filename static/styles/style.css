@@ -25,9 +25,11 @@ body {
 .cont .richtext-cont {
     flex: 0 0 75%;
     overflow: auto;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
-.cont .translate {
+.cont .translate-cont {
     background-color: #eee;
 
     flex: 0 0 25%;

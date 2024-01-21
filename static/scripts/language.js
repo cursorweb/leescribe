@@ -2,11 +2,6 @@ const startBtn = document.querySelector(".start-btn");
 const articleInput = document.querySelector(".article-input");
 const richtextCont = document.querySelector(".richtext-cont");
 
-// TODO: modular
-const foreignWordSpan = document.querySelector(".foreign-word");
-const passageTranslate = document.querySelector(".passage-translate");
-const translatedWordSpan = document.querySelector(".translated-word");
-
 let passage;
 
 let languageModel;
@@ -24,4 +19,10 @@ startBtn.addEventListener("click", () => {
         const lineEl = languageModel.createLineEl(line);
         richtextCont.append(lineEl);
     }
+});
+
+document.querySelector(".jump-to-passage").addEventListener("click", () => {
+    if (!languageModel || !languageModel.passage) return;
+    languageModel.passage.style.background = "yellow";
+    languageModel.passage.scrollIntoView(true);
 });

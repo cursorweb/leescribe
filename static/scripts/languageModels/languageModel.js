@@ -7,6 +7,8 @@ class LanguageModel {
         // TODO: decide if this.text is necessary
         this.text = text;
         this.lang = lang;
+
+        this.passageTranslateCont = document.querySelector(".passage-translate-cont");
     }
 
     _getWords(_line) { }
@@ -28,17 +30,8 @@ class LanguageModel {
             const word = words[i];
             const wordEl = this._createWordElement(word, i, words);
 
-            wordEl.addEventListener("click", async () => {
-                // TODO: modular
-                passageTranslate.classList.add("grayed-out");
-                const res = await this.translate(word);
-                passageTranslate.classList.remove("grayed-out");
-
-                if (passage) passage.style.removeProperty("background");
-                passage = wordEl;
-
-                foreignWordSpan.textContent = word;
-                translatedWordSpan.textContent = res;
+            wordEl.addEventListener("click", () => {
+                this.translatePassage(word, wordEl, true);
             });
 
             out.append(wordEl);
@@ -48,16 +41,8 @@ class LanguageModel {
         const translateBtn = document.createElement("button");
         translateBtn.textContent = "translate";
 
-        translateBtn.addEventListener("click", async () => {
-            passageTranslate.classList.add("grayed-out");
-            const res = await this.translate(line);
-            passageTranslate.classList.remove("grayed-out");
-
-            if (passage) passage.style.removeProperty("background");
-            passage = out;
-
-            foreignWordSpan.textContent = "<sentence>";
-            translatedWordSpan.textContent = res;
+        translateBtn.addEventListener("click", () => {
+            this.translatePassage(line, out);
         });
 
         const speakBtn = document.createElement("button");
@@ -83,6 +68,38 @@ class LanguageModel {
         out.append(translateBtn, speakBtn);
 
         return out;
+    }
+
+    /**
+     * Translates text for the hud
+     * @param {string} text
+     * @param {HTMLElement} el
+     */
+    async translatePassage(text, el, word = false) {
+        // remove previously highlighted passage
+        if (this.passage) {
+            this.passage.style.removeProperty("background");
+        }
+
+        this.passage = el;
+
+
+        this.passageTranslateCont.classList.add("grayed-out");
+
+        const translated = await this.translate(text);
+
+        this.passageTranslateCont.classList.remove("grayed-out");
+        this.passageTranslateCont.textContent = "";
+
+        if (word) {
+            const wordEl = document.createElement("div");
+            wordEl.textContent = `Word: ${text}`;
+            this.passageTranslateCont.append(wordEl);
+        }
+
+        const translatedEl = document.createElement("div");
+        translatedEl.textContent = `Translated: ${translated}`;
+        this.passageTranslateCont.append(translatedEl);
     }
 
     /**
