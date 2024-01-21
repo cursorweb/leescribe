@@ -9,6 +9,8 @@ class LanguageModel {
         this.lang = lang;
 
         this.passageTranslateCont = document.querySelector(".passage-translate-cont");
+
+        // this.passage = null;
     }
 
     _getWords(_line) { }
@@ -100,6 +102,16 @@ class LanguageModel {
         const translatedEl = document.createElement("div");
         translatedEl.textContent = `Translated: ${translated}`;
         this.passageTranslateCont.append(translatedEl);
+    }
+
+    async customTranslate(text) {
+        const out = document.createElement("div");
+
+        const translated = await this.translate(text);
+
+        out.textContent = `Translated: ${translated}`;
+
+        return out;
     }
 
     /**

@@ -2,8 +2,6 @@ const startBtn = document.querySelector(".start-btn");
 const articleInput = document.querySelector(".article-input");
 const richtextCont = document.querySelector(".richtext-cont");
 
-let passage;
-
 let languageModel;
 
 startBtn.addEventListener("click", () => {
@@ -21,8 +19,36 @@ startBtn.addEventListener("click", () => {
     }
 });
 
-document.querySelector(".jump-to-passage").addEventListener("click", () => {
+
+const jumpToPassageBtn = document.querySelector(".jump-to-passage");
+
+jumpToPassageBtn.addEventListener("click", () => {
     if (!languageModel || !languageModel.passage) return;
     languageModel.passage.style.background = "yellow";
     languageModel.passage.scrollIntoView(true);
+});
+
+
+const customTranslateInput = document.querySelector(".custom-translate-input");
+const customTranslateBtn = document.querySelector(".custom-translate-btn");
+const customTranslateCont = document.querySelector(".custom-translate-cont");
+
+customTranslateBtn.addEventListener("click", async () => {
+    const text = customTranslateInput.value;
+
+    customTranslateCont.classList.add("grayed-out");
+
+    const translatedEl = await languageModel.customTranslate(text);
+
+    customTranslateCont.classList.remove("grayed-out");
+    customTranslateCont.textContent = "";
+
+    customTranslateCont.append(translatedEl);
+});
+
+customTranslateInput.addEventListener("keydown", e => {
+    if (e.key == "Enter" && e.ctrlKey) {
+        e.preventDefault();
+        customTranslateBtn.click();
+    }
 });
