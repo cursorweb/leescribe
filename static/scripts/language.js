@@ -1,13 +1,23 @@
 const startBtn = document.querySelector(".start-btn");
 const articleInput = document.querySelector(".article-input");
+const languageSelect = document.querySelector(".language-select");
 const richtextCont = document.querySelector(".richtext-cont");
 
 let languageModel;
 
 startBtn.addEventListener("click", () => {
     // create handler
+    const language = languageSelect.value;
     const text = articleInput.value;
-    languageModel = new Spanish(text);
+
+    switch (language) {
+        case "es":
+            languageModel = new Spanish(text);
+            break;
+        case "zh":
+            languageModel = new Chinese(text);
+            break;
+    }
 
     richtextCont.textContent = "";
 

@@ -39,37 +39,56 @@ class LanguageModel {
             out.append(wordEl);
         }
 
-        // TODO: modular
+        this.addParagraphActionBar(line, out);
+
+        return out;
+    }
+
+    /**
+     * Creates an action bar
+     * @param {string} line
+     * @param {HTMLParagraphElement} el
+     */
+    addParagraphActionBar(line, el) {
         const translateBtn = document.createElement("button");
         translateBtn.textContent = "translate";
 
         translateBtn.addEventListener("click", () => {
-            this.translatePassage(line, out);
+            this.translatePassage(line, el);
         });
 
-        const speakBtn = document.createElement("button");
-        speakBtn.textContent = "speak";
+        // const speakBtn = document.createElement("button");
+        // speakBtn.textContent = "speak";
 
-        speakBtn.addEventListener("click", async () => {
-            // https://stackoverflow.com/questions/64662877/how-to-add-a-pause-and-stop-function-to-my-javascript-text-to-speech
+        // speakBtn.addEventListener("click", async () => {
+        //     // https://stackoverflow.com/questions/64662877/how-to-add-a-pause-and-stop-function-to-my-javascript-text-to-speech
 
-            const speaker = new SpeechSynthesisUtterance(line);
-            const voiceName = "Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)";
-            // speaker.voice = voices[voiceName];
+        //     const speaker = new SpeechSynthesisUtterance(line);
+        //     const voiceName = "Microsoft Xiaoxiao Online (Natural) - Chinese (Mainland)";
+        //     // speaker.voice = voices[voiceName];
 
-            for (let i = 0; i < voices.length; i++) {
-                if (voices[i].name === voiceName) {
-                    speaker.voice = voices[i];
-                    break;
-                }
-            }
+        //     for (let i = 0; i < voices.length; i++) {
+        //         if (voices[i].name === voiceName) {
+        //             speaker.voice = voices[i];
+        //             break;
+        //         }
+        //     }
 
-            window.speechSynthesis.speak(speaker);
+        //     window.speechSynthesis.speak(speaker);
+        // });
+
+        const copyBtn = document.createElement("button");
+        copyBtn.textContent = "copy";
+
+        copyBtn.addEventListener("click", async () => {
+            await navigator.clipboard.writeText(line);
+            copyBtn.textContent = "copied";
+            setTimeout(() => {
+                copyBtn.textContent = "copy";
+            }, 500);
         });
 
-        out.append(translateBtn, speakBtn);
-
-        return out;
+        el.append(translateBtn, copyBtn);
     }
 
     /**
@@ -104,6 +123,10 @@ class LanguageModel {
         this.passageTranslateCont.append(translatedEl);
     }
 
+    /**
+     * Translate user-inputted text
+     * @param {string} text
+     */
     async customTranslate(text) {
         const out = document.createElement("div");
 
