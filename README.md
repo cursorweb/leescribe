@@ -44,6 +44,12 @@ Typing practice
 
 Save texts
 
+Summarization Practice
+
+Break up into sections for more focused reading
+
+Save Texts
+
 Optimization?
 * Reduce spans
 * Make more modular (probably optional but want to mod this)

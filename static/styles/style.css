@@ -2,37 +2,42 @@ body {
     font-family: calibri, kaiti;
     font-size: 22px;
 
+    margin: 0;
+
     display: flex;
     height: 100vh;
-    width: 100vw;
-    margin: 0;
     flex-direction: column;
 }
 
 .header {
     background: #eef;
+
     box-sizing: border-box;
+    padding: 10px;
 }
 
 .cont {
     display: flex;
-    /* why ??? */
-    height: 10px;
-    flex: 1;
+    overflow: auto;
+    height: 100%;
 }
 
 .cont .richtext-cont {
     flex: 0 0 75%;
     overflow: auto;
-    position: relative;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
-.cont .translate {
+.cont .translate-cont {
     background-color: #eee;
+
     flex: 0 0 25%;
-    box-sizing: border-box;
     overflow: auto;
+
+    box-sizing: border-box;
     padding: 8px;
+
     display: flex;
     flex-direction: column;
     gap: 10px;
