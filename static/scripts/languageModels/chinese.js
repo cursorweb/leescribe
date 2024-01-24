@@ -16,4 +16,15 @@ class Chinese extends LanguageModel {
 
         return wordEl;
     }
+
+    async customTranslate(text) {
+        const pinyin = pinyinPro.html(text);
+        const out = await super.customTranslate(text);
+
+        const pinyinCont = document.createElement("div");
+        pinyinCont.innerHTML = `Pinyin: ${pinyin}`;
+
+        out.append(pinyinCont);
+        return out;
+    }
 }
