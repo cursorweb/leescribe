@@ -11,6 +11,7 @@ class Chinese extends LanguageModel {
     _createWordElement(word) {
         const wordEl = document.createElement("span");
 
+        wordEl.classList.add("pinyin-span");
         wordEl.innerHTML = pinyinPro.html(word);
         wordEl.setAttribute("tabindex", "0");
 

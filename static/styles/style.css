@@ -63,3 +63,7 @@ a {
 a:hover {
     text-decoration: none;
 }
+
+.pinyin-span {
+    display: inline-block;
+}
