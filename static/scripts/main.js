@@ -13,12 +13,20 @@ const articleInput = document.querySelector(".article-input");
 const languageSelect = document.querySelector(".language-select");
 const richtextCont = document.querySelector(".richtext-cont");
 
+const prevPassageBtn = document.querySelector(".prev-passage");
+const nextPassageBtn = document.querySelector(".next-passage");
+
 let languageModel;
+
+const passageSize = 20;
+let passageIndex = 0;
+let passages = [];
 
 startBtn.addEventListener("click", () => {
     // create handler
     const language = languageSelect.value;
     const text = articleInput.value;
+    passages = [];
 
     switch (language) {
         case "es":
@@ -29,13 +37,35 @@ startBtn.addEventListener("click", () => {
             break;
     }
 
+    const lines = text.split("\n").map(line => line.trim());
+    for (let i = 0; i < lines.length; i += passageSize) {
+        passages.push(lines.slice(i, i + passageSize));
+    }
+
+    renderPassage();
+});
+
+function renderPassage() {
+    richtextCont.scrollTop = 0;
     richtextCont.textContent = "";
 
-    const lines = text.split("\n").map(line => line.trim());
-
-    for (const line of lines) {
+    for (const line of passages[passageIndex]) {
         const lineEl = languageModel.createLineEl(line);
         richtextCont.append(lineEl);
+    }
+}
+
+prevPassageBtn.addEventListener("click", () => {
+    if (passageIndex > 0) {
+        passageIndex--;
+        renderPassage();
+    }
+});
+
+nextPassageBtn.addEventListener("click", () => {
+    if (passageIndex < passages.length - 1) {
+        passageIndex++;
+        renderPassage();
     }
 });
 
