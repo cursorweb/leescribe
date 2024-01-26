@@ -36,6 +36,9 @@ startBtn.addEventListener("click", () => {
         case "zh":
             languageModel = new Chinese(text);
             break;
+        case "zh-trad":
+            languageModel = new TradChinese(text);
+            break;
     }
 
     const lines = text.split("\n").map(line => line.trim());

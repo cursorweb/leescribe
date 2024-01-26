@@ -13,11 +13,13 @@
     <script>const TRANSLATE_URL = "{{ url }}";</script>
 
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.19.2/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/t2cn.js"></script>
 
     <script src="{{ url_for('static', filename='scripts/languageModels/languageModel.js') }}"></script>
 
     <script src="{{ url_for('static', filename='scripts/languageModels/spanish.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts/languageModels/chinese.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/languageModels/trad-chinese.js') }}"></script>
 
     <script src="{{ url_for('static', filename='scripts/settings.js') }}"></script>
 </head>
@@ -41,6 +43,7 @@
             <select class="language-select">
                 <option value="es">Spanish</option>
                 <option value="zh">Chinese</option>
+                <option value="zh-trad">Chinese (Traditional)</option>
             </select>
         </div>
         <button class="start-btn">Start</button>
