@@ -38,6 +38,13 @@ body {
 
 .cont .article-cont .article-nav {
     background: #fee;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.cont .article-cont .article-nav button {
+    flex-grow: 1;
 }
 
 .cont .translate-cont {

@@ -15,6 +15,7 @@ const richtextCont = document.querySelector(".richtext-cont");
 
 const prevPassageBtn = document.querySelector(".prev-passage");
 const nextPassageBtn = document.querySelector(".next-passage");
+const passageNumberText = document.querySelector(".passage-number");
 
 let languageModel;
 
@@ -52,6 +53,20 @@ function renderPassage() {
     for (const line of passages[passageIndex]) {
         const lineEl = languageModel.createLineEl(line);
         richtextCont.append(lineEl);
+    }
+
+    passageNumberText.textContent = `${passageIndex + 1} / ${passages.length}`;
+
+    if (passageIndex == 0) {
+        prevPassageBtn.disabled = true;
+    } else {
+        prevPassageBtn.disabled = false;
+    }
+
+    if (passageIndex == passages.length - 1) {
+        nextPassageBtn.disabled = true;
+    } else {
+        nextPassageBtn.disabled = false;
     }
 }
 
