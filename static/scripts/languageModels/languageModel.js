@@ -113,14 +113,19 @@ class LanguageModel {
         this.passageTranslateCont.textContent = "";
 
         if (word) {
-            const wordEl = document.createElement("div");
-            wordEl.textContent = `Word: ${text}`;
+            const wordEl = this._renderWordEl(text);
             this.passageTranslateCont.append(wordEl);
         }
 
         const translatedEl = document.createElement("div");
         translatedEl.textContent = `Translated: ${translated}`;
         this.passageTranslateCont.append(translatedEl);
+    }
+
+    _renderWordEl(text) {
+        const wordEl = document.createElement("div");
+        wordEl.textContent = `Word: ${text}`;
+        return wordEl;
     }
 
     /**

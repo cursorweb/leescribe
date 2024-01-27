@@ -5,20 +5,48 @@ class TradChinese extends Chinese {
         super(text, "zh");
     }
 
+    _renderWordEl(tradText) {
+        const simpText = converter(tradText);
+        const wordEl = this.__tradPinyinAlternator("Word", tradText, simpText);
+        return wordEl;
+    }
+
     async translate(text) {
         const simp = converter(text);
         return super.translate(simp);
     }
 
-    async customTranslate(text) {
-        const out = await super.customTranslate(text);
+    async customTranslate(tradText) {
+        const out = document.createElement("div");
 
-        const simpDiv = document.createElement("div");
-        const simp = converter(text);
+        const translated = await this.translate(tradText);
 
-        simpDiv.textContent = `简体：${simp}`;
+        const translatedDiv = document.createElement("div");
+        translatedDiv.textContent = `Translated: ${translated}`;
 
-        out.append(simpDiv);
+        const simpText = converter(tradText);
+        const tradPinyin = pinyinPro.html(tradText);
+        const simpPinyin = pinyinPro.html(simpText);
+        const pinyinCont = this.__tradPinyinAlternator("Pinyin", tradPinyin, simpPinyin);
+
+        out.append(translatedDiv, pinyinCont);
+        return out;
+    }
+
+    __tradPinyinAlternator(name, trad, simp) {
+        const out = document.createElement("div");
+        out.innerHTML = `${name}: ${trad}`;
+
+        let isSimp = false;
+
+        out.addEventListener("click", () => {
+            isSimp = !isSimp;
+            if (isSimp) {
+                out.innerHTML = `${name}: ${simp}`;
+            } else {
+                out.innerHTML = `${name}: ${trad}`;
+            }
+        });
 
         return out;
     }
