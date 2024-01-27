@@ -24,6 +24,9 @@ class Settings {
                 }, {
                     name: "Chinese Handwritten",
                     value: "calibri, kaiti"
+                }, {
+                    name: "Chinese Traditional",
+                    value: "calibri, Microsoft JhengHei"
                 }]
             }
         ];
