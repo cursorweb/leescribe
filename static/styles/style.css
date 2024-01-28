@@ -22,11 +22,29 @@ body {
     height: 100%;
 }
 
-.cont .richtext-cont {
+.cont .article-cont {
     flex: 0 0 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cont .article-cont .richtext-cont {
+    overflow: auto;
+    padding: 10px;
     overflow: auto;
     box-sizing: border-box;
-    padding: 10px;
+    flex-grow: 1;
+}
+
+.cont .article-cont .article-nav {
+    background: #fee;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.cont .article-cont .article-nav button {
+    flex-grow: 1;
 }
 
 .cont .translate-cont {
@@ -62,4 +80,8 @@ a {
 
 a:hover {
     text-decoration: none;
+}
+
+.pinyin-span {
+    display: inline-block;
 }
