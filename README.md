@@ -50,6 +50,8 @@ Break up into sections for more focused reading
 
 Save Texts
 
+"Blurting" method
+
 Optimization?
 * Reduce spans
 * Make more modular (probably optional but want to mod this)
