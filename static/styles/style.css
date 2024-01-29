@@ -85,3 +85,10 @@ a:hover {
 .pinyin-span {
     display: inline-block;
 }
+
+.hud {
+    position: absolute;
+    user-select: none;
+    background: red;
+    opacity: 0.1;
+}

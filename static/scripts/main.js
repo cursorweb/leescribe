@@ -11,6 +11,7 @@ window.addEventListener("load", () => {
 const startBtn = document.querySelector(".start-btn");
 const articleInput = document.querySelector(".article-input");
 const languageSelect = document.querySelector(".language-select");
+/** @type {HTMLDivElement} */
 const richtextCont = document.querySelector(".richtext-cont");
 
 const prevPassageBtn = document.querySelector(".prev-passage");
@@ -85,6 +86,37 @@ nextPassageBtn.addEventListener("click", () => {
         passageIndex++;
         renderPassage();
     }
+});
+
+
+// highlighting HUD
+const hudTest = document.querySelector(".hud");
+const hudTestRect = hudTest.getBoundingClientRect();
+document.addEventListener("selectionchange", () => {
+    const range = document.getSelection();
+
+    if (range.rangeCount == 0) {
+        hudTest.style.top = "-100px";
+        return;
+    }
+
+    const posRange = range.getRangeAt(0);
+
+    const rect = posRange.getBoundingClientRect();
+
+    // selection empty
+    if (rect.width < 1) {
+        hudTest.style.top = "-100px";
+        return;
+    }
+
+    // console.log(rect.left, rect.top, rect.width, rect.height);
+
+    const top = rect.top - hudTestRect.height;
+    const left = rect.left + rect.width / 2;
+
+    hudTest.style.top = top + "px";
+    hudTest.style.left = left + "px";
 });
 
 
