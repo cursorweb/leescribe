@@ -90,34 +90,41 @@ nextPassageBtn.addEventListener("click", () => {
 
 
 // highlighting HUD
-const hudTest = document.querySelector(".hud");
-const hudTestRect = hudTest.getBoundingClientRect();
-document.addEventListener("selectionchange", () => {
-    const range = document.getSelection();
+// const hudTest = document.querySelector(".hud");
+// const hudTestRect = hudTest.getBoundingClientRect();
+// let prevSelectedTime = -1;
+// document.addEventListener("selectionchange", () => {
+//     prevSelectedTime = Date.now();
+// });
 
-    if (range.rangeCount == 0) {
-        hudTest.style.top = "-100px";
-        return;
-    }
+// setInterval(() => {
+//     if (Date.now() - prevSelectedTime > 1000) {
+//         const range = document.getSelection();
 
-    const posRange = range.getRangeAt(0);
+//         if (range.rangeCount == 0) {
+//             hudTest.style.top = "-100px";
+//             return;
+//         }
 
-    const rect = posRange.getBoundingClientRect();
+//         const posRange = range.getRangeAt(0);
 
-    // selection empty
-    if (rect.width < 1) {
-        hudTest.style.top = "-100px";
-        return;
-    }
+//         const rect = posRange.getBoundingClientRect();
 
-    // console.log(rect.left, rect.top, rect.width, rect.height);
+//         // selection empty
+//         if (rect.width < 1) {
+//             hudTest.style.top = "-100px";
+//             return;
+//         }
 
-    const top = rect.top - hudTestRect.height;
-    const left = rect.left + rect.width / 2;
+//         // console.log(rect.left, rect.top, rect.width, rect.height);
 
-    hudTest.style.top = top + "px";
-    hudTest.style.left = left + "px";
-});
+//         const top = rect.top - hudTestRect.height - 5;
+//         const left = rect.left + rect.width / 2;
+
+//         hudTest.style.top = top + "px";
+//         hudTest.style.left = left + "px";
+//     }
+// }, 1);
 
 
 // jump to passage
