@@ -19,20 +19,27 @@
     align-items: center;
 }
 
-.nav-bar {
-    flex-basis: 50%;
-    background: red;
-    width: 100%;
-
-    display: flex;
-    align-items: stretch;
-    justify-content: stretch;
+.prompt {
+    flex-basis: 0;
 }
 
 .front .text,
 .back .text {
     font-size: 10rem;
-    flex-basis: 50%;
+    flex-basis: 75%;
+    overflow: hidden;
+}
+
+.nav-bar {
+    flex-basis: 25%;
+    width: 100%;
+
+    display: flex;
+    align-items: stretch;
+}
+
+.nav-bar button {
+    flex-grow: 1;
 }
 
 .front {
@@ -41,6 +48,14 @@
 
 .back {
     background: #ccecff;
+}
+
+.front.review {
+    background: #fee;
+}
+
+.back.review {
+    background: #b6dbff;
 }
 
 .hide {
