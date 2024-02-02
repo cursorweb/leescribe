@@ -25,5 +25,10 @@ def main():
     return render_template("index.html", url=f"http://{HOST}:{TRANSLATE_PORT}")
 
 
+@app.route("/kana")
+def kana():
+    return render_template("kana.html")
+
+
 print(f"Running on http://{HOST}:{SITE_PORT}")
 app.run(host=HOST, port=SITE_PORT)

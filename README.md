@@ -55,3 +55,8 @@ Save Texts
 Optimization?
 * Reduce spans
 * Make more modular (probably optional but want to mod this)
+
+Kana Learner
+* Random between draw the character and what is the character
+* Random between romaji vs kana
+* Review all

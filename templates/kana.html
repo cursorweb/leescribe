@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kana Learner</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='kana/style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.png') }}" type="image/png">
+</head>
+
+<body>
+    <a href="/">Back to Leescribe</a>
+
+    <button>Hiragana</button>
+    <button>Katakana</button>
+    <button>Both</button>
+
+    <div class="card">
+        <div class="front">
+            <div class="prompt"></div>
+            <div class="text"></div>
+            <div class="nav-bar">
+                <button class="flip-btn">Flip</button>
+            </div>
+        </div>
+        <div class="back">
+            <div class="text"></div>
+            <div class="nav-bar">
+                <button class="next-btn">Easy</button>
+                <button class="save-btn">Hard</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='kana/main.js') }}"></script>
+</body>
+
+</html>

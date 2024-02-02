@@ -1,0 +1,48 @@
+.card {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.front,
+.back {
+    padding: 10px;
+    box-shadow: 0 0 5px;
+    border-radius: 8px;
+    width: 50vh;
+    height: 50vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar {
+    flex-basis: 50%;
+    background: red;
+    width: 100%;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.front .text,
+.back .text {
+    font-size: 10rem;
+    flex-basis: 50%;
+}
+
+.front {
+    background: #e7e7e7;
+}
+
+.back {
+    background: #ccecff;
+}
+
+.hide {
+    display: none;
+}
