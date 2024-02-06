@@ -66,7 +66,7 @@ document.addEventListener("keydown", e => {
         }
     } else {
         // back of card
-        if (e.key == "2") {
+        if (e.key == "4") {
             saveBtn.click();
         } else if (e.key == "1") {
             nextBtn.click();
