@@ -4,16 +4,29 @@ const romajiArr = "a ka sa ta na i ki shi chi ni u ku su tsu nu e ke se te ne o 
 // const romajiArr = "a ka sa ta".split(" ");
 
 
-/** [romaji] -> [hiragana] */
+/** [hiragana] -> [romaji] */
 const hiraganaObj = {};
 
-/** [romaji] -> [katakana] */
+/** [katakana] -> [romaji] */
 const katakanaObj = {};
 
 for (let i = 0; i < hiraganaChars.length; i++) {
-    hiraganaObj[romajiArr[i]] = hiraganaChars[i];
-    katakanaObj[romajiArr[i]] = katakanaChars[i];
+    hiraganaObj[hiraganaChars[i]] = romajiArr[i];
+    katakanaObj[katakanaChars[i]] = romajiArr[i];
 }
+
+const kanaData = {
+    obj: {
+        hiragana: hiraganaObj,
+        katakana: katakanaObj,
+    },
+    arr: {
+        hiragana: hiraganaChars,
+        katakana: katakanaChars,
+    }
+};
+
+const totalKana = romajiArr.length; // 71
 
 
 function shuffleArray(arr) {
@@ -34,7 +47,8 @@ const backText = document.querySelector(".back .text");
 const cardFront = document.querySelector(".front");
 const cardBack = document.querySelector(".back");
 
-shuffleArray(romajiArr);
+let kanaType = "katakana";
+shuffleArray(kanaData.arr[kanaType]);
 
 let cardIndex = -1;
 let savedArray = [];
@@ -78,7 +92,7 @@ function newKana() {
     cardIndex++;
 
     let index;
-    if (!isReviewMode && cardIndex == romajiArr.length) {
+    if (!isReviewMode && cardIndex == totalKana) {
         if (savedArray.length > 0) {
             isReviewMode = true;
             cardIndex = 0;
@@ -98,13 +112,13 @@ function newKana() {
         cardPrompt.textContent = `Review: ${cardIndex + 1} / ${savedArray.length}`;
     } else {
         index = cardIndex;
-        cardPrompt.textContent = `${cardIndex + 1} / ${romajiArr.length}`
+        cardPrompt.textContent = `${cardIndex + 1} / ${totalKana}`
     }
 
-    const romaji = romajiArr[index];
-    const hiragana = hiraganaObj[romaji];
+    const kana = kanaData.arr[kanaType][index];
+    const romaji = kanaData.obj[kanaType][kana];
 
-    frontText.textContent = hiragana;
+    frontText.textContent = kana;
     backText.textContent = romaji;
 
     cardBack.classList.add("hide");
