@@ -47,8 +47,15 @@ const backText = document.querySelector(".back .text");
 const cardFront = document.querySelector(".front");
 const cardBack = document.querySelector(".back");
 
-let kanaType = "katakana";
+let kanaType = "hiragana";
 shuffleArray(kanaData.arr[kanaType]);
+
+document.querySelectorAll(".kana-type").forEach(el => {
+    el.addEventListener("change", () => {
+        kanaType = el.value;
+        reset();
+    });
+});
 
 let cardIndex = -1;
 let savedArray = [];
@@ -87,6 +94,16 @@ document.addEventListener("keydown", e => {
         }
     }
 });
+
+function reset() {
+    cardIndex = -1;
+    savedArray = [];
+    isReviewMode = false;
+
+    shuffleArray(kanaData.arr[kanaType]);
+
+    newKana();
+}
 
 function newKana() {
     cardIndex++;
