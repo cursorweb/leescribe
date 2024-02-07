@@ -10,15 +10,22 @@ const hiraganaObj = {};
 /** [katakana] -> [romaji] */
 const katakanaObj = {};
 
+/** [katakana] -> [hiragana] & [hiragana] -> [katakana] */
+const kanaObj = {};
+
 for (let i = 0; i < hiraganaChars.length; i++) {
     hiraganaObj[hiraganaChars[i]] = romajiArr[i];
     katakanaObj[katakanaChars[i]] = romajiArr[i];
+
+    kanaObj[hiraganaChars[i]] = katakanaChars[i];
+    kanaObj[katakanaChars[i]] = hiraganaChars[i];
 }
 
 const kanaData = {
     obj: {
         hiragana: hiraganaObj,
         katakana: katakanaObj,
+        mixed: kanaObj,
     },
     arr: {
         hiragana: hiraganaChars,
@@ -100,7 +107,11 @@ function reset() {
     savedArray = [];
     isReviewMode = false;
 
-    shuffleArray(kanaData.arr[kanaType]);
+    if (kanaType == "mixed") {
+        shuffleArray(kanaData.arr.hiragana);
+    } else {
+        shuffleArray(kanaData.arr[kanaType]);
+    }
 
     newKana();
 }
@@ -108,6 +119,7 @@ function reset() {
 function newKana() {
     cardIndex++;
 
+    // the index to kana array -- either from saved or actual kana
     let index;
     if (!isReviewMode && cardIndex == totalKana) {
         if (savedArray.length > 0) {
@@ -132,11 +144,19 @@ function newKana() {
         cardPrompt.textContent = `${cardIndex + 1} / ${totalKana}`
     }
 
-    const kana = kanaData.arr[kanaType][index];
-    const romaji = kanaData.obj[kanaType][kana];
+    if (kanaType == "mixed") {
+        const hiragana = kanaData.arr.hiragana[index];
+        const katakana = kanaData.obj.mixed[hiragana];
 
-    frontText.textContent = kana;
-    backText.textContent = romaji;
+        frontText.textContent = hiragana;
+        backText.textContent = katakana;
+    } else {
+        const kana = kanaData.arr[kanaType][index];
+        const romaji = kanaData.obj[kanaType][kana];
+
+        frontText.textContent = kana;
+        backText.textContent = romaji;
+    }
 
     cardBack.classList.add("hide");
     cardFront.classList.remove("hide");

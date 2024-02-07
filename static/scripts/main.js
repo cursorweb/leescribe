@@ -29,6 +29,7 @@ startBtn.addEventListener("click", () => {
     const language = languageSelect.value;
     const text = articleInput.value;
     passages = [];
+    passageIndex = 0;
 
     switch (language) {
         case "es":
