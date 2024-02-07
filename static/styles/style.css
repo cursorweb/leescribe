@@ -9,26 +9,26 @@ body {
     flex-direction: column;
 }
 
-.header {
+.menu {
     background: #eef;
 
     box-sizing: border-box;
     padding: 10px;
 }
 
-.cont {
+.main-cont {
     display: flex;
     overflow: auto;
     height: 100%;
 }
 
-.cont .article-cont {
+.main-cont .article-cont {
     flex: 0 0 75%;
     display: flex;
     flex-direction: column;
 }
 
-.cont .article-cont .richtext-cont {
+.main-cont .article-cont .richtext-cont {
     overflow: auto;
     padding: 10px;
     overflow: auto;
@@ -36,18 +36,18 @@ body {
     flex-grow: 1;
 }
 
-.cont .article-cont .article-nav {
+.main-cont .article-cont .article-nav {
     background: #fee;
     display: flex;
     justify-content: space-between;
     gap: 10px;
 }
 
-.cont .article-cont .article-nav button {
+.main-cont .article-cont .article-nav button {
     flex-grow: 1;
 }
 
-.cont .translate-cont {
+.main-cont .translate-cont {
     background-color: #eee;
 
     flex: 0 0 25%;
@@ -61,12 +61,12 @@ body {
     gap: 10px;
 }
 
-.cont .richtext-cont span rt {
+.main-cont .richtext-cont span rt {
     visibility: hidden;
     user-select: none;
 }
 
-.cont .richtext-cont span:focus rt {
+.main-cont .richtext-cont span:focus rt {
     visibility: visible;
 }
 
