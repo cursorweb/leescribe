@@ -4,9 +4,8 @@ body {
 
     margin: 0;
 
-    display: flex;
+    width: 100vw;
     height: 100vh;
-    flex-direction: column;
 }
 
 .menu {
@@ -14,10 +13,40 @@ body {
 
     box-sizing: border-box;
     padding: 10px;
+
+    height: 100%;
+    width: 100%;
+}
+
+.card {
+    background: #d0e2eb;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.card .opts {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.card .opts div {
+    flex-basis: 100%;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.card .opts div {
+    background: orange;
+}
+
+.card-title {
+    font-weight: bolder;
 }
 
 .main-cont {
-    display: flex;
+    display: none;
+    /* display: flex; */
     overflow: auto;
     height: 100%;
 }
