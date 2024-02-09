@@ -7,11 +7,21 @@ window.addEventListener("load", () => {
 });
 
 
+// menu stuff (TODO: move)
+const returnMenuBtn = document.querySelector(".menu-btn");
+returnMenuBtn.addEventListener("click", () => {
+    menuCont.classList.remove("hide");
+    mainCont.classList.add("hide");
+})
+
+
 // load passage
+const mainCont = document.querySelector(".main-cont");
+const menuCont = document.querySelector(".menu-cont");
+
 const startBtn = document.querySelector(".start-btn");
 const articleInput = document.querySelector(".article-input");
 const languageSelect = document.querySelector(".language-select");
-/** @type {HTMLDivElement} */
 const richtextCont = document.querySelector(".richtext-cont");
 
 const prevPassageBtn = document.querySelector(".prev-passage");
@@ -25,6 +35,9 @@ let passageIndex = 0;
 let passages = [];
 
 startBtn.addEventListener("click", () => {
+    mainCont.classList.remove("hide");
+    menuCont.classList.add("hide");
+
     // create handler
     const language = languageSelect.value;
     const text = articleInput.value;

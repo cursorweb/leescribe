@@ -25,8 +25,8 @@
 </head>
 
 <body>
-    <div class="menu">
-        <div class="card">
+    <div class="menu-cont">
+        <div class="card review-card">
             <div class="card-title">Review</div>
 
             <div class="opts">
@@ -49,20 +49,40 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="card article-card">
             <div class="tabs-nav">
                 <div>
                     <!-- todo: make as tabs?? -->
+                </div>
+                <div>
+                    <div class="btn">? Random Article</div>
+                    <button class="btn">+ Add Article</button>
+                </div>
+            </div>
+            <div class="load-article-page">
+                <div>
+                    <a href="https://www.bbc.com/mundo" target="_blank">BBC Mundo</a>
+                    <a href="https://cnnespanol.cnn.com/" target="_blank">CNN en español</a>
+                    <a href="https://www.msn.com/es-us" target="_blank">MSN español</a>
+                    |
+                    <a href="https://www.bbc.com/zhongwen/simp" target="_blank">BBC 中文</a>
+                    <a href="http://www.people.com.cn/" target="_blank">人民网</a>
+                    <a href="https://www.msn.com/zh-cn" target="_blank">MSN 中文</a>
+                    |
+                    <a href="https://www.cna.com.tw/" target="_blank">臺灣——中央社</a>
+                    |
+                    <a href="https://japan.focustaiwan.tw/" target="_blank">フォーカス台湾</a>
+                </div>
+                <div>
+                    Language:
                     <select class="language-select">
                         <option value="es">Spanish</option>
                         <option value="zh">Chinese</option>
                         <option value="zh-trad">Chinese (Traditional)</option>
                     </select>
                 </div>
-                <div>
-                    <div class="btn">? Random Article</div>
-                    <div class="btn">+ Add Article</div>
-                </div>
+                <textarea placeholder="Paste in your text..." class="article-input"></textarea>
+                <button class="start-btn">Start</button>
             </div>
             <div class="article-list-cont">
 
@@ -70,8 +90,13 @@
         </div>
     </div>
 
-    <div class="main-cont">
+    <div class="main-cont hide">
         <div class="article-cont">
+            <div class="top-nav">
+                <button class="menu-btn">Back to menu</button>
+                <!-- settings button -->
+                <!-- read out loud -->
+            </div>
             <div class="hud">
                 <button>Translate</button>
             </div>

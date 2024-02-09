@@ -16,6 +16,9 @@ body {
 
     height: 100%;
     width: 100%;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .card {
@@ -24,19 +27,16 @@ body {
     padding: 10px;
 }
 
-.card .opts {
+.review-card .opts {
     display: flex;
     flex-direction: row;
     gap: 8px;
 }
 
-.card .opts div {
+.review-card .opts div {
     flex-basis: 100%;
     padding: 5px;
     border-radius: 8px;
-}
-
-.card .opts div {
     background: orange;
 }
 
@@ -44,9 +44,30 @@ body {
     font-weight: bolder;
 }
 
+.article-card {
+    overflow: auto;
+    flex-grow: 1;
+}
+
+.article-card .tabs-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.article-card .tabs-nav div {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+
+/* article reader */
+.top-nav {
+    background: gray;
+}
+
 .main-cont {
-    display: none;
-    /* display: flex; */
+    display: flex;
     overflow: auto;
     height: 100%;
 }
@@ -60,7 +81,6 @@ body {
 .main-cont .article-cont .richtext-cont {
     overflow: auto;
     padding: 10px;
-    overflow: auto;
     box-sizing: border-box;
     flex-grow: 1;
 }
@@ -121,4 +141,8 @@ a:hover {
     background: #000;
     opacity: 0.5;
     top: -100px;
+}
+
+.hide {
+    display: none;
 }
