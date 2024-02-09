@@ -31,6 +31,8 @@ const passageNumberText = document.querySelector(".passage-number");
 let languageModel;
 
 const passageSize = 20;
+// max passage size, in characters
+const maxPassageWords = 1600;
 let passageIndex = 0;
 let passages = [];
 
@@ -57,8 +59,26 @@ startBtn.addEventListener("click", () => {
     }
 
     const lines = text.split("\n").map(line => line.trim());
-    for (let i = 0; i < lines.length; i += passageSize) {
-        passages.push(lines.slice(i, i + passageSize));
+    for (let i = 0; i < lines.length;) {
+        let words = 0;
+        let passageArr = [];
+
+        let visited = 0;
+        for (let j = i; j < i + passageSize && j < lines.length; j++) {
+            const line = lines[j];
+            words += line.length;
+
+            if (words > maxPassageWords) {
+                break;
+            }
+
+            passageArr.push(line);
+            visited++;
+        }
+
+        i += visited;
+
+        passages.push(passageArr);
     }
 
     renderPassage();
