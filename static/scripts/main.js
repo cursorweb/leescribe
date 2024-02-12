@@ -58,54 +58,41 @@ startBtn.addEventListener("click", () => {
             break;
     }
 
-    const lines = text.split("\n").map(line => line.trim());
+    const lines = text.trim().split("\n").map(line => line.trim());
 
-    /*
-    function paginate() {
-        let pageText = null;
-        for (let i = 0; i < lines.length; i++) {
-            let betterPageText;
-            if (pageText) {
-                betterPageText = pageText + ' ' + words[i];
-            } else {
-                betterPageText = words[i];
-            }
-            newPage.text(betterPageText);
-            if (newPage.height() > $(window).height()) {
-                newPage.text(pageText);
-                newPage.clone().insertBefore(newPage)
-                pageText = null;
-            } else {
-                pageText = betterPageText;
-            }
-        }
-    }
-    */
-
-    for (let i = 0; i < lines.length;) {
-        let words = 0;
-        let passageArr = [];
-
-        let visited = 0;
-        for (let j = i; j < i + passageSize && j < lines.length; j++) {
-            const line = lines[j];
-            words += line.length;
-
-            if (words > maxPassageWords) {
-                break;
-            }
-
-            passageArr.push(line);
-            visited++;
-        }
-
-        i += visited;
-
-        passages.push(passageArr);
-    }
+    passages = paginateLines(lines);
 
     renderPassage();
 });
+
+function paginateLines(lines) {
+    const out = [[]];
+    richtextCont.textContent = "";
+    const { bottom: maxHeight } = richtextCont.getBoundingClientRect();
+    console.log(maxHeight);
+
+    for (const line of lines) {
+        const lineEl = languageModel.createLineEl(line);
+        richtextCont.append(lineEl);
+
+        const rect = lineEl.getBoundingClientRect();
+        // todo: buttons
+
+        console.log(rect.bottom + 100, maxHeight)
+
+        if (rect.bottom > maxHeight) {
+            // create new breakpoint
+            out.push([line]);
+            richtextCont.textContent = "";
+            richtextCont.append(lineEl);
+        } else {
+            // add to existing
+            out[out.length - 1].push(line);
+        }
+    }
+
+    return out;
+}
 
 function renderPassage() {
     richtextCont.scrollTop = 0;
