@@ -23,10 +23,14 @@ Languages are stored in `C:\users\user\.local\share\argos-translate\packages`
 
 ## Todo
 **Major**
-Redo main menu
-Save words
-Save articles
-Review articles, and reconstruct sentences with words (add a skip button for weird translations, also save overrides)
+* Redo main menu
+* Save words
+* Save articles
+* Review articles, and reconstruct sentences with words (add a skip button for weird translations, also save overrides)
+* Summarize article practice at end
+* Switch to three page layout:
+    * Left is text, top right is article, bottom right are translation features
+    * Preview of translated text on bottom left (which can be minimized etc)
 
 ***
 

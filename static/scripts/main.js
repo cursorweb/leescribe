@@ -59,6 +59,29 @@ startBtn.addEventListener("click", () => {
     }
 
     const lines = text.split("\n").map(line => line.trim());
+
+    /*
+    function paginate() {
+        let pageText = null;
+        for (let i = 0; i < lines.length; i++) {
+            let betterPageText;
+            if (pageText) {
+                betterPageText = pageText + ' ' + words[i];
+            } else {
+                betterPageText = words[i];
+            }
+            newPage.text(betterPageText);
+            if (newPage.height() > $(window).height()) {
+                newPage.text(pageText);
+                newPage.clone().insertBefore(newPage)
+                pageText = null;
+            } else {
+                pageText = betterPageText;
+            }
+        }
+    }
+    */
+
     for (let i = 0; i < lines.length;) {
         let words = 0;
         let passageArr = [];
