@@ -34,6 +34,7 @@ const passageSize = 20;
 // max passage size, in characters
 const maxPassageWords = 1600;
 let passageIndex = 0;
+// in elements
 let passages = [];
 
 startBtn.addEventListener("click", () => {
@@ -69,7 +70,6 @@ function paginateLines(lines) {
     const out = [[]];
     richtextCont.textContent = "";
     const { bottom: maxHeight } = richtextCont.getBoundingClientRect();
-    console.log(maxHeight);
 
     for (const line of lines) {
         const lineEl = languageModel.createLineEl(line);
@@ -82,12 +82,12 @@ function paginateLines(lines) {
 
         if (rect.bottom > maxHeight) {
             // create new breakpoint
-            out.push([line]);
+            out.push([lineEl]);
             richtextCont.textContent = "";
             richtextCont.append(lineEl);
         } else {
             // add to existing
-            out[out.length - 1].push(line);
+            out[out.length - 1].push(lineEl);
         }
     }
 
@@ -98,8 +98,8 @@ function renderPassage() {
     richtextCont.scrollTop = 0;
     richtextCont.textContent = "";
 
-    for (const line of passages[passageIndex]) {
-        const lineEl = languageModel.createLineEl(line);
+    for (const lineEl of passages[passageIndex]) {
+        // const lineEl = languageModel.createLineEl(line);
         richtextCont.append(lineEl);
     }
 
