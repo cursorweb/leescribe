@@ -135,7 +135,7 @@ a:hover {
     display: inline-block;
 }
 
-.hud {
+.tooltip-hud {
     position: absolute;
     user-select: none;
     background: #000;
@@ -144,7 +144,7 @@ a:hover {
     top: -100px;
 }
 
-.hud button {
+.tooltip-hud button {
     display: block;
 }
 

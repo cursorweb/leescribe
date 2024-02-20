@@ -96,7 +96,6 @@ function renderPassage() {
     richtextCont.textContent = "";
 
     for (const lineEl of passages[passageIndex]) {
-        // const lineEl = languageModel.createLineEl(line);
         richtextCont.append(lineEl);
     }
 
@@ -128,72 +127,6 @@ nextPassageBtn.addEventListener("click", () => {
         renderPassage();
     }
 });
-
-
-// highlighting HUD
-const hudTest = document.querySelector(".hud");
-document.addEventListener("keydown", e => {
-    if (e.ctrlKey) {
-        const range = document.getSelection();
-
-        const posRange = range.getRangeAt(0);
-
-        const rect = posRange.getBoundingClientRect();
-        const hudTestRect = hudTest.getBoundingClientRect();
-
-        // selection empty, or toggle
-        if (rect.width < 1 || hudTestRect.top > 0) {
-            hudTest.style.top = "-100px";
-            return;
-        }
-
-        for (let i = 0; i < range.rangeCount; i++) {
-            if (!richtextCont.contains(range.getRangeAt(i).commonAncestorContainer)) {
-                return;
-            }
-        }
-
-        const top = rect.top - hudTestRect.height;
-        const left = rect.left + rect.width / 2 - hudTestRect.width / 2;
-
-        hudTest.style.top = top + "px";
-        hudTest.style.left = left + "px";
-    }
-});
-
-// let prevSelectedTime = -1;
-document.addEventListener("click", () => {
-    hudTest.style.top = "-100px";
-});
-
-// setInterval(() => {
-//     if (Date.now() - prevSelectedTime > 1000) {
-//         const range = document.getSelection();
-
-//         if (range.rangeCount == 0) {
-//             hudTest.style.top = "-100px";
-//             return;
-//         }
-
-//         const posRange = range.getRangeAt(0);
-
-//         const rect = posRange.getBoundingClientRect();
-
-//         // selection empty
-//         if (rect.width < 1) {
-//             hudTest.style.top = "-100px";
-//             return;
-//         }
-
-//         // console.log(rect.left, rect.top, rect.width, rect.height);
-
-//         const top = rect.top - hudTestRect.height - 5;
-//         const left = rect.left + rect.width / 2;
-
-//         hudTest.style.top = top + "px";
-//         hudTest.style.left = left + "px";
-//     }
-// }, 1);
 
 
 // jump to passage
@@ -229,4 +162,48 @@ customTranslateInput.addEventListener("keydown", e => {
         e.preventDefault();
         customTranslateBtn.click();
     }
+});
+
+
+// highlighting HUD
+const tooltipHud = document.querySelector(".tooltip-hud");
+document.addEventListener("keydown", e => {
+    if (!e.ctrlKey) {
+        return;
+    }
+
+    const range = document.getSelection();
+    const posRange = range.getRangeAt(0);
+
+    const rect = posRange.getBoundingClientRect();
+    const hudTestRect = tooltipHud.getBoundingClientRect();
+
+    // if selection is empty, or toggle
+    if (rect.width < 1 || hudTestRect.top > 0) {
+        tooltipHud.style.top = "-100px";
+        return;
+    }
+
+    for (let i = 0; i < range.rangeCount; i++) {
+        if (!richtextCont.contains(range.getRangeAt(i).commonAncestorContainer)) {
+            return;
+        }
+    }
+
+    const top = rect.top - hudTestRect.height;
+    const left = rect.left + rect.width / 2 - hudTestRect.width / 2;
+
+    tooltipHud.style.top = top + "px";
+    tooltipHud.style.left = left + "px";
+});
+
+document.addEventListener("click", () => {
+    tooltipHud.style.top = "-100px";
+});
+
+const tooltipTranslateBtn = document.querySelector(".tooltip-translate");
+tooltipTranslateBtn.addEventListener("click", () => {
+    const value = document.getSelection().toString();
+    customTranslateInput.value = value;
+    customTranslateBtn.click();
 });
