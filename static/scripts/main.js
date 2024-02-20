@@ -76,9 +76,6 @@ function paginateLines(lines) {
         richtextCont.append(lineEl);
 
         const rect = lineEl.getBoundingClientRect();
-        // todo: buttons
-
-        console.log(rect.bottom + 100, maxHeight)
 
         if (rect.bottom > maxHeight) {
             // create new breakpoint
@@ -134,12 +131,40 @@ nextPassageBtn.addEventListener("click", () => {
 
 
 // highlighting HUD
-// const hudTest = document.querySelector(".hud");
-// const hudTestRect = hudTest.getBoundingClientRect();
+const hudTest = document.querySelector(".hud");
+document.addEventListener("keydown", e => {
+    if (e.ctrlKey) {
+        const range = document.getSelection();
+
+        const posRange = range.getRangeAt(0);
+
+        const rect = posRange.getBoundingClientRect();
+        const hudTestRect = hudTest.getBoundingClientRect();
+
+        // selection empty, or toggle
+        if (rect.width < 1 || hudTestRect.top > 0) {
+            hudTest.style.top = "-100px";
+            return;
+        }
+
+        for (let i = 0; i < range.rangeCount; i++) {
+            if (!richtextCont.contains(range.getRangeAt(i).commonAncestorContainer)) {
+                return;
+            }
+        }
+
+        const top = rect.top - hudTestRect.height;
+        const left = rect.left + rect.width / 2 - hudTestRect.width / 2;
+
+        hudTest.style.top = top + "px";
+        hudTest.style.left = left + "px";
+    }
+});
+
 // let prevSelectedTime = -1;
-// document.addEventListener("selectionchange", () => {
-//     prevSelectedTime = Date.now();
-// });
+document.addEventListener("click", () => {
+    hudTest.style.top = "-100px";
+});
 
 // setInterval(() => {
 //     if (Date.now() - prevSelectedTime > 1000) {
