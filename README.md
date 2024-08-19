@@ -36,6 +36,12 @@ Languages are stored in `C:\users\user\.local\share\argos-translate\packages`
 
 **Other**
 
+Daily word of the day
+
+Log in page, with selectable language, and then to homescreen with articles, etc
+
+Link to ebook
+
 Import spanish from bbc mundo link
 
 More better formatted document
