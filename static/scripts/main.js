@@ -28,6 +28,7 @@ const prevPassageBtn = document.querySelector(".prev-passage");
 const nextPassageBtn = document.querySelector(".next-passage");
 const passageNumberText = document.querySelector(".passage-number");
 
+/** @type {LanguageModel} */
 let languageModel;
 
 const passageSize = 20;
@@ -37,6 +38,8 @@ let passageIndex = 0;
 // in elements
 let passages = [];
 
+
+/// TODO: make a renderPageManager that holds a LanguageModel too, i.e. move this
 startBtn.addEventListener("click", () => {
     mainCont.classList.remove("hide");
     menuCont.classList.add("hide");
@@ -98,6 +101,20 @@ function renderPassage() {
     for (const lineEl of passages[passageIndex]) {
         richtextCont.append(lineEl);
     }
+
+    richtextCont.addEventListener("mouseup", () => {
+        const selection = window.getSelection();
+        const text = selection.toString();
+
+        for (let i = 0; i < selection.rangeCount; i++) {
+            if (!richtextCont.contains(selection.getRangeAt(i).commonAncestorContainer)) {
+                return;
+            }
+        }
+
+        if (!text) return;
+        languageModel.translatePassage(text);
+    });
 
     passageNumberText.textContent = `${passageIndex + 1} / ${passages.length}`;
 
@@ -166,40 +183,40 @@ customTranslateInput.addEventListener("keydown", e => {
 
 
 // highlighting HUD
-const tooltipHud = document.querySelector(".tooltip-hud");
-document.addEventListener("keydown", e => {
-    if (!e.ctrlKey) {
-        return;
-    }
+// const tooltipHud = document.querySelector(".tooltip-hud");
+// document.addEventListener("keydown", e => {
+//     if (!e.ctrlKey) {
+//         return;
+//     }
 
-    const range = document.getSelection();
-    const posRange = range.getRangeAt(0);
+//     const range = document.getSelection();
+//     const posRange = range.getRangeAt(0);
 
-    const rect = posRange.getBoundingClientRect();
-    const hudTestRect = tooltipHud.getBoundingClientRect();
+//     const rect = posRange.getBoundingClientRect();
+//     const hudTestRect = tooltipHud.getBoundingClientRect();
 
-    // if selection is empty, or toggle
-    if (rect.width < 1 || hudTestRect.top > 0) {
-        tooltipHud.style.top = "-100px";
-        return;
-    }
+//     // if selection is empty, or toggle
+//     if (rect.width < 1 || hudTestRect.top > 0) {
+//         tooltipHud.style.top = "-100px";
+//         return;
+//     }
 
-    for (let i = 0; i < range.rangeCount; i++) {
-        if (!richtextCont.contains(range.getRangeAt(i).commonAncestorContainer)) {
-            return;
-        }
-    }
+//     for (let i = 0; i < range.rangeCount; i++) {
+//         if (!richtextCont.contains(range.getRangeAt(i).commonAncestorContainer)) {
+//             return;
+//         }
+//     }
 
-    const top = rect.top - hudTestRect.height;
-    const left = rect.left + rect.width / 2 - hudTestRect.width / 2;
+//     const top = rect.top - hudTestRect.height;
+//     const left = rect.left + rect.width / 2 - hudTestRect.width / 2;
 
-    tooltipHud.style.top = top + "px";
-    tooltipHud.style.left = left + "px";
-});
+//     tooltipHud.style.top = top + "px";
+//     tooltipHud.style.left = left + "px";
+// });
 
-document.addEventListener("click", () => {
-    tooltipHud.style.top = "-100px";
-});
+// document.addEventListener("click", () => {
+//     tooltipHud.style.top = "-100px";
+// });
 
 const tooltipTranslateBtn = document.querySelector(".tooltip-translate");
 tooltipTranslateBtn.addEventListener("click", () => {

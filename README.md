@@ -49,12 +49,11 @@ More better formatted document
 Flashcard system (not sure if I want it long term)
 
 Translate highlighted sentences
+* use a context menu for options (rather than an action bar?)
 
 Read out loud
 
 Review
-
-Writing Canvas
 
 Font size
 

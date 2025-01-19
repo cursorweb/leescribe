@@ -8,14 +8,15 @@ class LanguageModel {
         this.text = text;
         this.lang = lang;
 
+        // container to hold text input
         this.passageTranslateCont = document.querySelector(".passage-translate-cont");
 
-        // this.passage = null;
+        this.passage = null;
     }
 
-    _getWords(_line) { }
+    _getWords(line) { return [line]; }
 
-    _createWordElement(_word, _i, _arr) { }
+    _createWordElement(word, _i, _arr) { return document.createTextNode(word); }
 
     /**
      * @param {string} line
@@ -32,10 +33,6 @@ class LanguageModel {
             const word = words[i];
             const wordEl = this._createWordElement(word, i, words);
 
-            wordEl.addEventListener("click", () => {
-                this.translatePassage(word, wordEl, true);
-            });
-
             out.append(wordEl);
         }
 
@@ -45,7 +42,7 @@ class LanguageModel {
     }
 
     /**
-     * Creates an action bar
+     * Creates an action bar (translate, copy etc.)
      * @param {string} line
      * @param {HTMLParagraphElement} el
      */
@@ -94,16 +91,17 @@ class LanguageModel {
     /**
      * Translates text for the hud
      * @param {string} text
-     * @param {HTMLElement} el
+     * @param {HTMLElement} el For entire line translations, highlight line for easy use
      */
-    async translatePassage(text, el, word = false) {
+    async translatePassage(text, el = null) {
         // remove previously highlighted passage
         if (this.passage) {
             this.passage.style.removeProperty("background");
         }
 
-        this.passage = el;
-
+        if (el) {
+            this.passage = el;
+        }
 
         this.passageTranslateCont.classList.add("grayed-out");
 
@@ -112,13 +110,8 @@ class LanguageModel {
         this.passageTranslateCont.classList.remove("grayed-out");
         this.passageTranslateCont.textContent = "";
 
-        if (word) {
-            const wordEl = this._renderWordEl(text);
-            this.passageTranslateCont.append(wordEl);
-        }
-
         const translatedEl = document.createElement("div");
-        translatedEl.textContent = `Translated: ${translated}`;
+        translatedEl.textContent = translated;
         this.passageTranslateCont.append(translatedEl);
     }
 
