@@ -13,7 +13,6 @@ class Chinese extends LanguageModel {
 
         wordEl.classList.add("pinyin-span");
         wordEl.innerHTML = pinyinPro.html(word);
-        wordEl.setAttribute("tabindex", "0");
 
         return wordEl;
     }

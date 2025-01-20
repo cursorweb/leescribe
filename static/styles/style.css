@@ -115,7 +115,7 @@ body {
     user-select: none;
 }
 
-.main-cont .richtext-cont span:focus rt {
+.main-cont .richtext-cont span:active rt {
     visibility: visible;
 }
 
@@ -150,4 +150,10 @@ a:hover {
 
 .hide {
     display: none;
+}
+
+rp,
+rt {
+    user-select: none;
+    pointer-events: none;
 }

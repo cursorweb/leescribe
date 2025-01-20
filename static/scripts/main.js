@@ -104,13 +104,15 @@ function renderPassage() {
 
     richtextCont.addEventListener("mouseup", () => {
         const selection = window.getSelection();
-        const text = selection.toString();
 
+        // preface: range count is usually 1 because it's number of cursors
         for (let i = 0; i < selection.rangeCount; i++) {
             if (!richtextCont.contains(selection.getRangeAt(i).commonAncestorContainer)) {
                 return;
             }
         }
+
+        const text = getFilteredSelection(selection);
 
         if (!text) return;
         languageModel.translatePassage(text);
@@ -129,6 +131,53 @@ function renderPassage() {
     } else {
         nextPassageBtn.disabled = false;
     }
+}
+
+/**
+ * @param {Selection} selection 
+ * @returns filtered
+ */
+function getFilteredSelection(selection) { // source: chatGPT :skull:
+    if (!selection.rangeCount) return "";
+
+    const range = selection.getRangeAt(0);
+    const container = range.commonAncestorContainer;
+
+    if (container.nodeType == Node.TEXT_NODE) {
+        const startOffset = range.startOffset;
+        const endOffset = range.endOffset;
+        return container.textContent.slice(startOffset, endOffset).trim();
+    }
+
+    function isUnselectable(node) {
+        const style = window.getComputedStyle(node);
+        return style.userSelect == "none";
+    }
+
+    // Walk through the selected nodes
+    const walker = document.createTreeWalker(
+        container,
+        NodeFilter.SHOW_TEXT,
+        {
+            acceptNode: node => {
+                if (range.intersectsNode(node) && !isUnselectable(node.parentNode)) {
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+
+                return NodeFilter.FILTER_REJECT;
+            },
+        }
+    );
+
+    let filteredText = "";
+    while (walker.nextNode()) {
+        const node = walker.currentNode;
+        const startOffset = node == range.startContainer ? range.startOffset : 0;
+        const endOffset = node == range.endContainer ? range.endOffset : node.textContent.length;
+        filteredText += node.textContent.slice(startOffset, endOffset);
+    }
+
+    return filteredText.trim();
 }
 
 prevPassageBtn.addEventListener("click", () => {

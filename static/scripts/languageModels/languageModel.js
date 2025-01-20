@@ -14,8 +14,8 @@ class LanguageModel {
         this.passage = null;
     }
 
+    // useful for chinese language modes, for pinyin
     _getWords(line) { return [line]; }
-
     _createWordElement(word, _i, _arr) { return document.createTextNode(word); }
 
     /**
@@ -94,6 +94,7 @@ class LanguageModel {
      * @param {HTMLElement} el For entire line translations, highlight line for easy use
      */
     async translatePassage(text, el = null) {
+        console.log('got text', text);
         // remove previously highlighted passage
         if (this.passage) {
             this.passage.style.removeProperty("background");
