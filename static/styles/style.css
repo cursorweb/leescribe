@@ -112,7 +112,6 @@ body {
 
 .main-cont .richtext-cont span rt {
     visibility: hidden;
-    user-select: none;
 }
 
 .main-cont .richtext-cont span:active rt {
