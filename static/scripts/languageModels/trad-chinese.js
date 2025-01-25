@@ -16,10 +16,8 @@ class TradChinese extends Chinese {
         return super.translate(simp);
     }
 
-    async customTranslate(tradText) {
+    async customTranslate(tradText, translated) {
         const out = document.createElement("div");
-
-        const translated = await this.translate(tradText);
 
         const translatedDiv = document.createElement("div");
         translatedDiv.textContent = `Translated: ${translated}`;

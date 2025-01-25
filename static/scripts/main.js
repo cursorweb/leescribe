@@ -206,21 +206,61 @@ jumpToPassageBtn.addEventListener("click", () => {
 
 
 // custom translate
+/** @type {HTMLTextAreaElement} */
 const customTranslateInput = document.querySelector(".custom-translate-input");
 const customTranslateBtn = document.querySelector(".custom-translate-btn");
-const customTranslateCont = document.querySelector(".custom-translate-cont");
+const customTranslateText = document.querySelector(".custom-translate-cont");
+/** @type {HTMLTextAreaElement} */
+const customTranslateOutput = document.querySelector(".custom-translate-output");
+const customTranslateToggle = document.querySelector(".custom-translate-toggle");
+let isInputLastEdited = true;
 
 customTranslateBtn.addEventListener("click", async () => {
-    const text = customTranslateInput.value;
+    if (isInputLastEdited) {
+        const text = customTranslateInput.value;
+        customTranslateText.classList.add("grayed-out");
 
-    customTranslateCont.classList.add("grayed-out");
+        const [translatedEl, translatedText] = await languageModel.customTranslate(text);
 
-    const translatedEl = await languageModel.customTranslate(text);
+        customTranslateText.classList.remove("grayed-out");
+        customTranslateText.textContent = "";
 
-    customTranslateCont.classList.remove("grayed-out");
-    customTranslateCont.textContent = "";
+        customTranslateText.append(translatedEl);
+        customTranslateOutput.value = translatedText;
 
-    customTranslateCont.append(translatedEl);
+        customTranslateOutput.classList.add("hide");
+        customTranslateText.classList.remove("hide");
+    } else {
+        const text = customTranslateOutput.value;
+
+        customTranslateInput.classList.add("grayed-out");
+        const translatedText = await languageModel.untranslate(text);
+        customTranslateInput.classList.remove("grayed-out");
+
+        customTranslateInput.value = translatedText;
+    }
+
+});
+
+customTranslateInput.addEventListener("keyup", () => {
+    isInputLastEdited = true;
+});
+
+customTranslateOutput.addEventListener("keyup", () => {
+    isInputLastEdited = false;
+    customTranslateText.textContent = customTranslateOutput.value;
+});
+
+customTranslateToggle.addEventListener("click", () => {
+    if (customTranslateOutput.classList.contains("hide")) {
+        customTranslateOutput.classList.remove("hide");
+        customTranslateText.classList.add("hide");
+
+        customTranslateOutput.focus();
+    } else {
+        customTranslateOutput.classList.add("hide");
+        customTranslateText.classList.remove("hide");
+    }
 });
 
 customTranslateInput.addEventListener("keydown", e => {
@@ -266,10 +306,3 @@ customTranslateInput.addEventListener("keydown", e => {
 // document.addEventListener("click", () => {
 //     tooltipHud.style.top = "-100px";
 // });
-
-const tooltipTranslateBtn = document.querySelector(".tooltip-translate");
-tooltipTranslateBtn.addEventListener("click", () => {
-    const value = document.getSelection().toString();
-    customTranslateInput.value = value;
-    customTranslateBtn.click();
-});

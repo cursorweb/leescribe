@@ -23,18 +23,20 @@ Languages are stored in `C:\users\user\.local\share\argos-translate\packages`
 
 ## Todo
 **Major**
+* Back and forth translate to language and from language
+* Save sentence flashcards
+
 * Redo main menu
 * Save words
 * Save articles
 * Review articles, and reconstruct sentences with words (add a skip button for weird translations, also save overrides)
 * Summarize article practice at end
-* Switch to three page layout:
-    * Left is text, top right is article, bottom right are translation features
-    * Preview of translated text on bottom left (which can be minimized etc)
 
 ***
 
 **Other**
+
+Article display images, etc.
 
 Daily word of the day
 
@@ -44,20 +46,13 @@ Link to ebook
 
 Import spanish from bbc mundo link
 
-More better formatted document
-
 Flashcard system (not sure if I want it long term)
-
-Translate highlighted sentences
-* use a context menu for options (rather than an action bar?)
 
 Read out loud
 
 Review
 
 Font size
-
-Typing practice
 
 Save texts
 
@@ -70,10 +65,12 @@ Save Texts
 "Blurting" method
 
 Optimization?
-* Reduce spans
 * Make more modular (probably optional but want to mod this)
 
 Kana Learner
 * Random between draw the character and what is the character
 * Random between romaji vs kana
 * Review all
+
+
+*I feel like using next.js/react would work so well here...*

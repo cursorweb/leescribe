@@ -125,12 +125,16 @@ class LanguageModel {
     /**
      * Translate user-inputted text
      * @param {string} text
+     * @returns {[string, string]} [element, rawText]
      */
     async customTranslate(text) {
-        const out = document.createElement("div");
-
         const translated = await this.translate(text);
+        const out = this._customTranslate(text, translated);
+        return [out, translated];
+    }
 
+    _customTranslate(_text, translated) {
+        const out = document.createElement("div");
         out.textContent = `Translated: ${translated}`;
 
         return out;
@@ -147,6 +151,22 @@ class LanguageModel {
                 q: text,
                 source: this.lang,
                 target: "en",
+                format: "text",
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return (await res.json()).translatedText;
+    }
+
+    async untranslate(text) {
+        const res = await fetch(TRANSLATE_URL + "/translate", {
+            method: "POST",
+            body: JSON.stringify({
+                q: text,
+                source: "en",
+                target: this.lang,
                 format: "text",
             }),
             headers: {
