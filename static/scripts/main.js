@@ -20,7 +20,11 @@ const mainCont = document.querySelector(".main-cont");
 const menuCont = document.querySelector(".menu-cont");
 
 const startBtn = document.querySelector(".start-btn");
-const articleInput = document.querySelector(".article-input");
+const richtextToggle = document.querySelector(".richtext-toggle");
+const rawTextInput = document.querySelector(".rawtext-input");
+const richTextInput = document.querySelector(".richtext-input");
+let useRichText = true;
+
 const languageSelect = document.querySelector(".language-select");
 const richtextCont = document.querySelector(".richtext-cont");
 
@@ -40,13 +44,24 @@ let passages = [];
 
 
 /// TODO: make a renderPageManager that holds a LanguageModel too, i.e. move this
+richtextToggle.addEventListener("click", () => {
+    useRichText = !useRichText;
+    if (useRichText) {
+        richTextInput.classList.remove("hide");
+        rawTextInput.classList.add("hide");
+    } else {
+        richTextInput.classList.add("hide");
+        rawTextInput.classList.remove("hide");
+    }
+});
+
 startBtn.addEventListener("click", () => {
     mainCont.classList.remove("hide");
     menuCont.classList.add("hide");
 
     // create handler
     const language = languageSelect.value;
-    const text = articleInput.value;
+    const text = rawTextInput.value;
     passages = [];
     passageIndex = 0;
 

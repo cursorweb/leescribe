@@ -61,3 +61,11 @@
 .hide {
     display: none;
 }
+
+.richtext-input {
+    border: 1px solid black;
+    position: relative;
+    overflow: auto;
+    height: 250px;
+    resize: vertical;
+}
