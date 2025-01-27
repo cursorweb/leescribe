@@ -17,7 +17,7 @@ class Chinese extends LanguageModel {
         return wordEl;
     }
 
-    async customTranslate(text, translated) {
+    _customTranslate(text, translated) {
         const pinyin = pinyinPro.html(text);
         const out = super._customTranslate(text, translated);
 

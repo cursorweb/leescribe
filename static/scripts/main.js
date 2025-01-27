@@ -242,13 +242,22 @@ customTranslateBtn.addEventListener("click", async () => {
 
 });
 
-customTranslateInput.addEventListener("keyup", () => {
+customTranslateInput.addEventListener("keydown", e => {
     isInputLastEdited = true;
+    if (e.key == "Enter" && e.ctrlKey) {
+        e.preventDefault();
+        customTranslateBtn.click();
+    }
 });
 
-customTranslateOutput.addEventListener("keyup", () => {
+customTranslateOutput.addEventListener("keyup", e => {
     isInputLastEdited = false;
     customTranslateText.textContent = customTranslateOutput.value;
+
+    if (e.key == "Enter" && e.ctrlKey) {
+        e.preventDefault();
+        customTranslateBtn.click();
+    }
 });
 
 customTranslateToggle.addEventListener("click", () => {
@@ -262,47 +271,3 @@ customTranslateToggle.addEventListener("click", () => {
         customTranslateText.classList.remove("hide");
     }
 });
-
-customTranslateInput.addEventListener("keydown", e => {
-    if (e.key == "Enter" && e.ctrlKey) {
-        e.preventDefault();
-        customTranslateBtn.click();
-    }
-});
-
-
-// highlighting HUD
-// const tooltipHud = document.querySelector(".tooltip-hud");
-// document.addEventListener("keydown", e => {
-//     if (!e.ctrlKey) {
-//         return;
-//     }
-
-//     const range = document.getSelection();
-//     const posRange = range.getRangeAt(0);
-
-//     const rect = posRange.getBoundingClientRect();
-//     const hudTestRect = tooltipHud.getBoundingClientRect();
-
-//     // if selection is empty, or toggle
-//     if (rect.width < 1 || hudTestRect.top > 0) {
-//         tooltipHud.style.top = "-100px";
-//         return;
-//     }
-
-//     for (let i = 0; i < range.rangeCount; i++) {
-//         if (!richtextCont.contains(range.getRangeAt(i).commonAncestorContainer)) {
-//             return;
-//         }
-//     }
-
-//     const top = rect.top - hudTestRect.height;
-//     const left = rect.left + rect.width / 2 - hudTestRect.width / 2;
-
-//     tooltipHud.style.top = top + "px";
-//     tooltipHud.style.left = left + "px";
-// });
-
-// document.addEventListener("click", () => {
-//     tooltipHud.style.top = "-100px";
-// });
