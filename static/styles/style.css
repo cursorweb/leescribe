@@ -83,6 +83,7 @@ body {
     padding: 10px;
     box-sizing: border-box;
     flex-grow: 1;
+    position: relative;
 }
 
 .main-cont .article-cont .article-nav {
@@ -155,4 +156,17 @@ rp,
 rt {
     user-select: none;
     pointer-events: none;
+}
+
+.richtext-input {
+    border: 1px solid black;
+    position: relative;
+    overflow: auto;
+    height: 250px;
+    resize: vertical;
+    background: white;
+}
+
+img {
+    width: 100%;
 }

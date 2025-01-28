@@ -30,27 +30,24 @@
         const output = document.querySelector(".container");
 
         btn.addEventListener("click", () => {
-            console.log(JSON.stringify(content.textContent));
             let x = content.querySelectorAll("img, p, h1");
 
             x = [...x].map(el => {
                 if (el.nodeName.toLowerCase() == "img") {
-                    // /** @type {HTMLImageElement} */
-                    // let el = el;
-
+                    console.log(el.removeAttribute("class"));
                     for (const attr of el.attributes) {
                         if (attr.name != "src") {
                             el.removeAttribute(attr.name);
                         }
                     }
 
-                    el.style.width = `${el.clientWidth}px`;
-                    el.style.height = `${el.clientHeight}px`;
+                    el.style.width = `${el.naturalWidth}px`;
+                    el.style.height = `${el.naturalHeight}px`;
                 } else {
-                    while (el.attributes.length > 0)
+                    while (el.attributes.length > 0) {
                         el.removeAttribute(el.attributes[0].name);
+                    }
                 }
-
 
                 return el;
             });

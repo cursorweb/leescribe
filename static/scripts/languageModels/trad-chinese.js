@@ -1,8 +1,8 @@
 const converter = OpenCC.Converter({ from: 'tw', to: 'cn' });
 
 class TradChinese extends Chinese {
-    constructor(text) {
-        super(text, "zh");
+    constructor() {
+        super("zh");
     }
 
     _renderWordEl(tradText) {

@@ -1,6 +1,6 @@
 class Chinese extends LanguageModel {
-    constructor(text) {
-        super(text, "zh");
+    constructor() {
+        super("zh");
     }
 
     _getWords(line) {

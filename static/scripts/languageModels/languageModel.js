@@ -1,11 +1,8 @@
 class LanguageModel {
     /**
-     * @param {string} text article text
      * @param {string} lang language code
     */
-    constructor(text, lang) {
-        // TODO: decide if this.text is necessary
-        this.text = text;
+    constructor(lang) {
         this.lang = lang;
 
         // container to hold text input
@@ -21,8 +18,8 @@ class LanguageModel {
     /**
      * @param {string} line
      */
-    createLineEl(line) {
-        const out = document.createElement("p");
+    createLineEl(line, el = "p") {
+        const out = document.createElement(el);
 
         // if line empty, return an empty paragraph
         if (!line) return out;
@@ -39,6 +36,18 @@ class LanguageModel {
         this.addParagraphActionBar(line, out);
 
         return out;
+    }
+
+    /**
+     * @param {HTMLElement} el el
+     */
+    lineFromEl(el) {
+        if (el.nodeName.toLowerCase() == "img") {
+            return el;
+        }
+
+        const line = el.textContent;
+        return this.createLineEl(line, el.nodeName);
     }
 
     /**

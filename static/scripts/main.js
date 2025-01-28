@@ -12,7 +12,7 @@ const returnMenuBtn = document.querySelector(".menu-btn");
 returnMenuBtn.addEventListener("click", () => {
     menuCont.classList.remove("hide");
     mainCont.classList.add("hide");
-})
+});
 
 
 // load passage
@@ -61,25 +61,29 @@ startBtn.addEventListener("click", () => {
 
     // create handler
     const language = languageSelect.value;
-    const text = rawTextInput.value;
     passages = [];
     passageIndex = 0;
 
     switch (language) {
         case "es":
-            languageModel = new Spanish(text);
+            languageModel = new Spanish();
             break;
         case "zh":
-            languageModel = new Chinese(text);
+            languageModel = new Chinese();
             break;
         case "zh-trad":
-            languageModel = new TradChinese(text);
+            languageModel = new TradChinese();
             break;
     }
 
-    const lines = text.trim().split("\n").map(line => line.trim());
-
-    passages = paginateLines(lines);
+    if (useRichText) {
+        const text = richTextInput;
+        passages = richTextPaginateLines(text);
+    } else {
+        const text = rawTextInput.value;
+        const lines = text.trim().split("\n").map(line => line.trim());
+        passages = paginateLines(lines);
+    }
 
     renderPassage();
 });
@@ -91,6 +95,49 @@ function paginateLines(lines) {
 
     for (const line of lines) {
         const lineEl = languageModel.createLineEl(line);
+        richtextCont.append(lineEl);
+
+        const rect = lineEl.getBoundingClientRect();
+
+        if (rect.bottom > maxHeight) {
+            // create new breakpoint
+            out.push([lineEl]);
+            richtextCont.textContent = "";
+            richtextCont.append(lineEl);
+        } else {
+            // add to existing
+            out[out.length - 1].push(lineEl);
+        }
+    }
+
+    return out;
+}
+
+function richTextPaginateLines(content) {
+    let els = content.querySelectorAll("img, p, h1, figcaption");
+
+    els = [...els].map(el => {
+        if (el.nodeName.toLowerCase() == "img") {
+            for (const attr of el.attributes) {
+                if (attr.name != "src") {
+                    el.removeAttribute(attr.name);
+                }
+            }
+        } else {
+            while (el.attributes.length > 0) {
+                el.removeAttribute(el.attributes[0].name);
+            }
+        }
+
+        return el;
+    });
+
+    const out = [[]];
+    richtextCont.textContent = "";
+    const { bottom: maxHeight } = richtextCont.getBoundingClientRect();
+
+    for (const el of els) {
+        const lineEl = languageModel.lineFromEl(el);
         richtextCont.append(lineEl);
 
         const rect = lineEl.getBoundingClientRect();
