@@ -113,14 +113,18 @@ function paginateLines(lines) {
     return out;
 }
 
+/**
+ * @param {HTMLElement} content
+ */
 function richTextPaginateLines(content) {
-    let els = content.querySelectorAll("img, p, h1, figcaption");
+    let els = content.querySelectorAll("img, p, h1, h2, h3, h4, h5, h6, figcaption");
 
     els = [...els].map(el => {
         if (el.nodeName.toLowerCase() == "img") {
-            for (const attr of el.attributes) {
-                if (attr.name != "src") {
-                    el.removeAttribute(attr.name);
+            for (let i = el.attributes.length - 1; i >= 0; i--) {
+                const name = el.attributes[i].name;
+                if (name != "src") {
+                    el.removeAttribute(name);
                 }
             }
         } else {
@@ -129,7 +133,7 @@ function richTextPaginateLines(content) {
             }
         }
 
-        return el;
+        return el.cloneNode(true);
     });
 
     const out = [[]];
