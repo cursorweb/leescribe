@@ -22,25 +22,37 @@ libretranslate --load-only es,zh,en --update-models
 Languages are stored in `C:\users\user\.local\share\argos-translate\packages`
 
 ## Todo
-Import spanish from bbc mundo link
+**Major**
+* Back and forth translate to language and from language
+* Save sentence flashcards
 
-More better formatted document
+* Redo main menu
+* Save words
+* Save articles
+* Review articles, and reconstruct sentences with words (add a skip button for weird translations, also save overrides)
+* Summarize article practice at end
+
+***
+
+**Other**
+
+Article display images, etc.
+
+Daily word of the day
+
+Log in page, with selectable language, and then to homescreen with articles, etc
+
+Link to ebook
+
+Import spanish from bbc mundo link
 
 Flashcard system (not sure if I want it long term)
 
-Translate highlighted sentences
-
 Read out loud
-
-Switch font
 
 Review
 
-Writing Canvas
-
 Font size
-
-Typing practice
 
 Save texts
 
@@ -53,10 +65,12 @@ Save Texts
 "Blurting" method
 
 Optimization?
-* Reduce spans
 * Make more modular (probably optional but want to mod this)
 
 Kana Learner
 * Random between draw the character and what is the character
 * Random between romaji vs kana
 * Review all
+
+
+*I feel like using next.js/react would work so well here...*

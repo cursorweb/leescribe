@@ -1,6 +1,6 @@
 class Chinese extends LanguageModel {
-    constructor(text) {
-        super(text, "zh");
+    constructor() {
+        super("zh");
     }
 
     _getWords(line) {
@@ -13,14 +13,13 @@ class Chinese extends LanguageModel {
 
         wordEl.classList.add("pinyin-span");
         wordEl.innerHTML = pinyinPro.html(word);
-        wordEl.setAttribute("tabindex", "0");
 
         return wordEl;
     }
 
-    async customTranslate(text) {
+    _customTranslate(text, translated) {
         const pinyin = pinyinPro.html(text);
-        const out = await super.customTranslate(text);
+        const out = super._customTranslate(text, translated);
 
         const pinyinCont = document.createElement("div");
         pinyinCont.innerHTML = `Pinyin: ${pinyin}`;

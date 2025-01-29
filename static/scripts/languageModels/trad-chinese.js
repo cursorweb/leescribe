@@ -1,8 +1,8 @@
 const converter = OpenCC.Converter({ from: 'tw', to: 'cn' });
 
 class TradChinese extends Chinese {
-    constructor(text) {
-        super(text, "zh");
+    constructor() {
+        super("zh");
     }
 
     _renderWordEl(tradText) {
@@ -16,10 +16,8 @@ class TradChinese extends Chinese {
         return super.translate(simp);
     }
 
-    async customTranslate(tradText) {
+    _customTranslate(tradText, translated) {
         const out = document.createElement("div");
-
-        const translated = await this.translate(tradText);
 
         const translatedDiv = document.createElement("div");
         translatedDiv.textContent = `Translated: ${translated}`;

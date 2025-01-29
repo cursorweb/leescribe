@@ -1,27 +1,25 @@
 class LanguageModel {
     /**
-     * @param {string} text article text
      * @param {string} lang language code
     */
-    constructor(text, lang) {
-        // TODO: decide if this.text is necessary
-        this.text = text;
+    constructor(lang) {
         this.lang = lang;
 
+        // container to hold text input
         this.passageTranslateCont = document.querySelector(".passage-translate-cont");
 
-        // this.passage = null;
+        this.passage = null;
     }
 
-    _getWords(_line) { }
-
-    _createWordElement(_word, _i, _arr) { }
+    // useful for chinese language modes, for pinyin
+    _getWords(line) { return [line]; }
+    _createWordElement(word, _i, _arr) { return document.createTextNode(word); }
 
     /**
      * @param {string} line
      */
-    createLineEl(line) {
-        const out = document.createElement("p");
+    createLineEl(line, el = "p") {
+        const out = document.createElement(el);
 
         // if line empty, return an empty paragraph
         if (!line) return out;
@@ -32,10 +30,6 @@ class LanguageModel {
             const word = words[i];
             const wordEl = this._createWordElement(word, i, words);
 
-            wordEl.addEventListener("click", () => {
-                this.translatePassage(word, wordEl, true);
-            });
-
             out.append(wordEl);
         }
 
@@ -45,7 +39,19 @@ class LanguageModel {
     }
 
     /**
-     * Creates an action bar
+     * @param {HTMLElement} el el
+     */
+    lineFromEl(el) {
+        if (el.nodeName.toLowerCase() == "img") {
+            return el;
+        }
+
+        const line = el.textContent;
+        return this.createLineEl(line, el.nodeName);
+    }
+
+    /**
+     * Creates an action bar (translate, copy etc.)
      * @param {string} line
      * @param {HTMLParagraphElement} el
      */
@@ -94,16 +100,18 @@ class LanguageModel {
     /**
      * Translates text for the hud
      * @param {string} text
-     * @param {HTMLElement} el
+     * @param {HTMLElement} el For entire line translations, highlight line for easy use
      */
-    async translatePassage(text, el, word = false) {
+    async translatePassage(text, el = null) {
+        console.log('got text', text);
         // remove previously highlighted passage
         if (this.passage) {
             this.passage.style.removeProperty("background");
         }
 
-        this.passage = el;
-
+        if (el) {
+            this.passage = el;
+        }
 
         this.passageTranslateCont.classList.add("grayed-out");
 
@@ -112,13 +120,8 @@ class LanguageModel {
         this.passageTranslateCont.classList.remove("grayed-out");
         this.passageTranslateCont.textContent = "";
 
-        if (word) {
-            const wordEl = this._renderWordEl(text);
-            this.passageTranslateCont.append(wordEl);
-        }
-
         const translatedEl = document.createElement("div");
-        translatedEl.textContent = `Translated: ${translated}`;
+        translatedEl.textContent = translated;
         this.passageTranslateCont.append(translatedEl);
     }
 
@@ -131,12 +134,16 @@ class LanguageModel {
     /**
      * Translate user-inputted text
      * @param {string} text
+     * @returns {[string, string]} [element, rawText]
      */
     async customTranslate(text) {
-        const out = document.createElement("div");
-
         const translated = await this.translate(text);
+        const out = this._customTranslate(text, translated);
+        return [out, translated];
+    }
 
+    _customTranslate(_text, translated) {
+        const out = document.createElement("div");
         out.textContent = `Translated: ${translated}`;
 
         return out;
@@ -153,6 +160,22 @@ class LanguageModel {
                 q: text,
                 source: this.lang,
                 target: "en",
+                format: "text",
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        return (await res.json()).translatedText;
+    }
+
+    async untranslate(text) {
+        const res = await fetch(TRANSLATE_URL + "/translate", {
+            method: "POST",
+            body: JSON.stringify({
+                q: text,
+                source: "en",
+                target: this.lang,
                 format: "text",
             }),
             headers: {

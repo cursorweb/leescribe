@@ -4,50 +4,100 @@ body {
 
     margin: 0;
 
-    display: flex;
+    width: 100vw;
     height: 100vh;
-    flex-direction: column;
 }
 
-.header {
+.menu {
     background: #eef;
 
     box-sizing: border-box;
     padding: 10px;
+
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
 }
 
-.cont {
+.card {
+    background: #d0e2eb;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.review-card .opts {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.review-card .opts div {
+    flex-basis: 100%;
+    padding: 5px;
+    border-radius: 8px;
+    background: orange;
+}
+
+.card-title {
+    font-weight: bolder;
+}
+
+.article-card {
+    overflow: auto;
+    flex-grow: 1;
+}
+
+.article-card .tabs-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.article-card .tabs-nav div {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+
+/* article reader */
+.top-nav {
+    background: gray;
+}
+
+.main-cont {
     display: flex;
     overflow: auto;
     height: 100%;
 }
 
-.cont .article-cont {
+.main-cont .article-cont {
     flex: 0 0 75%;
     display: flex;
     flex-direction: column;
 }
 
-.cont .article-cont .richtext-cont {
+.main-cont .article-cont .richtext-cont {
     overflow: auto;
     padding: 10px;
-    overflow: auto;
     box-sizing: border-box;
     flex-grow: 1;
+    position: relative;
 }
 
-.cont .article-cont .article-nav {
+.main-cont .article-cont .article-nav {
     background: #fee;
     display: flex;
     justify-content: space-between;
     gap: 10px;
 }
 
-.cont .article-cont .article-nav button {
+.main-cont .article-cont .article-nav button {
     flex-grow: 1;
 }
 
-.cont .translate-cont {
+.main-cont .translate-cont {
     background-color: #eee;
 
     flex: 0 0 25%;
@@ -61,12 +111,11 @@ body {
     gap: 10px;
 }
 
-.cont .richtext-cont span rt {
+.main-cont .richtext-cont span rt {
     visibility: hidden;
-    user-select: none;
 }
 
-.cont .richtext-cont span:focus rt {
+.main-cont .richtext-cont span:active rt {
     visibility: visible;
 }
 
@@ -86,10 +135,38 @@ a:hover {
     display: inline-block;
 }
 
-.hud {
+.tooltip-hud {
     position: absolute;
     user-select: none;
     background: #000;
-    opacity: 0.5;
+    /* opacity: 0.7; */
+    padding: 2px;
     top: -100px;
+}
+
+.tooltip-hud button {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+rp,
+rt {
+    user-select: none;
+    pointer-events: none;
+}
+
+.richtext-input {
+    border: 1px solid black;
+    position: relative;
+    overflow: auto;
+    height: 250px;
+    resize: vertical;
+    background: white;
+}
+
+img {
+    width: 50%;
 }

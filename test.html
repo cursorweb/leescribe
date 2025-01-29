@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .content {
+            border: 1px solid black;
+            padding: 10px;
+            height: 500px;
+            position: relative;
+            overflow: auto;
+        }
+
+        img {
+            /* width: 100%; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content" contenteditable="true"></div>
+    <button>doit</button>
+    <div class="container"></div>
+    <script>
+        const btn = document.querySelector('button');
+        const content = document.querySelector(".content");
+        const output = document.querySelector(".container");
+
+        btn.addEventListener("click", () => {
+            let x = content.querySelectorAll("img, p, h1");
+
+            x = [...x].map(el => {
+                if (el.nodeName.toLowerCase() == "img") {
+                    console.log(el.removeAttribute("class"));
+                    for (const attr of el.attributes) {
+                        if (attr.name != "src") {
+                            el.removeAttribute(attr.name);
+                        }
+                    }
+
+                    el.style.width = `${el.naturalWidth}px`;
+                    el.style.height = `${el.naturalHeight}px`;
+                } else {
+                    while (el.attributes.length > 0) {
+                        el.removeAttribute(el.attributes[0].name);
+                    }
+                }
+
+                return el;
+            });
+
+            output.append(...x);
+        });
+    </script>
+</body>
+
+</html>

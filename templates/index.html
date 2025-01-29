@@ -25,38 +25,79 @@
 </head>
 
 <body>
-    <div class="header">
-        <div>
-            <a href="https://www.bbc.com/mundo" target="_blank">BBC Mundo</a>
-            <a href="https://cnnespanol.cnn.com/" target="_blank">CNN en español</a>
-            <a href="https://www.msn.com/es-us" target="_blank">MSN español</a>
-            |
-            <a href="https://www.bbc.com/zhongwen/simp" target="_blank">BBC 中文</a>
-            <a href="http://www.people.com.cn/" target="_blank">人民网</a>
-            <a href="https://www.msn.com/zh-cn" target="_blank">MSN 中文</a>
-            |
-            <a href="https://www.cna.com.tw/" target="_blank">臺灣——中央社</a>
-            |
-            <a href="https://japan.focustaiwan.tw/" target="_blank">フォーカス台湾</a>
-            |
-            <a href="/kana">仮名</a>
+    <div class="menu-cont">
+        <div class="card review-card">
+            <div class="card-title">Review</div>
+
+            <div class="opts">
+                <div class="card-btn">
+                    <div class="card-title">Vocab Review</div>
+                    <div class="card-desc">Review saved words, form sentences</div>
+                </div>
+
+                <div class="card-btn">
+                    <a href="/kana">
+                        <div class="card-title">Kana Review</div>
+                        <div class="card-desc">Review Hiragana and Katakana</div>
+                    </a>
+                </div>
+
+                <div class="card-btn">
+                    <div class="card-title">Typing Practice</div>
+                    <div class="card-desc">Type saved articles!</div>
+                </div>
+            </div>
         </div>
-        <textarea placeholder="Paste in your text..." class="article-input"></textarea>
-        <div>
-            Language:
-            <select class="language-select">
-                <option value="es">Spanish</option>
-                <option value="zh">Chinese</option>
-                <option value="zh-trad">Chinese (Traditional)</option>
-            </select>
+
+        <div class="card article-card">
+            <div class="tabs-nav">
+                <div>
+                    <!-- todo: make as tabs?? -->
+                </div>
+                <div>
+                    <div class="btn">? Random Article</div>
+                    <button class="btn">+ Add Article</button>
+                </div>
+            </div>
+            <div class="load-article-page">
+                <div>
+                    <a href="https://www.bbc.com/mundo" target="_blank">BBC Mundo</a>
+                    <a href="https://cnnespanol.cnn.com/" target="_blank">CNN en español</a>
+                    <a href="https://www.msn.com/es-us" target="_blank">MSN español</a>
+                    |
+                    <a href="https://www.bbc.com/zhongwen/simp" target="_blank">BBC 中文</a>
+                    <a href="http://www.people.com.cn/" target="_blank">人民网</a>
+                    <a href="https://www.msn.com/zh-cn" target="_blank">MSN 中文</a>
+                    |
+                    <a href="https://www.cna.com.tw/" target="_blank">臺灣——中央社</a>
+                    |
+                    <a href="https://japan.focustaiwan.tw/" target="_blank">フォーカス台湾</a>
+                </div>
+                <div>
+                    Language:
+                    <select class="language-select">
+                        <option value="es">Spanish</option>
+                        <option value="zh">Chinese</option>
+                        <option value="zh-trad">Chinese (Traditional)</option>
+                    </select>
+                </div>
+                <button class="richtext-toggle">Rich Text</button>
+                <textarea placeholder="Paste in your text..." class="rawtext-input hide"></textarea>
+                <div class="richtext-input" contenteditable="true"></div>
+                <button class="start-btn">Start</button>
+            </div>
+            <div class="article-list-cont">
+
+            </div>
         </div>
-        <button class="start-btn">Start</button>
     </div>
 
-    <div class="cont">
+    <div class="main-cont hide">
         <div class="article-cont">
-            <div class="hud">
-                <button>Translate</button>
+            <div class="top-nav">
+                <button class="menu-btn">Back to menu</button>
+                <!-- settings button -->
+                <!-- read out loud -->
             </div>
             <div class="richtext-cont"></div>
             <div class="article-nav">
@@ -81,9 +122,13 @@
 
                 <div>Text:</div>
                 <div><textarea class="custom-translate-input"></textarea></div>
+                <div>
+                    <div class="custom-translate-cont"></div>
+                    <textarea class="custom-translate-output hide"></textarea>
+                    <button class="custom-translate-toggle">Edit</button>
+                </div>
                 <button class="custom-translate-btn">Translate</button>
 
-                <div class="custom-translate-cont"></div>
             </div>
         </div>
     </div>

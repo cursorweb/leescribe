@@ -18,6 +18,7 @@ libre_thread.start()
 from flask import Flask, render_template
 
 app = Flask("app")
+app.debug = True
 
 
 @app.route("/")
