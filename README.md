@@ -2,6 +2,8 @@
 Read articles in other languages and translate words you don't know!
 Save words in a growable list collection to review them.
 
+
+## Building
 Venv:
 ```sh
 python -m venv .venv
@@ -9,6 +11,27 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+Development:
+```
+cd client
+npm run dev
+```
+```
+cd server
+py main.py
+```
+*Don't forget `client/.env` sets the translater api location for now...*
+
+Production:
+```
+cd client
+npm run build
+cd ../server
+py main.py
+```
+
+
+## Libretranslate
 Running:
 ```sh
 libretranslate --port 3000
@@ -24,6 +47,7 @@ Languages are stored in `C:\users\user\.local\share\argos-translate\packages`
 ## Todo
 **API**
 Self host api using argostranslate instead of libretranslate wrapper
+.env problem ^^
 
 **Major**
 * Back and forth translate to language and from language

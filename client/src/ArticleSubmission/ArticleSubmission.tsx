@@ -57,7 +57,7 @@ export function ArticleSubmission() {
     }
 
     return (
-        <div style={{ position: "relative" }}>
+        <div>
             <button onClick={() => setUseRichText(!useRichText)}>{useRichText ? "Use Raw Text" : "Use Rich Text"}</button>
             {
                 useRichText
