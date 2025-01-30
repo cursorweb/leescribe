@@ -44,16 +44,16 @@ let passages = [];
 
 
 /// TODO: make a renderPageManager that holds a LanguageModel too, i.e. move this
-richtextToggle.addEventListener("click", () => {
-    useRichText = !useRichText;
-    if (useRichText) {
-        richTextInput.classList.remove("hide");
-        rawTextInput.classList.add("hide");
-    } else {
-        richTextInput.classList.add("hide");
-        rawTextInput.classList.remove("hide");
-    }
-});
+// richtextToggle.addEventListener("click", () => {
+//     useRichText = !useRichText;
+//     if (useRichText) {
+//         richTextInput.classList.remove("hide");
+//         rawTextInput.classList.add("hide");
+//     } else {
+//         richTextInput.classList.add("hide");
+//         rawTextInput.classList.remove("hide");
+//     }
+// });
 
 startBtn.addEventListener("click", () => {
     mainCont.classList.remove("hide");
