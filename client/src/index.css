@@ -1,0 +1,31 @@
+body {
+    font-family: calibri, kaiti;
+    font-size: 22px;
+
+    margin: 0;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+a {
+    color: blue;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.hide {
+    display: none;
+}
+
+rp,
+rt {
+    user-select: none;
+    pointer-events: none;
+}
+
+img {
+    width: 50%;
+}
