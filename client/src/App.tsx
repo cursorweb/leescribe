@@ -3,16 +3,17 @@ import { ArticleLinks } from "./home/ArticleLinks/ArticleLinks";
 import { ArticleSubmission } from "./home/ArticleSubmission/ArticleSubmission";
 import { ReviewNav } from "./home/ReviewNav/ReviewNav";
 import { RichTextCont } from "./reader/RichTextCont/RichTextCont";
+import { LanguageModel } from "./reader/langModels/langModel";
 
 
 function App() {
-    const languageSelectRef = useRef(null);
-    const [articleContent, setArticleContent] = useState<Node[]>();
+    const languageSelectRef = useRef<HTMLSelectElement>(null);
+    const [articleContent, setArticleContent] = useState<Element[]>();
 
     if (articleContent) {
         return (
             <>
-                <RichTextCont content={articleContent} />
+                <RichTextCont content={articleContent} langModel={new LanguageModel("en")} />
             </>
         );
     }

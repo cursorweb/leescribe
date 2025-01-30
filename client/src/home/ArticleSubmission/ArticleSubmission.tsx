@@ -7,7 +7,7 @@ import styles from "./ArticleSubmission.module.css";
 // is going to process based on their own logics
 
 
-export function ArticleSubmission({ onSubmit }: { onSubmit: (els: Node[]) => void }) {
+export function ArticleSubmission({ onSubmit }: { onSubmit: (els: Element[]) => void }) {
     const [useRichText, setUseRichText] = useState(true);
     const rawTextRef = useRef<HTMLTextAreaElement>(null);
     const richTextRef = useRef<HTMLDivElement>(null);
@@ -31,7 +31,7 @@ export function ArticleSubmission({ onSubmit }: { onSubmit: (els: Node[]) => voi
                 }
             }
 
-            return el.cloneNode(true);
+            return el.cloneNode(true) as Element;
         });
 
         onSubmit(elArray);
