@@ -3,6 +3,9 @@ import styles from "./ArticleSubmission.module.css";
 
 // todo: save contenteditable and textarea values
 
+// the logic: return a list of elements that people down the line (article reader)
+// is going to process based on their own logics
+
 
 export function ArticleSubmission() {
     const [useRichText, setUseRichText] = useState(true);
@@ -36,7 +39,14 @@ export function ArticleSubmission() {
 
     function handleRawSubmission() {
         const text = rawTextRef.current!.value;
-        console.log(text);
+        const lines = text.trim().split("\n").map(line => {
+            const text = line.trim();
+            const p = document.createElement("p");
+            p.textContent = text;
+            return p;
+        });
+
+        console.log(lines);
     }
 
     function enterToSubmit(e: React.KeyboardEvent) {
