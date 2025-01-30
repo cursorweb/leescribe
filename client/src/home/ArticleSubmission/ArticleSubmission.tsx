@@ -7,7 +7,7 @@ import styles from "./ArticleSubmission.module.css";
 // is going to process based on their own logics
 
 
-export function ArticleSubmission() {
+export function ArticleSubmission({ onSubmit }: { onSubmit: (els: Node[]) => void }) {
     const [useRichText, setUseRichText] = useState(true);
     const rawTextRef = useRef<HTMLTextAreaElement>(null);
     const richTextRef = useRef<HTMLDivElement>(null);
@@ -34,7 +34,7 @@ export function ArticleSubmission() {
             return el.cloneNode(true);
         });
 
-        console.log(elArray);
+        onSubmit(elArray);
     }
 
     function handleRawSubmission() {
@@ -46,7 +46,7 @@ export function ArticleSubmission() {
             return p;
         });
 
-        console.log(lines);
+        onSubmit(lines);
     }
 
     function enterToSubmit(e: React.KeyboardEvent) {
