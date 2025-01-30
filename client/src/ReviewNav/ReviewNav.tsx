@@ -1,6 +1,6 @@
-import styles from "./MenuNav.module.css";
+import styles from "./ReviewNav.module.css";
 
-export function MenuNav() {
+export function ReviewNav() {
     return (
         <div className={styles.card}>
             <div className={styles.title}>Review</div>
