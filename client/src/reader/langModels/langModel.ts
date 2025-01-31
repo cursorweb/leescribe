@@ -13,7 +13,20 @@ export class LanguageModel {
         }
 
         const text = el.textContent!;
-        const out = document.createElement(el.nodeName);
+        const nodeName = el.nodeName;
+        const out = this.processText(nodeName, text);
+        return out;
+    }
+
+    /**
+     * Process the text-based items: `p`, `h1`, etc. by adding pinyin or whatever else
+     * that may be desired
+     * @param nodeName p, h1, etc.
+     * @param text Content
+     * @returns Processed element
+     */
+    protected processText(nodeName: string, text: string): Element {
+        const out = document.createElement(nodeName);
         out.textContent = text;
         return out;
     }
