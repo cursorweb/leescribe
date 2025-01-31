@@ -4,11 +4,8 @@ import { LanguageModel } from "../langModels/langModel";
 
 export function RichTextCont({ content, langModel }: React.PropsWithChildren & { content: Element[], langModel: LanguageModel }) {
     const divElRef = useRef<HTMLDivElement>(null);
-    // const pageRef = useRef<Element[][]>([]);
     const [pages, setPages] = useState<Element[][]>([]);
     const [pageIdx, setPageIdx] = useState(0);
-
-    // const pages = pageRef.current;
 
     useEffect(() => {
         const out: Element[][] = [[]];
