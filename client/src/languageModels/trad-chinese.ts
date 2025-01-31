@@ -1,22 +1,22 @@
+import * as pinyinPro from "pinyin-pro";
+import * as OpenCC from "opencc-js";
+import { Chinese } from "./chinese";
+
 const converter = OpenCC.Converter({ from: 'tw', to: 'cn' });
 
-class TradChinese extends Chinese {
-    constructor() {
-        super("zh");
-    }
-
-    _renderWordEl(tradText) {
+export class TradChinese extends Chinese {
+    _renderWordEl(tradText: string) {
         const simpText = converter(tradText);
         const wordEl = this.__tradPinyinAlternator("Word", tradText, simpText);
         return wordEl;
     }
 
-    async translate(text) {
+    async translate(text: string) {
         const simp = converter(text);
         return super.translate(simp);
     }
 
-    _customTranslate(tradText, translated) {
+    _customTranslate(tradText: string, translated: string) {
         const out = document.createElement("div");
 
         const translatedDiv = document.createElement("div");
@@ -31,7 +31,7 @@ class TradChinese extends Chinese {
         return out;
     }
 
-    __tradPinyinAlternator(name, trad, simp) {
+    __tradPinyinAlternator(name: string, trad: string, simp: string) {
         const out = document.createElement("div");
         out.innerHTML = `${name}: ${trad}`;
 

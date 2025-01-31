@@ -1,46 +1,49 @@
+import { Chinese } from "./languageModels/chinese";
+import { LanguageModel } from "./languageModels/languageModel";
+import { Spanish } from "./languageModels/spanish";
+import { TradChinese } from "./languageModels/trad-chinese";
+import { Settings } from "./settings";
+
+
+// load passage
+const mainCont = document.querySelector(".main-cont") as HTMLDivElement;
+const menuCont = document.querySelector(".menu-cont") as HTMLDivElement;
+
+const startBtn = document.querySelector(".start-btn") as HTMLButtonElement;
+const richtextToggle = document.querySelector(".richtext-toggle") as HTMLButtonElement;
+const rawTextInput = document.querySelector(".rawtext-input") as HTMLInputElement;
+const richTextInput = document.querySelector(".richtext-input") as HTMLInputElement;
+let useRichText = true;
+
+const languageSelect = document.querySelector(".language-select") as HTMLSelectElement;
+const richtextCont = document.querySelector(".richtext-cont") as HTMLDivElement;
+
+const prevPassageBtn = document.querySelector(".prev-passage") as HTMLButtonElement;
+const nextPassageBtn = document.querySelector(".next-passage") as HTMLButtonElement;
+const passageNumberText = document.querySelector(".passage-number") as HTMLDivElement;
+
+
 // create settings
-const settings = new Settings();
+const settings = new Settings(richtextCont);
 window.addEventListener("load", () => {
     const div = settings.createSettings();
 
-    document.querySelector(".settings-div").append(div);
+    document.querySelector(".settings-div")!.append(div);
 });
 
 
 // menu stuff (TODO: move)
-const returnMenuBtn = document.querySelector(".menu-btn");
+const returnMenuBtn = document.querySelector(".menu-btn") as HTMLDivElement;
 returnMenuBtn.addEventListener("click", () => {
     menuCont.classList.remove("hide");
     mainCont.classList.add("hide");
 });
 
+let languageModel: LanguageModel;
 
-// load passage
-const mainCont = document.querySelector(".main-cont");
-const menuCont = document.querySelector(".menu-cont");
-
-const startBtn = document.querySelector(".start-btn");
-const richtextToggle = document.querySelector(".richtext-toggle");
-const rawTextInput = document.querySelector(".rawtext-input");
-const richTextInput = document.querySelector(".richtext-input");
-let useRichText = true;
-
-const languageSelect = document.querySelector(".language-select");
-const richtextCont = document.querySelector(".richtext-cont");
-
-const prevPassageBtn = document.querySelector(".prev-passage");
-const nextPassageBtn = document.querySelector(".next-passage");
-const passageNumberText = document.querySelector(".passage-number");
-
-/** @type {LanguageModel} */
-let languageModel;
-
-const passageSize = 20;
-// max passage size, in characters
-const maxPassageWords = 1600;
 let passageIndex = 0;
 // in elements
-let passages = [];
+let passages: HTMLElement[][] = [];
 
 
 /// TODO: make a renderPageManager that holds a LanguageModel too, i.e. move this
@@ -88,8 +91,8 @@ startBtn.addEventListener("click", () => {
     renderPassage();
 });
 
-function paginateLines(lines) {
-    const out = [[]];
+function paginateLines(lines: string[]) {
+    const out: HTMLElement[][] = [[]];
     richtextCont.textContent = "";
     const { bottom: maxHeight } = richtextCont.getBoundingClientRect();
 
@@ -113,13 +116,10 @@ function paginateLines(lines) {
     return out;
 }
 
-/**
- * @param {HTMLElement} content
- */
-function richTextPaginateLines(content) {
+function richTextPaginateLines(content: HTMLElement) {
     let els = content.querySelectorAll("img, p, h1, h2, h3, h4, h5, h6, figcaption");
 
-    els = [...els].map(el => {
+    const elsArray = [...els].map(el => {
         if (el.nodeName.toLowerCase() == "img") {
             for (let i = el.attributes.length - 1; i >= 0; i--) {
                 const name = el.attributes[i].name;
@@ -133,14 +133,14 @@ function richTextPaginateLines(content) {
             }
         }
 
-        return el.cloneNode(true);
+        return el.cloneNode(true) as HTMLElement;
     });
 
-    const out = [[]];
+    const out: HTMLElement[][] = [[]];
     richtextCont.textContent = "";
     const { bottom: maxHeight } = richtextCont.getBoundingClientRect();
 
-    for (const el of els) {
+    for (const el of elsArray) {
         const lineEl = languageModel.lineFromEl(el);
         richtextCont.append(lineEl);
 
@@ -169,7 +169,7 @@ function renderPassage() {
     }
 
     richtextCont.addEventListener("mouseup", () => {
-        const selection = window.getSelection();
+        const selection = window.getSelection()!;
 
         // preface: range count is usually 1 because it's number of cursors
         for (let i = 0; i < selection.rangeCount; i++) {
@@ -199,11 +199,7 @@ function renderPassage() {
     }
 }
 
-/**
- * @param {Selection} selection 
- * @returns filtered
- */
-function getFilteredSelection(selection) { // source: chatGPT :skull:
+function getFilteredSelection(selection: Selection) { // source: chatGPT :skull:
     if (!selection.rangeCount) return "";
 
     const range = selection.getRangeAt(0);
@@ -212,10 +208,10 @@ function getFilteredSelection(selection) { // source: chatGPT :skull:
     if (container.nodeType == Node.TEXT_NODE) {
         const startOffset = range.startOffset;
         const endOffset = range.endOffset;
-        return container.textContent.slice(startOffset, endOffset).trim();
+        return container.textContent!.slice(startOffset, endOffset).trim();
     }
 
-    function isUnselectable(node) {
+    function isUnselectable(node: HTMLElement) {
         const style = window.getComputedStyle(node);
         return style.userSelect == "none";
     }
@@ -226,7 +222,7 @@ function getFilteredSelection(selection) { // source: chatGPT :skull:
         NodeFilter.SHOW_TEXT,
         {
             acceptNode: node => {
-                if (range.intersectsNode(node) && !isUnselectable(node.parentNode)) {
+                if (range.intersectsNode(node) && !isUnselectable(node.parentNode as HTMLElement)) {
                     return NodeFilter.FILTER_ACCEPT;
                 }
 
@@ -239,8 +235,8 @@ function getFilteredSelection(selection) { // source: chatGPT :skull:
     while (walker.nextNode()) {
         const node = walker.currentNode;
         const startOffset = node == range.startContainer ? range.startOffset : 0;
-        const endOffset = node == range.endContainer ? range.endOffset : node.textContent.length;
-        filteredText += node.textContent.slice(startOffset, endOffset);
+        const endOffset = node == range.endContainer ? range.endOffset : node.textContent!.length;
+        filteredText += node.textContent!.slice(startOffset, endOffset);
     }
 
     return filteredText.trim();
@@ -262,7 +258,7 @@ nextPassageBtn.addEventListener("click", () => {
 
 
 // jump to passage
-const jumpToPassageBtn = document.querySelector(".jump-to-passage");
+const jumpToPassageBtn = document.querySelector(".jump-to-passage") as HTMLButtonElement;
 
 jumpToPassageBtn.addEventListener("click", () => {
     if (!languageModel || !languageModel.passage) return;
@@ -272,13 +268,11 @@ jumpToPassageBtn.addEventListener("click", () => {
 
 
 // custom translate
-/** @type {HTMLTextAreaElement} */
-const customTranslateInput = document.querySelector(".custom-translate-input");
-const customTranslateBtn = document.querySelector(".custom-translate-btn");
-const customTranslateText = document.querySelector(".custom-translate-cont");
-/** @type {HTMLTextAreaElement} */
-const customTranslateOutput = document.querySelector(".custom-translate-output");
-const customTranslateToggle = document.querySelector(".custom-translate-toggle");
+const customTranslateInput = document.querySelector(".custom-translate-input") as HTMLTextAreaElement;
+const customTranslateBtn = document.querySelector(".custom-translate-btn") as HTMLButtonElement;
+const customTranslateText = document.querySelector(".custom-translate-cont") as HTMLDivElement;
+const customTranslateOutput = document.querySelector(".custom-translate-output") as HTMLTextAreaElement;
+const customTranslateToggle = document.querySelector(".custom-translate-toggle") as HTMLButtonElement;
 let isInputLastEdited = true;
 
 customTranslateBtn.addEventListener("click", async () => {

@@ -1,24 +1,27 @@
-class LanguageModel {
+const TRANSLATE_URL = "http://127.0.0.1:3000";
+
+export class LanguageModel {
+    lang: string;
+    passage: HTMLElement | null;
+    passageTranslateCont: HTMLDivElement;
+
     /**
      * @param {string} lang language code
     */
-    constructor(lang) {
+    constructor(lang: string) {
         this.lang = lang;
 
         // container to hold text input
-        this.passageTranslateCont = document.querySelector(".passage-translate-cont");
+        this.passageTranslateCont = document.querySelector(".passage-translate-cont")!;
 
         this.passage = null;
     }
 
     // useful for chinese language modes, for pinyin
-    _getWords(line) { return [line]; }
-    _createWordElement(word, _i, _arr) { return document.createTextNode(word); }
+    protected _getWords(line: string) { return [line]; }
+    protected _createWordElement(word: string, _i: number, _arr: string[]): Node { return document.createTextNode(word); }
 
-    /**
-     * @param {string} line
-     */
-    createLineEl(line, el = "p") {
+    createLineEl(line: string, el = "p") {
         const out = document.createElement(el);
 
         // if line empty, return an empty paragraph
@@ -38,24 +41,19 @@ class LanguageModel {
         return out;
     }
 
-    /**
-     * @param {HTMLElement} el el
-     */
-    lineFromEl(el) {
+    lineFromEl(el: HTMLElement) {
         if (el.nodeName.toLowerCase() == "img") {
             return el;
         }
 
-        const line = el.textContent;
+        const line = el.textContent!;
         return this.createLineEl(line, el.nodeName);
     }
 
     /**
      * Creates an action bar (translate, copy etc.)
-     * @param {string} line
-     * @param {HTMLParagraphElement} el
      */
-    addParagraphActionBar(line, el) {
+    addParagraphActionBar(line: string, el: HTMLElement) {
         const translateBtn = document.createElement("button");
         translateBtn.textContent = "translate";
 
@@ -99,10 +97,8 @@ class LanguageModel {
 
     /**
      * Translates text for the hud
-     * @param {string} text
-     * @param {HTMLElement} el For entire line translations, highlight line for easy use
      */
-    async translatePassage(text, el = null) {
+    async translatePassage(text: string, el?: HTMLElement) {
         console.log('got text', text);
         // remove previously highlighted passage
         if (this.passage) {
@@ -125,7 +121,7 @@ class LanguageModel {
         this.passageTranslateCont.append(translatedEl);
     }
 
-    _renderWordEl(text) {
+    _renderWordEl(text: string) {
         const wordEl = document.createElement("div");
         wordEl.textContent = `Word: ${text}`;
         return wordEl;
@@ -133,16 +129,15 @@ class LanguageModel {
 
     /**
      * Translate user-inputted text
-     * @param {string} text
-     * @returns {[string, string]} [element, rawText]
+     * @returns [element, rawText]
      */
-    async customTranslate(text) {
+    async customTranslate(text: string): Promise<[HTMLElement, string]> {
         const translated = await this.translate(text);
         const out = this._customTranslate(text, translated);
         return [out, translated];
     }
 
-    _customTranslate(_text, translated) {
+    _customTranslate(_text: string, translated: string) {
         const out = document.createElement("div");
         out.textContent = `Translated: ${translated}`;
 
@@ -153,7 +148,7 @@ class LanguageModel {
      * @param {string} text
      * @returns {Promise<string>}
      */
-    async translate(text) {
+    async translate(text: string): Promise<string> {
         const res = await fetch(TRANSLATE_URL + "/translate", {
             method: "POST",
             body: JSON.stringify({
@@ -169,7 +164,7 @@ class LanguageModel {
         return (await res.json()).translatedText;
     }
 
-    async untranslate(text) {
+    async untranslate(text: string): Promise<string> {
         const res = await fetch(TRANSLATE_URL + "/translate", {
             method: "POST",
             body: JSON.stringify({

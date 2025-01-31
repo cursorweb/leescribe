@@ -1,5 +1,13 @@
-class Settings {
-    constructor() {
+export class Settings {
+    basicSettings: {
+        name: string; // display name
+        prop: keyof CSSStyleDeclaration; // js css prop
+        options: { name: string; value: string; }[];
+    }[];
+    settingsDiv: HTMLDivElement;
+    richtextCont: HTMLDivElement;
+
+    constructor(richtextCont: HTMLDivElement) {
         this.basicSettings = [
             {
                 name: "Font Size", // display name
@@ -32,6 +40,7 @@ class Settings {
         ];
 
         this.settingsDiv = document.createElement("div");
+        this.richtextCont = richtextCont;
     }
 
     createSettings() {
@@ -54,7 +63,7 @@ class Settings {
 
             selectEl.addEventListener("change", () => {
                 console.log(setting.prop);
-                richtextCont.style[setting.prop] = selectEl.value;
+                this.richtextCont.style.setProperty(setting.prop as string, selectEl.value);
             });
 
             labelEl.append(nameEl, selectEl);

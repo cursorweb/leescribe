@@ -9,7 +9,12 @@
         "preview": "vite preview"
     },
     "devDependencies": {
+        "@types/opencc-js": "^1.0.3",
         "typescript": "~5.6.2",
         "vite": "^6.0.5"
+    },
+    "dependencies": {
+        "opencc-js": "^1.0.5",
+        "pinyin-pro": "^3.26.0"
     }
 }
