@@ -63,7 +63,7 @@ export class Settings {
 
             selectEl.addEventListener("change", () => {
                 console.log(setting.prop);
-                this.richtextCont.style.setProperty(setting.prop as string, selectEl.value);
+                this.richtextCont.style[setting.prop as number] = selectEl.value;
             });
 
             labelEl.append(nameEl, selectEl);

@@ -58,6 +58,40 @@ richtextToggle.addEventListener("click", () => {
     }
 });
 
+rawTextInput.addEventListener("keyup", e => {
+    if (e.key == "Enter" && e.ctrlKey) {
+        e.preventDefault();
+        startBtn.click();
+    }
+})
+
+richTextInput.addEventListener("keyup", e => {
+    if (e.key == "Enter" && e.ctrlKey) {
+        e.preventDefault();
+        startBtn.click();
+    }
+
+    if (e.key == "v" && e.ctrlKey) {
+        let els = richTextInput.querySelectorAll("img, p, h1, h2, h3, h4, h5, h6, figcaption");
+
+        els.forEach(el => {
+            if (el.nodeName.toLowerCase() == "img") {
+                for (let i = el.attributes.length - 1; i >= 0; i--) {
+                    const name = el.attributes[i].name;
+                    if (name != "src") {
+                        el.removeAttribute(name);
+                    }
+                }
+            } else {
+                while (el.attributes.length > 0) {
+                    el.removeAttribute(el.attributes[0].name);
+                }
+            }
+        });
+    }
+
+});
+
 startBtn.addEventListener("click", () => {
     mainCont.classList.remove("hide");
     menuCont.classList.add("hide");
@@ -120,19 +154,6 @@ function richTextPaginateLines(content: HTMLElement) {
     let els = content.querySelectorAll("img, p, h1, h2, h3, h4, h5, h6, figcaption");
 
     const elsArray = [...els].map(el => {
-        if (el.nodeName.toLowerCase() == "img") {
-            for (let i = el.attributes.length - 1; i >= 0; i--) {
-                const name = el.attributes[i].name;
-                if (name != "src") {
-                    el.removeAttribute(name);
-                }
-            }
-        } else {
-            while (el.attributes.length > 0) {
-                el.removeAttribute(el.attributes[0].name);
-            }
-        }
-
         return el.cloneNode(true) as HTMLElement;
     });
 
