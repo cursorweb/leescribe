@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode, useState } from "react";
+import React, { PropsWithChildren, useState } from "react";
 import { ReactElement } from "react";
 
 const TRANSLATE_URL = "http://127.0.0.1:3000";
@@ -16,6 +16,10 @@ export class LanguageModel {
         }
 
         const text = el.textContent!;
+
+        // if line empty, return an empty paragraph (esp for raw text)
+        if (!text) return <p />;
+
         const nodeName = el.nodeName.toLowerCase();
         const out = this.processText(nodeName, text);
         return out;

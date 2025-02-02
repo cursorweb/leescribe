@@ -4,47 +4,57 @@ import { LanguageModel } from "../langModels/langModel";
 import { renderToString } from "react-dom/server";
 import React from "react";
 
-export function RichTextCont({ content, langModel }: React.PropsWithChildren & { content: Element[], langModel: LanguageModel }) {
+export function RichTextCont({ rawContent, langModel }: React.PropsWithChildren & { rawContent: Element[], langModel: LanguageModel }) {
     const divElRef = useRef<HTMLDivElement>(null);
     const [pages, setPages] = useState<ReactElement[][]>([]);
     const [pageIdx, setPageIdx] = useState(0);
 
+    // perf: make sure 100-page test will not exceed 300ms as success! (ideally 90ms)
     useEffect(() => {
-        // article segmentation, pagination, etc
+        console.time("seg");
         const out: ReactElement[][] = [[]];
+        const content = rawContent.map(el => langModel.processElement(el));
 
+        const measurer = divElRef.current!.cloneNode() as HTMLDivElement;
         const maxHeight = divElRef.current!.getBoundingClientRect().height;
-
-        // TODO: make this less ugly
-        const style = divElRef.current!.computedStyleMap();
-        const measurer = document.createElement("div");
-        measurer.style.padding = style.get("padding") as string;
         document.body.appendChild(measurer);
 
+        const view = renderToString(content.map((el, i) => <div id={`${i}`}>{el}</div>));
+        measurer.innerHTML = view;
 
-        for (const domEl of content) {
-            const el = langModel.processElement(domEl);
+        let bottomOffset = measurer.getBoundingClientRect().top;
+        let prevBottom = 0;
 
-            const view = renderToString([...out[out.length - 1], el]);
-            measurer.innerHTML = view;
+        for (let i = 0; i < content.length; i++) {
+            const el = content[i];
+            const domRect = document.getElementById(`${i}`)!.getBoundingClientRect();
+            const bottom = domRect.bottom;
 
-            const height = measurer.getBoundingClientRect().height;
-
-            if (height > maxHeight) {
-                // prevent empty first page
-                if (out[out.length - 1].length != 0) {
-                    out.push([el]);
-                } else {
+            if (bottom - bottomOffset > maxHeight) {
+                if (out[out.length - 1].length == 0) {
+                    // this paragraph is super long!
+                    // this is to prevent empty first page
                     out[out.length - 1] = [el];
-                    out.push([]);
+                    if (i != content.length - 1) {
+                        // if this is the last article, then don't create an empty last page either
+                        out.push([]);
+                    }
+                } else {
+                    out.push([el]);
                 }
+
+                setPages(out);
+                bottomOffset = prevBottom;
             } else {
                 out[out.length - 1].push(el);
             }
+
+            prevBottom = bottom;
         }
 
         measurer.remove();
         setPages(out);
+        console.timeEnd("seg");
     }, []);
 
 

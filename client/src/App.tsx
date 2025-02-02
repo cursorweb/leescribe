@@ -27,7 +27,7 @@ function App() {
 
         return (
             <>
-                <RichTextCont content={articleContent} langModel={langModel} />
+                <RichTextCont rawContent={articleContent} langModel={langModel} />
             </>
         );
     }
