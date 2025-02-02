@@ -56,6 +56,7 @@ export class LanguageModel {
     addParagraphActionBar(line: string, el: HTMLElement) {
         const translateBtn = document.createElement("button");
         translateBtn.textContent = "translate";
+        translateBtn.style.userSelect = "none";
 
         translateBtn.addEventListener("click", () => {
             this.translatePassage(line, el);
@@ -83,6 +84,7 @@ export class LanguageModel {
 
         const copyBtn = document.createElement("button");
         copyBtn.textContent = "copy";
+        copyBtn.style.userSelect = "none";
 
         copyBtn.addEventListener("click", async () => {
             await navigator.clipboard.writeText(line);
