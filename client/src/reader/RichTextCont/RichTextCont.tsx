@@ -1,49 +1,54 @@
-import { useEffect, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import styles from "./RichTextCont.module.css";
 import { LanguageModel } from "../langModels/langModel";
+import { renderToString } from "react-dom/server";
+import React from "react";
 
 export function RichTextCont({ content, langModel }: React.PropsWithChildren & { content: Element[], langModel: LanguageModel }) {
     const divElRef = useRef<HTMLDivElement>(null);
-    const [pages, setPages] = useState<Element[][]>([]);
+    const [pages, setPages] = useState<ReactElement[][]>([]);
     const [pageIdx, setPageIdx] = useState(0);
 
     useEffect(() => {
-        const out: Element[][] = [[]];
-        const richTextCont = divElRef.current!;
-        richTextCont.textContent = "";
-        const { bottom: maxHeight } = richTextCont.getBoundingClientRect();
+        const out: ReactElement[][] = [[]];
 
-        for (const el of content) {
-            const lineEl = langModel.processElement(el);
-            richTextCont.append(lineEl);
+        const maxHeight = divElRef.current!.getBoundingClientRect().height;
 
-            const rect = lineEl.getBoundingClientRect();
+        // TODO: make this less ugly
+        const style = divElRef.current!.computedStyleMap();
+        const measurer = document.createElement("div");
+        measurer.style.padding = style.get("padding") as string;
+        document.body.appendChild(measurer);
 
-            if (rect.bottom > maxHeight) {
-                // create new breakpoint
-                out.push([lineEl]);
-                richTextCont.textContent = "";
-                richTextCont.append(lineEl);
+
+        for (const domEl of content) {
+            const el = langModel.processElement(domEl);
+            const prevHeight = measurer.getBoundingClientRect().height;
+
+            const view = renderToString([...out[out.length - 1], el]);
+            measurer.innerHTML = view;
+
+            const height = measurer.getBoundingClientRect().height;
+            console.log(el.type, el.props.children?.slice(0, 5), height - prevHeight, height.toFixed(), maxHeight);
+
+            if (height > maxHeight) {
+                out.push([el]);
             } else {
-                // add to existing
-                out[out.length - 1].push(lineEl);
+                out[out.length - 1].push(el);
             }
         }
 
+        measurer.remove();
         setPages(out);
     }, []);
 
-    useEffect(() => {
-        const el = divElRef.current!;
-        el.textContent = "";
-        pages[pageIdx]?.forEach(e => {
-            el.appendChild(e);
-        });
-    }, [pageIdx, pages]);
-
 
     return (<>
-        <div ref={divElRef} className={styles.textCont}></div>
+        <div ref={divElRef} className={styles.textCont}>
+            {pages[pageIdx]?.map((el, i) => (
+                <React.Fragment key={i}>{el}</React.Fragment>
+            ))}
+        </div>
         <button disabled={pageIdx == 0} onClick={() => setPageIdx(pageIdx - 1)}>Prev Page</button>
         {pageIdx + 1} / {pages.length}
         <button disabled={pageIdx == pages.length - 1} onClick={() => setPageIdx(pageIdx + 1)}>Next Page</button>

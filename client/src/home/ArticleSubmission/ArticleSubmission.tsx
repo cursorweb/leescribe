@@ -56,13 +56,37 @@ export function ArticleSubmission({ onSubmit }: { onSubmit: (els: Element[]) => 
         }
     }
 
+    function richEnterToSubmit(e: React.KeyboardEvent) {
+        if (e.key == "v" && e.ctrlKey) {
+            let els = richTextRef.current!.querySelectorAll("img, p, h1, h2, h3, h4, h5, h6, figcaption");
+
+            console.log(els);
+            els.forEach(el => {
+                if (el.nodeName.toLowerCase() == "img") {
+                    for (let i = el.attributes.length - 1; i >= 0; i--) {
+                        const name = el.attributes[i].name;
+                        if (name != "src") {
+                            el.removeAttribute(name);
+                        }
+                    }
+                } else {
+                    while (el.attributes.length > 0) {
+                        el.removeAttribute(el.attributes[0].name);
+                    }
+                }
+            });
+        }
+
+        enterToSubmit(e);
+    }
+
     return (
         <div>
             <button onClick={() => setUseRichText(!useRichText)}>{useRichText ? "Use Raw Text" : "Use Rich Text"}</button>
             {
                 useRichText
-                    ? <div className={styles.articleInput} contentEditable ref={richTextRef} onKeyDown={enterToSubmit} />
-                    : <textarea placeholder="Paste in your raw text..." className={styles.articleInput} onKeyDown={enterToSubmit} ref={rawTextRef}></textarea>
+                    ? <div className={styles.articleInput} contentEditable ref={richTextRef} onKeyUp={richEnterToSubmit} />
+                    : <textarea placeholder="Paste in your raw text..." className={styles.articleInput} onKeyUp={enterToSubmit} ref={rawTextRef}></textarea>
             }
 
             <button onClick={useRichText ? handleRichSubmission : handleRawSubmission} ref={startBtnRef}>Start</button>

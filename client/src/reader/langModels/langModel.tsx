@@ -1,3 +1,6 @@
+import React from "react";
+import { ReactElement } from "react";
+
 const TRANSLATE_URL = "http://127.0.0.1:3000";
 
 export class LanguageModel {
@@ -7,13 +10,13 @@ export class LanguageModel {
         this.lang = lang;
     }
 
-    processElement(el: Element) {
+    processElement(el: Element): ReactElement {
         if (el.nodeName.toLowerCase() == "img") {
-            return el;
+            return <img src={(el as HTMLImageElement).src} />;
         }
 
         const text = el.textContent!;
-        const nodeName = el.nodeName;
+        const nodeName = el.nodeName.toLowerCase();
         const out = this.processText(nodeName, text);
         return out;
     }
@@ -25,9 +28,10 @@ export class LanguageModel {
      * @param text Content
      * @returns Processed element
      */
-    protected processText(nodeName: string, text: string): Element {
-        const out = document.createElement(nodeName);
-        out.textContent = text;
+    protected processText(nodeName: string, text: string): ReactElement {
+        // const out = document.createElement(nodeName);
+        // out.textContent = text;
+        const out = React.createElement(nodeName, {}, text);
         return out;
     }
 

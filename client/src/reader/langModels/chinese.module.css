@@ -1,0 +1,14 @@
+.ruby rt {
+    visibility: hidden;
+}
+
+.ruby:active rt {
+    visibility: visible;
+}
+
+
+.ruby rp,
+.ruby rt {
+    user-select: none;
+    pointer-events: none;
+}
