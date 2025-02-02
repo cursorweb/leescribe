@@ -54,8 +54,10 @@ export function RichTextCont({ content, langModel }: React.PropsWithChildren & {
                 <React.Fragment key={i}>{el}</React.Fragment>
             ))}
         </div>
-        <button disabled={pageIdx == 0} onClick={() => setPageIdx(pageIdx - 1)}>Prev Page</button>
-        {pageIdx + 1} / {pages.length}
-        <button disabled={pageIdx == pages.length - 1} onClick={() => setPageIdx(pageIdx + 1)}>Next Page</button>
+        <div>
+            <button disabled={pageIdx == 0} onClick={() => setPageIdx(pageIdx - 1)}>&lt; Prev</button>
+            {pageIdx + 1} / {pages.length}
+            <button disabled={pageIdx == pages.length - 1} onClick={() => setPageIdx(pageIdx + 1)}>Next &gt;</button>
+        </div>
     </>);
 }

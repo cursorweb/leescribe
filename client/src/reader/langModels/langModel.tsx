@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import { ReactElement } from "react";
 
 const TRANSLATE_URL = "http://127.0.0.1:3000";
@@ -28,10 +28,12 @@ export class LanguageModel {
      * @param text Content
      * @returns Processed element
      */
-    protected processText(nodeName: string, text: string): ReactElement {
-        // const out = document.createElement(nodeName);
-        // out.textContent = text;
-        const out = React.createElement(nodeName, {}, text);
+    protected processText(nodeName: string, text: ReactNode): ReactElement {
+        const out = React.createElement(nodeName, {
+            onMouseOver: () => {
+                console.log('hi')
+            }
+        } as React.InputHTMLAttributes<HTMLDivElement>, <>{text} <button>translate</button> <button>copy</button></>);
         return out;
     }
 

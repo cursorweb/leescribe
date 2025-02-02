@@ -12,12 +12,12 @@ export class Chinese extends LanguageModel {
     protected processText(nodeName: string, text: string): ReactElement {
         const html = pinyinPro.html(text);
 
-        return React.createElement(nodeName, {
+        return super.processText(nodeName, React.createElement("span", {
             dangerouslySetInnerHTML: {
                 __html: html
             },
             className: styles.ruby
-        });
+        }));
     }
 
     protected getWords(text: string) {
