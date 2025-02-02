@@ -52,6 +52,7 @@ Self host api using argostranslate instead of libretranslate wrapper
 **Major**
 * Back and forth translate to language and from language
 * Save sentence flashcards
+* Audio dictate someone says it and you have to retype
 
 * Redo main menu
 * Save words

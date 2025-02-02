@@ -1,6 +1,5 @@
-import { LanguageModel } from "./langModel";
+import { ActionBar, LanguageModel } from "./langModel";
 import * as pinyinPro from "pinyin-pro";
-import React from "react";
 import { ReactElement } from "react";
 import styles from "./chinese.module.css";
 
@@ -12,12 +11,9 @@ export class Chinese extends LanguageModel {
     protected processText(nodeName: string, text: string): ReactElement {
         const html = pinyinPro.html(text);
 
-        return super.processText(nodeName, React.createElement("span", {
-            dangerouslySetInnerHTML: {
-                __html: html
-            },
-            className: styles.ruby
-        }));
+        return <ActionBar text={text} nodeName={nodeName}>
+            <span className={styles.ruby} dangerouslySetInnerHTML={{ __html: html }} />
+        </ActionBar>;
     }
 
     protected getWords(text: string) {

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { PropsWithChildren, ReactNode, useState } from "react";
 import { ReactElement } from "react";
 
 const TRANSLATE_URL = "http://127.0.0.1:3000";
@@ -28,13 +28,13 @@ export class LanguageModel {
      * @param text Content
      * @returns Processed element
      */
-    protected processText(nodeName: string, text: ReactNode): ReactElement {
-        const out = React.createElement(nodeName, {
-            onMouseOver: () => {
-                console.log('hi')
-            }
-        } as React.InputHTMLAttributes<HTMLDivElement>, <>{text} <button>translate</button> <button>copy</button></>);
-        return out;
+    protected processText(nodeName: string, text: string): ReactElement {
+        // const out = React.createElement(nodeName, {
+        //     onMouseOver: () => {
+        //         console.log('hi')
+        //     }
+        // } as React.InputHTMLAttributes<HTMLDivElement>, <>{text} <button>translate</button> <button>copy</button></>);
+        return <ActionBar text={text} nodeName={nodeName}>{text}</ActionBar>;
     }
 
     async translate(text: string): Promise<string> {
@@ -68,4 +68,30 @@ export class LanguageModel {
         });
         return (await res.json()).translatedText;
     }
+}
+
+export function ActionBar({ nodeName, text, children }: PropsWithChildren & { nodeName: string, text: string }) {
+    const [copyState, setCopyState] = useState("copy");
+
+    async function copyText() {
+        await navigator.clipboard.writeText(text);
+        setCopyState("copied");
+        setTimeout(() => {
+            setCopyState("copy");
+        }, 500);
+    }
+
+    return React.createElement(
+        nodeName,
+        {
+            onMouseOver: () => {
+                console.log('hi')
+            }
+        } as React.InputHTMLAttributes<HTMLDivElement>,
+        <>
+            {children}
+            <button>translate</button>
+            <button onClick={copyText}>{copyState}</button>
+        </>
+    );
 }
