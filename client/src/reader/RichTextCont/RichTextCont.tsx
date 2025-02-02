@@ -10,6 +10,7 @@ export function RichTextCont({ content, langModel }: React.PropsWithChildren & {
     const [pageIdx, setPageIdx] = useState(0);
 
     useEffect(() => {
+        // article segmentation, pagination, etc
         const out: ReactElement[][] = [[]];
 
         const maxHeight = divElRef.current!.getBoundingClientRect().height;
@@ -23,16 +24,20 @@ export function RichTextCont({ content, langModel }: React.PropsWithChildren & {
 
         for (const domEl of content) {
             const el = langModel.processElement(domEl);
-            const prevHeight = measurer.getBoundingClientRect().height;
 
             const view = renderToString([...out[out.length - 1], el]);
             measurer.innerHTML = view;
 
             const height = measurer.getBoundingClientRect().height;
-            console.log(el.type, el.props.children?.slice(0, 5), height - prevHeight, height.toFixed(), maxHeight);
 
             if (height > maxHeight) {
-                out.push([el]);
+                // prevent empty first page
+                if (out[out.length - 1].length != 0) {
+                    out.push([el]);
+                } else {
+                    out[out.length - 1] = [el];
+                    out.push([]);
+                }
             } else {
                 out[out.length - 1].push(el);
             }

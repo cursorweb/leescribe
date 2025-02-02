@@ -60,7 +60,6 @@ export function ArticleSubmission({ onSubmit }: { onSubmit: (els: Element[]) => 
         if (e.key == "v" && e.ctrlKey) {
             let els = richTextRef.current!.querySelectorAll("img, p, h1, h2, h3, h4, h5, h6, figcaption");
 
-            console.log(els);
             els.forEach(el => {
                 if (el.nodeName.toLowerCase() == "img") {
                     for (let i = el.attributes.length - 1; i >= 0; i--) {
