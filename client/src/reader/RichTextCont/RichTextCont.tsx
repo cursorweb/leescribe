@@ -11,9 +11,20 @@ export function RichTextCont({ rawContent, langModel }: React.PropsWithChildren 
 
     // perf: make sure 100-page test will not exceed 300ms as success! (ideally 90ms)
     useEffect(() => {
+        // delayed render rest optimization "heuristic"
+        // rationale: only load 1st page, and as the reader reads that page, slowly segment the rest
+        // heuristic: 1st page only contains ~10 elements, and will take less than 300 ms to process
+        const content = rawContent.slice(0, 10).map(el => langModel.processElement(el));
+        segmentArticle(content);
+        setTimeout(() => {
+            const content = rawContent.map(el => langModel.processElement(el));
+            segmentArticle(content);
+        }, 300);
+    }, []);
+
+    function segmentArticle(content: ReactElement[]) {
         console.time("seg");
         const out: ReactElement[][] = [[]];
-        const content = rawContent.map(el => langModel.processElement(el));
 
         const measurer = divElRef.current!.cloneNode() as HTMLDivElement;
         const maxHeight = divElRef.current!.getBoundingClientRect().height;
@@ -55,8 +66,7 @@ export function RichTextCont({ rawContent, langModel }: React.PropsWithChildren 
         measurer.remove();
         setPages(out);
         console.timeEnd("seg");
-    }, []);
-
+    }
 
     return (<>
         <div ref={divElRef} className={styles.textCont}>
