@@ -4,6 +4,7 @@ import { ArticleSubmission } from "./home/ArticleSubmission/ArticleSubmission";
 import { ReviewNav } from "./home/ReviewNav/ReviewNav";
 import { RichTextCont } from "./reader/RichTextCont/RichTextCont";
 import { LanguageModel } from "./reader/langModels/langModel";
+import { Chinese } from "./reader/langModels/chinese";
 
 
 function App() {
@@ -11,9 +12,22 @@ function App() {
     const [articleContent, setArticleContent] = useState<Element[]>();
 
     if (articleContent) {
+        let langModel: LanguageModel;
+
+        const lang = languageSelectRef.current!.value;
+        switch (lang) {
+            case "zh":
+                langModel = new Chinese();
+                break;
+
+            default:
+                langModel = new LanguageModel("en");
+                break;
+        }
+
         return (
             <>
-                <RichTextCont content={articleContent} langModel={new LanguageModel("en")} />
+                <RichTextCont content={articleContent} langModel={langModel} />
             </>
         );
     }
