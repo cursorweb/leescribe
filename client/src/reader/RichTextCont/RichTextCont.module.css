@@ -1,8 +1,17 @@
 .textCont {
+    position: relative;
     overflow: auto;
     padding: 10px;
-    height: 90vh;
-    box-sizing: border-box;
     flex-grow: 1;
-    position: relative;
+}
+
+.articleNav {
+    background: #fee;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.articleNav button {
+    flex-grow: 1;
 }

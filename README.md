@@ -45,9 +45,11 @@ libretranslate --load-only es,zh,en --update-models
 Languages are stored in `C:\users\user\.local\share\argos-translate\packages`
 
 ## Todo
-**API**
+**React**
 Self host api using argostranslate instead of libretranslate wrapper
 .env problem ^^
+
+Use context for language and themes
 
 **Major**
 * Back and forth translate to language and from language

@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 
 const TRANSLATE_URL = "http://127.0.0.1:3000";
 
-export class LanguageModel {
+export class LangModel {
     lang: string;
 
     constructor(lang: string) {
@@ -33,11 +33,6 @@ export class LanguageModel {
      * @returns Processed element
      */
     protected processText(nodeName: string, text: string): ReactElement {
-        // const out = React.createElement(nodeName, {
-        //     onMouseOver: () => {
-        //         console.log('hi')
-        //     }
-        // } as React.InputHTMLAttributes<HTMLDivElement>, <>{text} <button>translate</button> <button>copy</button></>);
         return <ActionBar text={text} nodeName={nodeName}>{text}</ActionBar>;
     }
 
@@ -74,7 +69,7 @@ export class LanguageModel {
     }
 }
 
-export function ActionBar({ nodeName, text, children }: PropsWithChildren & { nodeName: string, text: string }) {
+export function ActionBar({ nodeName, text, children }: PropsWithChildren<{ nodeName: string, text: string }>) {
     const [copyState, setCopyState] = useState("copy");
 
     async function copyText() {

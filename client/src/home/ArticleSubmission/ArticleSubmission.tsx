@@ -84,8 +84,18 @@ export function ArticleSubmission({ onSubmit }: { onSubmit: (els: Element[]) => 
             <button onClick={() => setUseRichText(!useRichText)}>{useRichText ? "Use Raw Text" : "Use Rich Text"}</button>
             {
                 useRichText
-                    ? <div className={styles.articleInput} contentEditable ref={richTextRef} onKeyUp={richEnterToSubmit} />
-                    : <textarea placeholder="Paste in your raw text..." className={styles.articleInput} onKeyUp={enterToSubmit} ref={rawTextRef}></textarea>
+                    ? <div
+                        className={styles.articleInput}
+                        contentEditable
+                        ref={richTextRef}
+                        onKeyUp={richEnterToSubmit}
+                    ></div>
+                    : <textarea
+                        placeholder="Paste in your raw text..."
+                        className={styles.articleInput}
+                        onKeyUp={enterToSubmit}
+                        ref={rawTextRef}
+                    ></textarea>
             }
 
             <button onClick={useRichText ? handleRichSubmission : handleRawSubmission} ref={startBtnRef}>Start</button>

@@ -1,10 +1,12 @@
 import { useState, useRef } from "react";
+
 import { ArticleLinks } from "./home/ArticleLinks/ArticleLinks";
 import { ArticleSubmission } from "./home/ArticleSubmission/ArticleSubmission";
 import { ReviewNav } from "./home/ReviewNav/ReviewNav";
-import { RichTextCont } from "./reader/RichTextCont/RichTextCont";
-import { LanguageModel } from "./reader/langModels/langModel";
+
+import { LangModel } from "./reader/langModels/langModel";
 import { Chinese } from "./reader/langModels/chinese";
+import { ArticleReader } from "./reader/ArticleReader/ArticleReader";
 
 
 function App() {
@@ -12,7 +14,7 @@ function App() {
     const [articleContent, setArticleContent] = useState<Element[]>();
 
     if (articleContent) {
-        let langModel: LanguageModel;
+        let langModel: LangModel;
 
         const lang = languageSelectRef.current!.value;
         switch (lang) {
@@ -21,14 +23,12 @@ function App() {
                 break;
 
             default:
-                langModel = new LanguageModel("en");
+                langModel = new LangModel("en");
                 break;
         }
 
         return (
-            <>
-                <RichTextCont rawContent={articleContent} langModel={langModel} />
-            </>
+            <ArticleReader rawContent={articleContent} langModel={langModel} />
         );
     }
 

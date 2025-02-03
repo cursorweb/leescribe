@@ -1,9 +1,9 @@
-import { ActionBar, LanguageModel } from "./langModel";
+import { ActionBar, LangModel } from "./langModel";
 import * as pinyinPro from "pinyin-pro";
 import { ReactElement } from "react";
 import styles from "./chinese.module.css";
 
-export class Chinese extends LanguageModel {
+export class Chinese extends LangModel {
     constructor() {
         super("zh");
     }

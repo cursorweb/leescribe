@@ -1,10 +1,10 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { PropsWithChildren, ReactElement, useEffect, useRef, useState } from "react";
 import styles from "./RichTextCont.module.css";
-import { LanguageModel } from "../langModels/langModel";
+import { LangModel } from "../langModels/langModel";
 import { renderToString } from "react-dom/server";
 import React from "react";
 
-export function RichTextCont({ rawContent, langModel }: React.PropsWithChildren & { rawContent: Element[], langModel: LanguageModel }) {
+export function RichTextCont({ rawContent, langModel, className }: PropsWithChildren<{ rawContent: Element[], langModel: LangModel, className: string }>) {
     const divElRef = useRef<HTMLDivElement>(null);
     const [pages, setPages] = useState<ReactElement[][]>([]);
     const [pageIdx, setPageIdx] = useState(0);
@@ -23,11 +23,15 @@ export function RichTextCont({ rawContent, langModel }: React.PropsWithChildren 
     }, []);
 
     function segmentArticle(content: ReactElement[]) {
-        console.time("seg");
         const out: ReactElement[][] = [[]];
 
         const measurer = divElRef.current!.cloneNode() as HTMLDivElement;
-        const maxHeight = divElRef.current!.getBoundingClientRect().height;
+
+        const divRect = divElRef.current!.getBoundingClientRect();
+        const width = divRect.width;
+        const maxHeight = divRect.height;
+        measurer.style.width = `${width}px`;
+
         document.body.appendChild(measurer);
 
         const view = renderToString(content.map((el, i) => <div id={`${i}`}>{el}</div>));
@@ -65,19 +69,18 @@ export function RichTextCont({ rawContent, langModel }: React.PropsWithChildren 
 
         measurer.remove();
         setPages(out);
-        console.timeEnd("seg");
     }
 
-    return (<>
+    return (<div className={className}>
         <div ref={divElRef} className={styles.textCont}>
             {pages[pageIdx]?.map((el, i) => (
                 <React.Fragment key={i}>{el}</React.Fragment>
             ))}
         </div>
-        <div>
+        <div className={styles.articleNav}>
             <button disabled={pageIdx == 0} onClick={() => setPageIdx(pageIdx - 1)}>&lt; Prev</button>
             {pageIdx + 1} / {pages.length}
             <button disabled={pageIdx == pages.length - 1} onClick={() => setPageIdx(pageIdx + 1)}>Next &gt;</button>
         </div>
-    </>);
+    </div>);
 }

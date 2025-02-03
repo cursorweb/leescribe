@@ -1,0 +1,17 @@
+.richTextCont {
+    flex: 0 0 75%;
+    display: flex;
+    flex-direction: column;
+}
+
+.articleCont {
+    display: flex;
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+}
+
+.translateCont {
+    flex: 1;
+    background: #eee;
+}
