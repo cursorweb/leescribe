@@ -1,12 +1,10 @@
 import { useRef, useState } from "react";
 import styles from "./ArticleSubmission.module.css";
 
-// todo: save contenteditable and textarea values
+// TODO: save contenteditable and textarea values
 
 // the logic: return a list of elements that people down the line (article reader)
 // is going to process based on their own logics
-
-
 export function ArticleSubmission({ onSubmit }: { onSubmit: (els: Element[]) => void }) {
     const [useRichText, setUseRichText] = useState(true);
     const rawTextRef = useRef<HTMLTextAreaElement>(null);
