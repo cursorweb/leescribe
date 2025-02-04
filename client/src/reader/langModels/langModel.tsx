@@ -94,13 +94,12 @@ export function ActionBar({ nodeName, text, children }: PropsWithChildren<{ node
         nodeName,
         {
             onMouseOver: () => {
-                console.log('hi')
             }
         } as React.InputHTMLAttributes<HTMLDivElement>,
         <>
             {children}
-            <button>translate</button>
-            <button onClick={copyText}>{copyState}</button>
+            <button style={{ userSelect: "none" }}>translate</button>
+            <button onClick={copyText} style={{ userSelect: "none" }}>{copyState}</button>
         </>
     );
 }

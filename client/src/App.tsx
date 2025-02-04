@@ -7,6 +7,7 @@ import { ReviewNav } from "./home/ReviewNav/ReviewNav";
 import { LangModel } from "./reader/langModels/langModel";
 import { Chinese } from "./reader/langModels/chinese";
 import { ArticleReader } from "./reader/ArticleReader/ArticleReader";
+import { TradChinese } from "./reader/langModels/tradChinese";
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
     if (articleContent) {
         let langModel: LangModel;
 
-        const lang = languageSelectRef.current!.value;
+        const lang = languageSelectRef.current?.value;
         switch (lang) {
             case "zh":
                 langModel = new Chinese();
@@ -27,7 +28,7 @@ function App() {
                 break;
 
             default:
-                langModel = new LangModel("en");
+                langModel = new TradChinese();
                 break;
         }
 

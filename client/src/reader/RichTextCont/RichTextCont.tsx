@@ -1,17 +1,17 @@
-import { PropsWithChildren, ReactElement, useContext, useEffect, useRef, useState } from "react";
+import { PropsWithChildren, ReactElement, useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import styles from "./RichTextCont.module.css";
 import { renderToString } from "react-dom/server";
 import React from "react";
 import { LangContext } from "../ArticleReader/ArticleReader";
 
-export function RichTextCont({ rawContent, className }: PropsWithChildren<{ rawContent: Element[], className: string }>) {
+export function RichTextCont({ rawContent, setSelectedText }: PropsWithChildren<{ rawContent: Element[], setSelectedText: React.Dispatch<React.SetStateAction<string>> }>) {
     const langModel = useContext(LangContext);
     const divElRef = useRef<HTMLDivElement>(null);
     const [pages, setPages] = useState<ReactElement[][]>([]);
     const [pageIdx, setPageIdx] = useState(0);
 
     // perf: make sure 100-page test will not exceed 300ms as success! (ideally 90ms)
-    useEffect(() => {
+    useLayoutEffect(() => {
         // delayed render rest optimization "heuristic"
         // rationale: only load 1st page, and as the reader reads that page, slowly segment the rest
         // heuristic: 1st page only contains ~10 elements, and will take less than 300 ms to process
@@ -21,6 +21,31 @@ export function RichTextCont({ rawContent, className }: PropsWithChildren<{ rawC
             const content = rawContent.map(el => langModel.processElement(el));
             segmentArticle(content);
         }, 300);
+    }, []);
+
+    useEffect(() => {
+        const div = divElRef.current!;
+        div.addEventListener("mouseup", handleSelection);
+
+        function handleSelection() {
+            const selection = window.getSelection()!;
+
+            // preface: range count is usually 1 because it's number of cursors
+            for (let i = 0; i < selection.rangeCount; i++) {
+                if (!div.contains(selection.getRangeAt(i).commonAncestorContainer)) {
+                    return;
+                }
+            }
+
+            const text = getFilteredSelection(selection);
+
+            if (!text) return;
+            setSelectedText(text);
+        }
+
+        return () => {
+            div.removeEventListener("mouseup", handleSelection);
+        };
     }, []);
 
     function segmentArticle(content: ReactElement[]) {
@@ -72,7 +97,7 @@ export function RichTextCont({ rawContent, className }: PropsWithChildren<{ rawC
         setPages(out);
     }
 
-    return (<div className={className}>
+    return (<div className={styles.richTextCont}>
         <div ref={divElRef} className={styles.textCont}>
             {pages[pageIdx]?.map((el, i) => (
                 <React.Fragment key={i}>{el}</React.Fragment>
@@ -84,4 +109,48 @@ export function RichTextCont({ rawContent, className }: PropsWithChildren<{ rawC
             <button disabled={pageIdx == pages.length - 1} onClick={() => setPageIdx(pageIdx + 1)}>Next &gt;</button>
         </div>
     </div>);
+}
+
+
+function getFilteredSelection(selection: Selection) { // source: chatGPT :skull:
+    if (!selection.rangeCount) return "";
+
+    const range = selection.getRangeAt(0);
+    const container = range.commonAncestorContainer;
+
+    if (container.nodeType == Node.TEXT_NODE) {
+        const startOffset = range.startOffset;
+        const endOffset = range.endOffset;
+        return container.textContent!.slice(startOffset, endOffset).trim();
+    }
+
+    function isUnselectable(node: HTMLElement) {
+        const style = window.getComputedStyle(node);
+        return style.userSelect == "none";
+    }
+
+    // Walk through the selected nodes
+    const walker = document.createTreeWalker(
+        container,
+        NodeFilter.SHOW_TEXT,
+        {
+            acceptNode: node => {
+                if (range.intersectsNode(node) && !isUnselectable(node.parentNode! as HTMLElement)) {
+                    return NodeFilter.FILTER_ACCEPT;
+                }
+
+                return NodeFilter.FILTER_REJECT;
+            },
+        }
+    );
+
+    let filteredText = "";
+    while (walker.nextNode()) {
+        const node = walker.currentNode as HTMLElement;
+        const startOffset = node == range.startContainer ? range.startOffset : 0;
+        const endOffset = node == range.endContainer ? range.endOffset : node.textContent!.length;
+        filteredText += node.textContent!.slice(startOffset, endOffset);
+    }
+
+    return filteredText.trim();
 }
