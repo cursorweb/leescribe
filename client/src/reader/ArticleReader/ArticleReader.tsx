@@ -22,7 +22,11 @@ export function ArticleReader({ rawContent, langModel }: { rawContent: Element[]
         <div className={styles.articleCont}>
             <LangContext.Provider value={langModel}>
                 <div className={styles.richTextCont}>
-                    <RichTextCont rawContent={rawContent} onTextSelect={setSelectedText} onTranslatePassage={text => setSelectedText(text)} />
+                    <RichTextCont
+                        rawContent={rawContent}
+                        onTextSelect={setSelectedText}
+                        onTranslatePassage={setSelectedText}
+                    />
                 </div>
 
                 <div className={styles.translateCont}>

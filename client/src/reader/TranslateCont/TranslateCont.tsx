@@ -12,15 +12,16 @@ export function TranslateCont({ text }: { text: string }) {
 
         (async () => {
             setIsLoading(true);
-            console.log('got:', text);
             const translated = await langModel.translate(text);
-            console.log('out:', translated, langModel.lang);
             setTranslated(translated);
             setIsLoading(false);
         })();
     }, [text]);
 
-    return <div style={{ opacity: isLoading ? 0.5 : 1 }}>
-        {translated}
+    return <div>
+        <strong>Translation</strong>
+        <div style={{ opacity: isLoading ? 0.5 : 1 }}>
+            {translated}
+        </div>
     </div>;
 }

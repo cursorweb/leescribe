@@ -1,5 +1,5 @@
 .richTextCont {
-    flex: 0 0 75%;
+    flex: 3;
     height: 100%;
 }
 
@@ -13,4 +13,10 @@
 .translateCont {
     flex: 1;
     background: #eee;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 8px;
 }

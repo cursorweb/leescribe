@@ -23,6 +23,11 @@ app = Flask("app")
 app.debug = True
 
 
+@app.route("/")
+def main1():
+    return render_template("index.html", url="http://127.0.0.1:3000")
+
+
 @app.route("/", defaults={"path": "index.html"})
 @app.route("/<path:path>")
 def main(path):
