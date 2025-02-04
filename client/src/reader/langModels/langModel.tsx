@@ -3,6 +3,7 @@ import { ReactElement } from "react";
 
 const TRANSLATE_URL = "http://127.0.0.1:3000";
 
+// TODO: component
 export class LangModel {
     lang: string;
 
@@ -10,7 +11,7 @@ export class LangModel {
         this.lang = lang;
     }
 
-    processElement(el: Element): ReactElement {
+    processElement(el: Element, onTranslatePassage: (text: string) => void): ReactElement {
         if (el.nodeName.toLowerCase() == "img") {
             return <img src={(el as HTMLImageElement).src} />;
         }
@@ -21,19 +22,17 @@ export class LangModel {
         if (!text) return <p />;
 
         const nodeName = el.nodeName.toLowerCase();
-        const out = this.processText(nodeName, text);
+        const out = this.processText({ nodeName, text, onTranslatePassage });
         return out;
     }
 
     /**
      * Process the text-based items: `p`, `h1`, etc. by adding pinyin or whatever else
      * that may be desired
-     * @param nodeName p, h1, etc.
-     * @param text Content
      * @returns Processed element
      */
-    protected processText(nodeName: string, text: string): ReactElement {
-        return <ActionBar text={text} nodeName={nodeName}>{text}</ActionBar>;
+    protected processText(props: ActionBarProps): ReactElement {
+        return <ActionBar {...props}>{props.text}</ActionBar>;
     }
 
     /**
@@ -79,7 +78,18 @@ export class LangModel {
     }
 }
 
-export function ActionBar({ nodeName, text, children }: PropsWithChildren<{ nodeName: string, text: string }>) {
+
+// TODO: (text: string) => void alias
+export interface ActionBarProps {
+    /** p, h1, etc. */
+    nodeName: string,
+    /** Content */
+    text: string,
+    /** When user presses on translate button */
+    onTranslatePassage: (text: string) => void
+}
+
+export function ActionBar({ nodeName, text, children, onTranslatePassage }: PropsWithChildren<ActionBarProps>) {
     const [copyState, setCopyState] = useState("copy");
 
     async function copyText() {
@@ -98,7 +108,7 @@ export function ActionBar({ nodeName, text, children }: PropsWithChildren<{ node
         } as React.InputHTMLAttributes<HTMLDivElement>,
         <>
             {children}
-            <button style={{ userSelect: "none" }}>translate</button>
+            <button onClick={() => onTranslatePassage(text)} style={{ userSelect: "none" }}>translate</button>
             <button onClick={copyText} style={{ userSelect: "none" }}>{copyState}</button>
         </>
     );

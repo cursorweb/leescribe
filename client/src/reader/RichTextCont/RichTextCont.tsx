@@ -4,7 +4,7 @@ import { renderToString } from "react-dom/server";
 import React from "react";
 import { LangContext } from "../ArticleReader/ArticleReader";
 
-export function RichTextCont({ rawContent, setSelectedText }: PropsWithChildren<{ rawContent: Element[], setSelectedText: React.Dispatch<React.SetStateAction<string>> }>) {
+export function RichTextCont({ rawContent, onTextSelect, onTranslatePassage }: PropsWithChildren<{ rawContent: Element[], onTextSelect: React.Dispatch<React.SetStateAction<string>>, onTranslatePassage: (text: string) => void }>) {
     const langModel = useContext(LangContext);
     const divElRef = useRef<HTMLDivElement>(null);
     const [pages, setPages] = useState<ReactElement[][]>([]);
@@ -15,37 +15,12 @@ export function RichTextCont({ rawContent, setSelectedText }: PropsWithChildren<
         // delayed render rest optimization "heuristic"
         // rationale: only load 1st page, and as the reader reads that page, slowly segment the rest
         // heuristic: 1st page only contains ~10 elements, and will take less than 300 ms to process
-        const content = rawContent.slice(0, 10).map(el => langModel.processElement(el));
+        const content = rawContent.slice(0, 10).map(el => langModel.processElement(el, onTranslatePassage));
         segmentArticle(content);
         setTimeout(() => {
-            const content = rawContent.map(el => langModel.processElement(el));
+            const content = rawContent.map(el => langModel.processElement(el, onTranslatePassage));
             segmentArticle(content);
         }, 300);
-    }, []);
-
-    useEffect(() => {
-        const div = divElRef.current!;
-        div.addEventListener("mouseup", handleSelection);
-
-        function handleSelection() {
-            const selection = window.getSelection()!;
-
-            // preface: range count is usually 1 because it's number of cursors
-            for (let i = 0; i < selection.rangeCount; i++) {
-                if (!div.contains(selection.getRangeAt(i).commonAncestorContainer)) {
-                    return;
-                }
-            }
-
-            const text = getFilteredSelection(selection);
-
-            if (!text) return;
-            setSelectedText(text);
-        }
-
-        return () => {
-            div.removeEventListener("mouseup", handleSelection);
-        };
     }, []);
 
     function segmentArticle(content: ReactElement[]) {
@@ -96,6 +71,31 @@ export function RichTextCont({ rawContent, setSelectedText }: PropsWithChildren<
         measurer.remove();
         setPages(out);
     }
+
+    useEffect(() => {
+        const div = divElRef.current!;
+        div.addEventListener("mouseup", handleSelection);
+
+        function handleSelection() {
+            const selection = window.getSelection()!;
+
+            // preface: range count is usually 1 because it's number of cursors
+            for (let i = 0; i < selection.rangeCount; i++) {
+                if (!div.contains(selection.getRangeAt(i).commonAncestorContainer)) {
+                    return;
+                }
+            }
+
+            const text = getFilteredSelection(selection);
+
+            if (!text) return;
+            onTextSelect(text);
+        }
+
+        return () => {
+            div.removeEventListener("mouseup", handleSelection);
+        };
+    }, []);
 
     return (<div className={styles.richTextCont}>
         <div ref={divElRef} className={styles.textCont}>
