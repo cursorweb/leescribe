@@ -23,7 +23,7 @@ app = Flask("app")
 app.debug = True
 
 
-@app.route("/")
+@app.route("/legacy")
 def main1():
     return render_template("index.html", url="http://127.0.0.1:3000")
 
