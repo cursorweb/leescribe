@@ -51,6 +51,8 @@ Self host api using argostranslate instead of libretranslate wrapper
 
 Use context for language and themes
 
+richtextcont need to uselayouteffect?
+
 **Major**
 * Back and forth translate to language and from language
 * Save sentence flashcards

@@ -36,6 +36,11 @@ export class LangModel {
         return <ActionBar text={text} nodeName={nodeName}>{text}</ActionBar>;
     }
 
+    /**
+     * Translate from chinese to english
+     * @param text chinese
+     * @returns english
+     */
     async translate(text: string): Promise<string> {
         const res = await fetch(TRANSLATE_URL + "/translate", {
             method: "POST",
@@ -52,6 +57,11 @@ export class LangModel {
         return (await res.json()).translatedText;
     }
 
+    /**
+     * Translate from english to chinese
+     * @param text english
+     * @returns chinese
+     */
     async untranslate(text: string): Promise<string> {
         const res = await fetch(TRANSLATE_URL + "/translate", {
             method: "POST",

@@ -1,10 +1,11 @@
-import { PropsWithChildren, ReactElement, useEffect, useRef, useState } from "react";
+import { PropsWithChildren, ReactElement, useContext, useEffect, useRef, useState } from "react";
 import styles from "./RichTextCont.module.css";
-import { LangModel } from "../langModels/langModel";
 import { renderToString } from "react-dom/server";
 import React from "react";
+import { LangContext } from "../ArticleReader/ArticleReader";
 
-export function RichTextCont({ rawContent, langModel, className }: PropsWithChildren<{ rawContent: Element[], langModel: LangModel, className: string }>) {
+export function RichTextCont({ rawContent, className }: PropsWithChildren<{ rawContent: Element[], className: string }>) {
+    const langModel = useContext(LangContext);
     const divElRef = useRef<HTMLDivElement>(null);
     const [pages, setPages] = useState<ReactElement[][]>([]);
     const [pageIdx, setPageIdx] = useState(0);

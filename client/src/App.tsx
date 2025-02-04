@@ -22,6 +22,10 @@ function App() {
                 langModel = new Chinese();
                 break;
 
+            case "es":
+                langModel = new LangModel("es");
+                break;
+
             default:
                 langModel = new LangModel("en");
                 break;
