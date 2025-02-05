@@ -1,0 +1,448 @@
+#separator:tab
+#html:false
+#tags column:4
+el cohete	The rocket		
+a medida que	As (at the same time as)	mientras - while	
+fingir	To pretend		
+la fe	The faith		
+quejarse de	To complain about	me quejo de que no puedes hacerlo	
+gozo	Joy	El proyecto es un gozo para nosotros	
+soler	To use to		
+entretener	To entertain		
+estallar	To explode		
+el agujero	The hole		
+grueso	Thick/Thickness	Tu brazo es muy grueso	
+a través de	Through		
+yacer	To lie down	La doncella yacía bajo el árbol	
+pender	To hang		
+colgar	To hang (clothes)	cuelgo la ropa	
+la vergüenza	The embarrassment		
+atreverse	To dare		
+la hormiga	The ant		
+el cangrejo	The crab		
+la semilla	The seed		
+la rueda	The wheel		
+además	Besides		
+tragar	To swallow		
+por lo tanto	Therefore		
+sordo	Deaf		
+qué rayos	What the hell		
+al revés	Upside down		
+la farola	The streetlight		
+la cadena	The chain		
+el alcalde	The mayor (of a town)		
+pisar	To step on		
+la raya	The line (stripes)		
+a pesar de	In spite of		
+asar	To roast		
+rezar	To pray		
+la voltereta	The somersault	dar una voltereta	
+el alborotador	The troublemaker		
+la sabiduría	The wisdom		
+dar la vuelta	To turn around		
+la amenaza	The threat		
+el corazón	The heart		
+el bosque	The forest		
+el árbol	The tree		
+el altercado	The fight		
+la Pascua	Easter		
+la barbilla	The chin		
+no obstante	However (literary)		
+sin embargo	However		
+destacar	To emphasize		
+el riñón	The kidney		
+agacharse	To bend over		
+florecer	To bloom		
+en vez de	Instead of		
+la cárcel	The prison		
+el uno al otro	One another	los payasos se imitaban el uno al otro	
+desviar	To divert		
+envenenar	To poison		
+hábil	Skillful		
+al fin y al cabo	After all		
+aplastar	To crush		
+avisar	To notify		
+sutil	subtle		
+el liderazgo	The leadership		
+chévere	Great		
+el recelo	The suspicion		
+la manga	The sleeve		
+la abeja	The bee		
+el durazno	The peach		
+derretir	To melt		
+el peine	The comb		
+la tiza	The chalk		
+culpable	Guilty		
+el barro	The clay		
+el ritmo	The rhythm		
+acordarse	To remember	me acuerdo de tú	
+coser	To sew		
+atascar	To clog up		
+susurrar	To whisper		
+la lana	The wool		
+juzgar	To judge		
+pegajoso	Sticky		
+el desfile	The parade		
+agitar	To shake (oneself)		
+acontecer	To take place		
+el apellido	The last name		
+adelantar	To overtake		
+siquiera	Even if (at least)	Debes ir a la fiesta, siquiera sea para saludar You should go to the party, even if it's to say hello	
+el pincel	The paintbrush		
+ebrio	Drunk		
+rodear	To surround		
+el barrio	The neighborhood		
+el humo	The smoke		
+el granizo	The hail		
+la Nochevieja	New Year's Eve		
+la Nochebuena	Christmas Eve		
+el impar	The odd number		
+la sombra	The shadow; the shade		
+por delante	In front		
+el ascensor	The elevator		
+de hecho	In fact		
+fuera	Outside		
+salvaje	Wild	El jabalí es un animal salvaje (boar)	
+la selva	The rainforest		
+asustarse	To get frightened		
+el dispositivo	The device		
+la mejilla	The cheek		
+el aliento	The breath		
+anterior	Previous		
+trepar	To climb		
+esconder	To hide		
+remar	To row		
+la colina	The hill (small hill)		
+el ajedrez	The chess		
+la arena	The sand		
+asombrar	To amaze		
+la seta	The mushroom	el hongo - fungus champiñón - specific kind of mushroom	
+merecer	To deserve		
+morder	To bite		
+la telaraña	The spiderweb		
+o sea	In other words		
+maduro	Ripe		
+desarrollar	To develop		
+la oscuridad	The darkness		
+el reto	The challenge		
+el cacahuete	The peanut		
+la vela	The candle		
+soltar	To let go of		
+la inundación	The flood		
+el huevo	The egg		
+la patineta	The skateboard		
+señalar	To point out		
+el acantilado	The cliff		
+reluciente	Shining; gleaming		
+la rana	The frog		
+apoyar	To support		
+otorgar	To grant		
+la araña	The spider		
+la hacienda	The estate		
+un manojo	A handful	Un manojo de semillas	
+el arbusto	The bush; the shrub		
+la estantería	The bookcase		
+el velero	The sailboat		
+la barriga	The belly		
+reírse	To laugh		
+el sello	The stamp		
+girar	To rotate		
+unir	To join		
+tierno	Tender		
+arrepentirse de	To regret		
+capaz	Able		
+alejarse	To move oneself away from	alejarse de	
+el pato	The duck		
+el lavamanos	The sink (Bathroom sink)		
+la vaca	The cow		
+extraño	Strange		
+planificar	To plan		
+el rincón	The corner (inside corner)		
+la esquina	The corner (outer)		
+rescatar	To rescue		
+los vaqueros	The jeans		
+inquebrantable	Unshakable		
+el conejo	The rabbit		
+caber	To fit		
+ancho	Wide		
+el espejo	The mirror		
+envolver	To wrap		
+arriesgar	To risk		
+la sangre	The blood		
+la oveja	The sheep		
+la billetera	The wallet		
+emprender	To undertake		
+aumentar	To increase		
+el antojo	The craving		
+el mueble	The furniture		
+el pasillo	The hallway		
+alentar	To encourage		
+el hielo	The ice		
+el pulgar	The thumb		
+la grieta	The crack		
+descargar	To download		
+fijar	To fix		
+la pesadilla	The nightmare		
+extrañar	To miss (someone)		
+mientras	While		
+la almohada	The pillow		
+lamer	To lick		
+el vidrio	The glass (material)		
+alcanzar	To reach		
+la cuerda	The rope		
+respaldar	To back		
+la contraseña	The password		
+cosechar	To harvest		
+al principio	Initially		
+el zumbido	The buzz		
+el rompecabezas	The puzzle		
+arriba	Up		
+abajo	Down		
+la siesta	The nap		
+gratis	Free (price)		
+el emparedado	The sandwich	Sinónimos: El sándwich El bocadillo	
+el paisaje	The landscape		
+el buzón	The mailbox		
+adelgazar	To lose weight		
+medir	To measure		
+el tamaño	The size (general)		
+vincular	To link		
+la manta	The blanket		
+la toronja	The grapefruit		
+tras	After (day after day)	Día tras día, él va creciendo más fuerte.	
+regatear	To bargain; to haggle		
+la tinta	The ink		
+lograr	To achieve		
+volverse	To become (involuntary)	volverse - involuntary hacerse - for career convertirse en - to turn into ponerse - emotion	
+la pared	The wall		
+el amanecer	The sunrise		
+el atardecer	The sunset		
+el águila	The eagle		
+la iglesia	The church		
+comprometido	Committed (to a task), Engaged (to a person)		
+el cisne	The swan		
+avergonzado	Embarrassed		
+la acera	The sidewalk		
+apenas	Barely		
+agradecer	To thank		
+el fregadero	The sink (Kitchen sink)		
+la langosta	The lobster		
+enterarse	To find out		
+alrededor	Around		
+la orilla	The shore		
+el hierro	The iron (ore)		
+el techo	The roof		
+borrar	To delete		
+la espalda	The back		
+estar de luto	To be in mourning		
+el paraguas	The umbrella		
+empapado	Soaked		
+el promedio	The average		
+prestar	To lend		
+el calcetín	The sock		
+encoger	To shrink		
+el fideo	The noodle		
+contratar	To hire		
+cariñoso	Caring; affectionate		
+acompañar	To accompany		
+cotejar	To compare with		
+valer	To be worth		
+el retraso	The delay		
+la nieve	The snow		
+la caja	The box		
+rodar	To roll		
+el ventilador	The fan		
+el obrero	The worker		
+el ensayo	The essay		
+el siglo	The century		
+la colmena	The beehive		
+secar	To dry		
+el cerdo	The pig		
+pararse	To stand up		
+instar	To urge		
+la lluvia	The rain		
+el globo	The balloon		
+los pepinillos	The pickles		
+el pecho	The chest (body)		
+el oso	The bear		
+reunirse	To meet (get together)		
+el pavo	The turkey		
+cualquier	Any		
+el mono	The monkey		
+de repente	Suddenly		
+ahorrar	To save (money)		
+flojo	Loose		
+el loro	The parrot		
+el disfraz	The costume		
+el pañuelo	The handkerchief		
+el fantasma	The ghost		
+la largura	The length		
+la fogata	The bonfire		
+decepcionado	Disappointed		
+engañar	To deceive		
+la sien	The temple (body)		
+el cirujano	The surgeon (male)		
+la rodilla	The knee		
+el tobillo	The ankle		
+estar resfriado	To have a cold		
+estar mareado	To be dizzy		
+padecer de	To suffer from	padezco de insomnio	
+toser	To cough		
+estornudar	To sneeze		
+la varicela	The chicken pox		
+auscultar	To listen with a stethescope		
+la gripe	The flu		
+las gotas	The drops (of water, etc)		
+el jarabe para la tos	The cough syrup		
+las caries	The cavities		
+la muela del juicio	The wisdom tooth		
+el yeso	The cast		
+las muletas	The crutches		
+las píldoras	The pills		
+enyesar	To put on a cast		
+la mascarilla	The mask		
+sacudir	To shake (an object)		
+la talla	The size (clothes)		
+arriba, abajo	up, down		
+desesperante	exasperating; infuriating		
+el peluquero	The hairdresser		
+intrascendente	Insignificant		
+la parrilla	The grill		
+la mosca	The fly (bug)		
+soleado	Sunny		
+el puente	The bridge		
+el rincón, la esquina	The inside corner, the outer corner		
+el anuncio	The advertisement		
+la arroba	The at (@) symbol		
+la huelga	The strike (workers' strike)		
+vacilar en	To hesitate about		
+soñar con	To dream of		
+tratar de	To try to (t...)		
+dejar de	To quit, stop something		
+cesar de	To stop (cease)		
+la oleada	The wave; the surge		
+la lápida	The tombstone		
+la cifra	The figure (number)	Se dice que su salario anual es de seis cifras.	
+la viruela	The smallpox		
+amargo	Bitter		
+la ardilla	The squirrel		
+desplazar	To displace; to move		
+desencadenar	To unleash; to trigger		
+malcriado	Bratty; spoiled		
+echar de menos	To long for		
+intentar	To attempt (i...)		
+bromear	to joke; to kid		
+tacaño	Stingy		
+amistoso	Friendly		
+vanidoso	Vain; conceited		
+el prometido	The fiancé		
+mandón	Bossy (male)	mandona (female)	
+la costumbre	The custom; the habit		
+egoísta	Selfish		
+meterse	To meddle; to interfere		
+divorciarse	To divorce		
+comprensivo	(of a person) Understanding		
+mimar	To pamper		
+pesimista	Pessimistic		
+entusiasmado	Enthusiastic		
+la boda	The wedding		
+respetar	To respect		
+haragán	Lazy (h...)		
+quedarse con	To stay with; to keep something		
+la cordillera	The mountain range		
+arrastrar	To drag		
+la culpa	The blame		
+devolver, volver, envolver	To return (an item), to come back, to wrap		
+rodar, rodear	To roll, to surround		
+el cerro	The hill (steeper, rougher)		
+burlarse de	To make fun of		
+a causa de	Because of		
+la piedra	The stone		
+rendirse	To give up		
+esforzarse	To make an effort; to exert oneself		
+sana y salva	Safe and sound		
+el impulso	The momentum		
+arrancar	To pull out		
+el anillo	The ring		
+arrodillarse	To kneel		
+la matrícula	The tuition, the registration	matricular - to register	
+la asistencia	The attendance		
+la química	The chemistry		
+la ventaja	The advantage		
+el título	The degree (master's degree etc.)		
+a más tardar	At the latest		
+la beca	The scholarship		
+por lo visto	Apparently		
+huir	To escape		
+el burro	The donkey		
+gozar	To enjoy  (g...)		
+espantar	To scare		
+retumbar	To echo		
+el otoño	The autumn		
+la costilla	The ribs		
+la cabra	The goat		
+hornear	To bake		
+reñido	close (a close game e.g. 4-5)		
+empatar	To tie (in a game e.g. 5-5)		
+vencer	To defeat; to beat		
+la caña de pescar	The fishing rod		
+la asignatura	The subject		
+la rama	The branch		
+tropezar	To stumble		
+el cazador	The hunter		
+el sudor	The sweat		
+el colchón	The mattress		
+la manguera	The hose		
+brincar	To jump		
+es preciso	It's necessary (p...)		
+sorprenderse	To surprise		
+aconsejar	to give advice, to counsel		
+exigir	To demand		
+la pata de conejo	The rabbit's foot		
+por casualidad	Just by chance		
+estar para	To be about to		
+por adelantado	in advance		
+por si acaso	Just in case (por...)		
+para variar	Just for a change		
+por mi parte	As for me		
+el caballo	The horse		
+la temporada	The season (t...)	Season of action, like skiing season temporada de esquí	
+a lo largo de	along (a road, etc)	Hay un río que corre a lo largo de nuestro pueblo	
+a fin de que	in order that		
+a menos que	unless		
+antes de que	before	antes (de) que	
+con tal que	provided that (as long as)	con tal (de) que	
+para que	so that		
+la vitamina	The vitamin		
+sobrar	To be left over		
+la proteína	The protein		
+la grasa	The fat		
+la pulgada	The inch		
+la cebolla	The onion		
+el ají	The green pepper	pimiento verde	
+la espinaca	The spinach		
+engordar	To gain weight		
+el apio	The celery		
+el ajo	The garlic		
+la remolacha	The beet		
+el pastel	The pie		
+la cerradura	The lock		
+estirar	To stretch		
+el aspecto	The appearance		
+el anfitrión	The host	la anfitriona	
+se trata de	It's about	La película se trata de un extraterreste	
+la bandera	The flag		
+el impuesto	The tax		
+la foca	The seal (animal)		
+la libra	The pound (unit)		
+entregar	To turn in; to deliver		
+de lo contrario	Otherwise		
+remolcar	To tow		
+el descapotable	The convertible (car)	el descapotable el convertible	
+cualquiera que sea	Whatever it may be		
+válido	Accepted, valid	Mi pasaporte es válido por diez años	
+el neumático	The tire	la llanta (wheel rim)	
+el acumulador	The battery	la batería	
+demorar	To take time	Demoraron cinco horas en fijar el coche	
+la goma pinchada	The flat tire		
+el taller de mecánica	The repair shop		

@@ -1,0 +1,8 @@
+{% extends "anki/layout.jinja" %}
+{% block content %}
+    {% for file in files %}
+        <a href="/anki?deck={{ file }}">{{ file }}</a>
+    {% endfor %}
+
+    <p>Upload a <strong>notes in plain text</strong> anki deck!</p>
+{% endblock %}

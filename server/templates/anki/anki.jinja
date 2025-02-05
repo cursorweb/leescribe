@@ -1,0 +1,29 @@
+{% extends "anki/layout.jinja" %}
+{% block content %}
+    <div>
+        <a href="{{ url_for('anki') }}">&lt; Decks</a>
+    </div>
+
+    <div>
+        <select class="lang">
+            <option value="es">Spanish</option>
+            <option value="zh-CN">Chinese</option>
+        </select>
+        <label><input type="checkbox" class="switch-sides"/>Switch Sides (front side should be target language)</label>
+    </div>
+
+    <div>
+        <div class="front-card">
+            <div class="front"></div>
+            <button class="flip">Flip</button>
+        </div>
+        <div class="back-card">
+            <div class="back"></div>
+            <button class="again">Listen Again</button>
+            <button class="next">Next</button>
+        </div>
+    </div>
+
+    <script>const DECK = {{ data }};</script>
+    <script src="{{ url_for('static', filename='anki/main.js') }}"></script>
+{% endblock %}
