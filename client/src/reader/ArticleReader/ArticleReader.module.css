@@ -20,3 +20,15 @@
 
     padding: 8px;
 }
+
+.topNav {
+    background: gray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.richTextCont {
+    display: flex;
+    flex-direction: column;
+}

@@ -97,18 +97,20 @@ export function RichTextCont({ rawContent, onTextSelect, onTranslatePassage }: P
         };
     }, []);
 
-    return (<div className={styles.richTextCont}>
-        <div ref={divElRef} className={styles.textCont}>
-            {pages[pageIdx]?.map((el, i) => (
-                <React.Fragment key={i}>{el}</React.Fragment>
-            ))}
+    return (
+        <div className={styles.richTextCont}>
+            <div ref={divElRef} className={styles.textCont}>
+                {pages[pageIdx]?.map((el, i) => (
+                    <React.Fragment key={i}>{el}</React.Fragment>
+                ))}
+            </div>
+            <div className={styles.articleNav}>
+                <button disabled={pageIdx == 0} onClick={() => setPageIdx(pageIdx - 1)}>&lt; Prev</button>
+                {pageIdx + 1} / {pages.length}
+                <button disabled={pageIdx == pages.length - 1} onClick={() => setPageIdx(pageIdx + 1)}>Next &gt;</button>
+            </div>
         </div>
-        <div className={styles.articleNav}>
-            <button disabled={pageIdx == 0} onClick={() => setPageIdx(pageIdx - 1)}>&lt; Prev</button>
-            {pageIdx + 1} / {pages.length}
-            <button disabled={pageIdx == pages.length - 1} onClick={() => setPageIdx(pageIdx + 1)}>Next &gt;</button>
-        </div>
-    </div>);
+    );
 }
 
 

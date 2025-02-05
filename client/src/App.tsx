@@ -33,7 +33,11 @@ function App() {
         }
 
         return (
-            <ArticleReader rawContent={articleContent} langModel={langModel} />
+            <ArticleReader
+                rawContent={articleContent}
+                langModel={langModel}
+                onReturnToMenu={() => setArticleContent(undefined)}
+            />
         );
     }
 
