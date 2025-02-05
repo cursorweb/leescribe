@@ -17,13 +17,19 @@ let index = 0;
 let card = DECK[index];
 
 const front = document.querySelector(".front");
-const back = document.querySelector(".back");
 
 const flipBtn = document.querySelector(".flip");
 const nextBtn = document.querySelector(".next");
+const againBtn = document.querySelector(".again");
 
 const frontCard = document.querySelector(".front-card");
 const backCard = document.querySelector(".back-card");
+
+const backPrompt = document.querySelector(".back-prompt");
+const backAnswer = document.querySelector(".back-answer");
+
+const progressBar = document.querySelector(".progress-bar");
+
 
 /** @type {HTMLSelectElement} */
 const langSelect = document.querySelector(".lang");
@@ -36,7 +42,7 @@ langSelect.addEventListener("change", () => {
 const switchSidesInput = document.querySelector(".switch-sides");
 let switchSides = false;
 switchSidesInput.addEventListener("change", () => {
-    switchSides = switchSidesInput.value;
+    switchSides = switchSidesInput.checked;
     render();
 });
 
@@ -47,31 +53,44 @@ nextBtn.addEventListener("click", () => {
 });
 
 function render() {
-    frontCard.style.display = "block";
-    backCard.style.display = "none";
+    progressBar.textContent = `${index + 1} / ${DECK.length}`;
+
+    frontCard.classList.remove("hide");
+    backCard.classList.add("hide");
 
     if (switchSides) {
         front.textContent = card.answer;
-        back.textContent = card.prompt;
+
+        backPrompt.textContent = card.answer;
+        backAnswer.textContent = card.prompt;
     } else {
         front.textContent = card.prompt;
-        back.textContent = card.answer;
+
+        backPrompt.textContent = card.prompt;
+        backAnswer.textContent = card.answer;
     }
 }
 
 render();
 
-flipBtn.addEventListener("click", () => {
-    backCard.style.display = "block";
-    frontCard.style.display = "none";
-
+function readOutLoud() {
     const textToSpeak = switchSides ? card.answer : card.prompt;
 
     const synth = window.speechSynthesis;
-    synth.cancel();
 
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
     utterance.lang = lang; // Set language to Spanish
 
+    synth.cancel();
     synth.speak(utterance);
+}
+
+flipBtn.addEventListener("click", () => {
+    backCard.classList.remove("hide");
+    frontCard.classList.add("hide");
+    readOutLoud();
+});
+
+againBtn.addEventListener("click", () => {
+    readOutLoud();
 });

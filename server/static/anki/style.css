@@ -1,0 +1,81 @@
+.card {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.front, .back {
+    font-family: sans-serif, kaiti;
+    flex: 0 0 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.front {
+    font-size: 3rem;
+}
+
+.back {
+    flex-direction: column;
+}
+
+.back-prompt {
+    font-size: 3rem;
+}
+
+.vert {
+    display: flex;
+    padding: 10px;
+    box-shadow: 0 0 5px;
+    border-radius: 8px;
+    width: 50vh;
+    height: 50vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom-nav {
+    display: flex;
+    height: 100%;
+}
+
+.bottom-nav button {
+    flex: 1 1;
+}
+
+.front-card, .back-card {
+    width: 100%;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.front-card button {
+    flex: 0 0 25%;
+}
+
+.back-card .back {
+    text-align: center;
+    flex: 0 0 75%;
+}
+
+.prompt {
+    flex-basis: 0;
+}
+
+.hide {
+    display: none;
+}
+
+.progress-bar {
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+}

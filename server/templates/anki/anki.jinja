@@ -9,18 +9,28 @@
             <option value="es">Spanish</option>
             <option value="zh-CN">Chinese</option>
         </select>
-        <label><input type="checkbox" class="switch-sides"/>Switch Sides (front side should be target language)</label>
+        <label><input type="checkbox" class="switch-sides" />Switch Sides (front side should be target language)</label>
     </div>
 
-    <div>
-        <div class="front-card">
-            <div class="front"></div>
-            <button class="flip">Flip</button>
-        </div>
-        <div class="back-card">
-            <div class="back"></div>
-            <button class="again">Listen Again</button>
-            <button class="next">Next</button>
+    <div class="progress-bar"></div>
+
+    <div class="card">
+        <div class="vert">
+            <div class="front-card">
+                <div class="front"></div>
+                <button class="flip">Flip</button>
+            </div>
+
+            <div class="back-card">
+                <div class="back">
+                    <div class="back-prompt"></div>
+                    <div class="back-answer"></div>
+                </div>
+                <div class="bottom-nav">
+                    <button class="next">Next</button>
+                    <button class="again">Listen Again</button>
+                </div>
+            </div>
         </div>
     </div>
 
