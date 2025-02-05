@@ -4,7 +4,15 @@ import { renderToString } from "react-dom/server";
 import React from "react";
 import { LangContext } from "../ArticleReader/ArticleReader";
 
-export function RichTextCont({ rawContent, onTextSelect, onTranslatePassage }: PropsWithChildren<{ rawContent: Element[], onTextSelect: React.Dispatch<React.SetStateAction<string>>, onTranslatePassage: (text: string) => void }>) {
+export function RichTextCont({
+    rawContent,
+    onTextSelect,
+    onTranslatePassage
+}: PropsWithChildren<{
+    rawContent: Element[],
+    onTextSelect: React.Dispatch<React.SetStateAction<string>>,
+    onTranslatePassage: (text: string) => void
+}>) {
     const langModel = useContext(LangContext);
     const divElRef = useRef<HTMLDivElement>(null);
     const [pages, setPages] = useState<ReactElement[][]>([]);
@@ -15,8 +23,11 @@ export function RichTextCont({ rawContent, onTextSelect, onTranslatePassage }: P
         // delayed render rest optimization "heuristic"
         // rationale: only load 1st page, and as the reader reads that page, slowly segment the rest
         // heuristic: 1st page only contains ~10 elements, and will take less than 300 ms to process
-        const content = rawContent.slice(0, 10).map(el => langModel.processElement(el, onTranslatePassage));
+        const content = rawContent
+            .slice(0, 10)
+            .map(el => langModel.processElement(el, onTranslatePassage));
         segmentArticle(content);
+
         setTimeout(() => {
             const content = rawContent.map(el => langModel.processElement(el, onTranslatePassage));
             segmentArticle(content);

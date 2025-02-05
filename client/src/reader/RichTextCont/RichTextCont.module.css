@@ -12,6 +12,8 @@
 
     flex-grow: 1;
 
+    box-sizing: border-box;
+
     /* something to do with margin magic */
     padding-top: 1px;
     margin-top: -1px;

@@ -12,6 +12,9 @@ export function ArticleSubmission({ onSubmit }: { onSubmit: (els: Element[]) => 
     const startBtnRef = useRef<HTMLButtonElement>(null);
 
     function handleRichSubmission() {
+        // TODO: remove
+        console.log(richTextRef.current?.querySelectorAll("button"))
+        richTextRef.current!.querySelectorAll("button").forEach(el => el.remove());
         const els = richTextRef.current!.querySelectorAll("img, p, h1, h2, h3, h4, h5, h6, figcaption");
         const elArray = [...els].map(el => {
             if (el.nodeName.toLowerCase() == "img") {
