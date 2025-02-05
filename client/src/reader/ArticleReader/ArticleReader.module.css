@@ -1,6 +1,8 @@
 .richTextCont {
-    flex: 3;
+    flex: 0 0 75%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .articleCont {
@@ -26,9 +28,4 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-}
-
-.richTextCont {
-    display: flex;
-    flex-direction: column;
 }

@@ -2,13 +2,19 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow: auto;
 }
 
 .textCont {
     position: relative;
     overflow: auto;
     padding: 10px;
+
     flex-grow: 1;
+
+    /* something to do with margin magic */
+    padding-top: 1px;
+    margin-top: -1px;
 }
 
 .articleNav {
