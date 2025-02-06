@@ -43,20 +43,25 @@ def kana():
 
 @app.route("/anki", methods=["GET", "POST"])
 def anki():
-    if request.method == "GET":
-        deck_name = request.args.get("deck")
-        if deck_name:
-            path = os.path.join("anki", deck_name)
-        if deck_name == None or not os.path.exists(path):
-            files = os.listdir("anki")
-            return render_template("anki/decks.jinja", files=files)
-        else:
-            data = read_deck(path)
-            return render_template("anki/anki.jinja", data=data)
+    deck_name = request.args.get("deck")
+
+    if request.method == "POST":
+        deck = request.files.get("deck")
+        filename = request.form.get("filename")
+        filename = f"{filename}.txt" if filename != '' else deck.filename
+
+        path = os.path.join(".anki", filename)
+        request.files.get("deck").save(path)
+        deck_name = filename
+
+    if deck_name:
+        path = os.path.join(".anki", deck_name)
+    if deck_name == None or not os.path.exists(path):
+        files = os.listdir(".anki")
+        return render_template("anki/decks.jinja", files=files)
     else:
-        print(request.data)
-        print(request.files)
-        return "hello"
+        data = read_deck(path)
+        return render_template("anki/anki.jinja", data=data)
 
 
 def read_deck(path: str):

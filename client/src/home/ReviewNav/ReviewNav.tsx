@@ -12,6 +12,13 @@ export function ReviewNav() {
                 </div>
 
                 <div>
+                    <a href="/anki">
+                        <div className={styles.title}>Anki Review</div>
+                        <div>Import anki decks to listen to</div>
+                    </a>
+                </div>
+
+                <div>
                     <a href="/kana">
                         <div className={styles.title}>Kana Review</div>
                         <div>Review Hiragana and Katakana</div>
