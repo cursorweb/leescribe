@@ -6,16 +6,18 @@
 
     <div>
         <select class="lang">
-            <option value="es">Spanish</option>
-            <option value="zh-CN">Chinese</option>
+            <option value="es-MX">Spanish (Mexico)</option>
+            <option value="es">Spanish (Spain)</option>
+            <option value="zh-CN">Chinese (Mainland)</option>
+            <option value="zh-TW">Chinese (Taiwan)</option>
         </select>
         <label><input type="checkbox" class="switch-sides" />Switch Sides (front side should be target language)</label>
     </div>
 
     <div class="progress-bar"></div>
 
-    <div class="card">
-        <div class="vert">
+    <div class="card-cont">
+        <div class="card">
             <div class="front-card">
                 <div class="front"></div>
                 <button class="flip">Flip</button>
@@ -32,6 +34,12 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div>
+        <h1>Read aloud</h1>
+        <textarea placeholder="Text to read..." class="readaloud-input"></textarea>
+        <div><button class="readaloud-submit">Read aloud</button></div>
     </div>
 
     <script>const DECK = {{ data }};</script>

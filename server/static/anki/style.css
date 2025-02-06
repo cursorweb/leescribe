@@ -1,31 +1,11 @@
-.card {
+.card-cont {
     padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.front, .back {
-    font-family: sans-serif, kaiti;
-    flex: 0 0 75%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.front {
-    font-size: 3rem;
-}
-
-.back {
-    flex-direction: column;
-}
-
-.back-prompt {
-    font-size: 3rem;
-}
-
-.vert {
+.card {
     display: flex;
     padding: 10px;
     box-shadow: 0 0 5px;
@@ -39,15 +19,6 @@
     align-items: center;
 }
 
-.bottom-nav {
-    display: flex;
-    height: 100%;
-}
-
-.bottom-nav button {
-    flex: 1 1;
-}
-
 .front-card, .back-card {
     width: 100%;
     flex: 1;
@@ -57,18 +28,45 @@
     height: 100%;
 }
 
+.front, .back {
+    font-family: sans-serif, kaiti;
+    flex: 0 0 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* front side */
 .front-card button {
     flex: 0 0 25%;
 }
 
+.front-card .front {
+    font-size: 3rem;
+}
+
+
+/* back side */
 .back-card .back {
+    flex-direction: column;
     text-align: center;
     flex: 0 0 75%;
 }
 
-.prompt {
-    flex-basis: 0;
+.back-card .back .back-prompt {
+    font-size: 3rem;
 }
+
+.back-card .bottom-nav {
+    display: flex;
+    height: 100%;
+}
+
+.back-card .bottom-nav button {
+    flex: 1 1;
+}
+
 
 .hide {
     display: none;

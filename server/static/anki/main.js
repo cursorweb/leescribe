@@ -16,15 +16,17 @@ shuffle(DECK);
 let index = 0;
 let card = DECK[index];
 
-const front = document.querySelector(".front");
 
 const flipBtn = document.querySelector(".flip");
 const nextBtn = document.querySelector(".next");
 const againBtn = document.querySelector(".again");
 
+// card
 const frontCard = document.querySelector(".front-card");
 const backCard = document.querySelector(".back-card");
 
+// text
+const front = document.querySelector(".front");
 const backPrompt = document.querySelector(".back-prompt");
 const backAnswer = document.querySelector(".back-answer");
 
@@ -73,8 +75,8 @@ function render() {
 
 render();
 
-function readOutLoud() {
-    const textToSpeak = switchSides ? card.answer : card.prompt;
+function readOutLoud(text) {
+    const textToSpeak = text || (switchSides ? card.answer : card.prompt);
 
     const synth = window.speechSynthesis;
 
@@ -93,4 +95,20 @@ flipBtn.addEventListener("click", () => {
 
 againBtn.addEventListener("click", () => {
     readOutLoud();
+});
+
+
+// READ ALOUD FEATURE
+/** @type {HTMLTextAreaElement} */
+const readaloudInput = document.querySelector(".readaloud-input");
+const readaloudBtn = document.querySelector(".readaloud-submit");
+
+readaloudInput.addEventListener("keydown", e => {
+    if (e.key == "Enter") {
+        readaloudBtn.click();
+    }
+})
+
+readaloudBtn.addEventListener("click", () => {
+    readOutLoud(readaloudInput.value);
 });
