@@ -5,18 +5,18 @@ export function CustomTranslateCont() {
     const langModel = useContext(LangContext);
     const [isEditing, setIsEditing] = useState(false);
 
-    const [inputValue, setInputValue] = useState("");
-    const [outputValue, setOutputValue] = useState("");
+    const [inputText, setInputValue] = useState("");
+    const [outputText, setOutputValue] = useState("");
 
     const isInputLastEdited = useRef(true);
 
     async function translatePassage() {
         const translateInput = isInputLastEdited.current;
         if (translateInput) {
-            const translated = await langModel.translate(inputValue);
+            const translated = await langModel.translate(inputText);
             setOutputValue(translated);
         } else {
-            const untranslated = await langModel.untranslate(outputValue);
+            const untranslated = await langModel.untranslate(outputText);
             setInputValue(untranslated);
         }
     }
@@ -37,8 +37,9 @@ export function CustomTranslateCont() {
                 <textarea
                     onChange={e => setInputValue((e.target as HTMLTextAreaElement).value)}
                     onKeyDown={e => enterToSubmit(e, true)}
-                    value={inputValue}
+                    value={inputText}
                 />
+                <langModel.CustomTranslateHUD text={inputText} />
             </div>
             <div>
                 {
@@ -46,9 +47,9 @@ export function CustomTranslateCont() {
                         ? <textarea
                             onChange={e => setOutputValue((e.target as HTMLTextAreaElement).value)}
                             onKeyDown={e => enterToSubmit(e, false)}
-                            value={outputValue}
+                            value={outputText}
                         />
-                        : <div>{outputValue}</div>
+                        : <div>{outputText}</div>
                 }
                 <button onClick={() => setIsEditing(!isEditing)}>Edit</button>
             </div>

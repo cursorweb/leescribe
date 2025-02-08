@@ -1,5 +1,4 @@
-import React, { PropsWithChildren, useState } from "react";
-import { ReactElement } from "react";
+import React, { PropsWithChildren, ReactElement, ReactNode, useState } from "react";
 
 const TRANSLATE_URL = "http://127.0.0.1:3000";
 
@@ -11,6 +10,10 @@ export class LangModel {
         this.lang = lang;
     }
 
+    /**
+     * Converts an HTML element into a react element
+     * @param onTranslatePassage when the user presses the "translate" button
+     */
     processElement(el: Element, onTranslatePassage: (text: string) => void): ReactElement {
         if (el.nodeName.toLowerCase() == "img") {
             return <img src={(el as HTMLImageElement).src} />;
@@ -33,6 +36,13 @@ export class LangModel {
      */
     protected processText(props: ActionBarProps): ReactElement {
         return <ActionBar {...props}>{props.text}</ActionBar>;
+    }
+
+    /**
+     * JSX Element that adds additional info (like pinyin, simp -> trad, etc.)
+     */
+    CustomTranslateHUD(_: { text: string }): ReactNode {
+        return "";
     }
 
     /**

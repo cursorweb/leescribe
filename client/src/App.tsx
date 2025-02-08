@@ -27,9 +27,12 @@ function App() {
                 langModel = new LangModel("es");
                 break;
 
-            default:
+            case "zh-trad":
                 langModel = new TradChinese();
                 break;
+            
+            default:
+                throw new Error("unreachable");
         }
 
         return (

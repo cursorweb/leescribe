@@ -1,6 +1,6 @@
 import { ActionBar, ActionBarProps, LangModel } from "./langModel";
 import * as pinyinPro from "pinyin-pro";
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 import styles from "./chinese.module.css";
 
 export class Chinese extends LangModel {
@@ -18,5 +18,10 @@ export class Chinese extends LangModel {
 
     protected getWords(text: string) {
         return text.split(/([，。！、？（）：—]+)/);
+    }
+
+    CustomTranslateHUD({ text }: { text: string; }): ReactNode {
+        const html = pinyinPro.html(text);
+        return <div dangerouslySetInnerHTML={{ __html: html }} />;
     }
 }
