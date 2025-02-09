@@ -56,8 +56,8 @@ export function SettingsModal({
 
     function createSetting({ name, prop, options }: SettingOpt, i: number) {
         return (
-            <div key={i}>
-                {name}
+            <div key={i} className={styles.settingOpt}>
+                <span>{name}</span>
                 <select
                     defaultValue={theme[prop]}
                     onChange={e => onSettingsChange({ prop, value: e.target.value })}
@@ -73,8 +73,9 @@ export function SettingsModal({
     return (
         <div className={styles.modalBg}>
             <div className={styles.modalCont}>
+                <h1>Settings</h1>
                 {settings.map(createSetting)}
-                <button onClick={onClose}>Close</button>
+                <div className={styles.doneDiv}><button onClick={onClose} >Done</button></div>
             </div>
         </div>
     );
