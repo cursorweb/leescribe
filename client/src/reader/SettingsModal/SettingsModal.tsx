@@ -71,11 +71,16 @@ export function SettingsModal({
     }
 
     return (
-        <div className={styles.modalBg}>
-            <div className={styles.modalCont}>
+        <div className={styles.modalBg} onClick={onClose}>
+            <div
+                className={styles.modalCont}
+                onClick={e => {
+                    e.nativeEvent.stopPropagation();
+                    e.stopPropagation();
+                }}>
                 <h1>Settings</h1>
                 {settings.map(createSetting)}
-                <div className={styles.doneDiv}><button onClick={onClose} >Done</button></div>
+                <div className={styles.doneDiv}><button onClick={onClose}>Done</button></div>
             </div>
         </div>
     );

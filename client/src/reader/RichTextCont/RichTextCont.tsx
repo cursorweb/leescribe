@@ -112,8 +112,8 @@ export function RichTextCont({
     }, []);
 
     return (
-        <div className={styles.richTextCont} style={theme as React.CSSProperties}>
-            <div ref={divElRef} className={styles.textCont}>
+        <div className={styles.richTextCont}>
+            <div ref={divElRef} className={styles.textCont} style={theme as React.CSSProperties}>
                 {pages[pageIdx]?.map((el, i) => (
                     <React.Fragment key={i}>{el}</React.Fragment>
                 ))}
