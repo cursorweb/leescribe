@@ -6,6 +6,21 @@ export default defineConfig({
     plugins: [react()],
     build: {
         outDir: "../server/dist",
-        emptyOutDir: true
+        emptyOutDir: true,
+        rollupOptions: {
+            output: {
+                manualChunks: id => {
+                    if (id.includes("node_modules")) {
+                        if (id.includes("opencc-js")) {
+                            return "vendor_opencc";
+                        } else if (id.includes("pinyin-pro")) {
+                            return "vendor_pinyin-pro";
+                        }
+
+                        return "vendor"; // all other package goes here
+                    }
+                }
+            }
+        }
     }
 });
