@@ -2,7 +2,7 @@ import { PropsWithChildren, ReactElement, useContext, useEffect, useLayoutEffect
 import styles from "./RichTextCont.module.css";
 import { renderToString } from "react-dom/server";
 import React from "react";
-import { LangContext } from "../ArticleReader/ArticleReader";
+import { LangContext, ThemeContext } from "../ArticleReader/ArticleReader";
 
 export function RichTextCont({
     rawContent,
@@ -14,6 +14,8 @@ export function RichTextCont({
     onTranslatePassage: (text: string) => void
 }>) {
     const langModel = useContext(LangContext);
+    const theme = useContext(ThemeContext);
+
     const divElRef = useRef<HTMLDivElement>(null);
     const [pages, setPages] = useState<ReactElement[][]>([]);
     const [pageIdx, setPageIdx] = useState(0);
@@ -84,6 +86,7 @@ export function RichTextCont({
     }
 
     useEffect(() => {
+        // Translate on select
         const div = divElRef.current!;
         div.addEventListener("mouseup", handleSelection);
 
@@ -109,7 +112,7 @@ export function RichTextCont({
     }, []);
 
     return (
-        <div className={styles.richTextCont}>
+        <div className={styles.richTextCont} style={theme as React.CSSProperties}>
             <div ref={divElRef} className={styles.textCont}>
                 {pages[pageIdx]?.map((el, i) => (
                     <React.Fragment key={i}>{el}</React.Fragment>

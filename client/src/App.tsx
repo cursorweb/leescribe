@@ -30,9 +30,9 @@ function App() {
             case "zh-trad":
                 langModel = new TradChinese();
                 break;
-            
+
             default:
-                throw new Error("unreachable");
+                throw new Error("unreachable language " + lang);
         }
 
         return (
