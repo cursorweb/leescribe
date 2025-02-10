@@ -1,0 +1,22 @@
+.card {
+    background: #d0e2eb;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.title {
+    font-weight: bolder;
+}
+
+.opts {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.opts div {
+    flex-basis: 100%;
+    padding: 5px;
+    border-radius: 8px;
+    background: orange;
+}

@@ -1,0 +1,24 @@
+{% extends "anki/layout.jinja" %}
+{% block content %}
+    <a href="/">&lt; Back to Leescribe</a>
+
+    <h1>Decks</h1>
+    <div>
+        {% for file in files %}
+            <div>
+                <a href="/anki?deck={{ file }}">{{ file }} >></a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <p>Upload a <strong>notes in plain text</strong> anki deck!</p>
+    <form action="/anki" method="post" enctype="multipart/form-data">
+        <div>
+            <label>Anki Deck File: <input type="file" name="deck" accept=".txt" /></label>
+        </div>
+        <div>
+            <label>File Name: <input type="text" name="filename" placeholder="español" />.txt</label>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

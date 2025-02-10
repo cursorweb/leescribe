@@ -1,0 +1,12 @@
+.articleInput {
+    border: 1px solid black;
+    position: relative;
+    overflow: auto;
+    height: 250px;
+    resize: vertical;
+    background: white;
+    font-family: sans-serif;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
