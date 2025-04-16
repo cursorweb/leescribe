@@ -21,10 +21,12 @@ export function ArticleLinks() {
                 <Link href="https://www.bbc.com/zhongwen/simp">BBC 中文</Link>
                 <Link href="http://www.people.com.cn/">人民网</Link>
                 <Link href="https://www.msn.com/zh-cn">MSN 中文</Link>
+                <Link href="https://www.jianshu.com/">简书</Link>
             </div>
             <div>
                 <Link href="https://www.bbc.com/zhongwen/trad">BBC 繁體中文</Link>
                 <Link href="https://www.cna.com.tw/">臺灣——中央社</Link>
+                <Link href="https://www.bnext.com.tw/">數位時代</Link>
             </div>
         </div>
     );
